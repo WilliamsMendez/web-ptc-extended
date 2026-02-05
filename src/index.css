@@ -1,1 +1,30 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("./assets/fonts/DMSans-VariableFont_opsz,wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  html {
+    font-family: "DM Sans", system-ui, sans-serif;
+  }
+}
+
+@layer base {
+  :root {
+    --color-bg-dark: 17 17 17;
+    --color-bg-white: 255 255 255;
+    --color-marino-primario: 16 34 63;
+    --color-marino-secundario: 32 48 76;
+    --color-celeste: 93 139 181;
+  }
+}
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
