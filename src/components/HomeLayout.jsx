@@ -1,17 +1,17 @@
-import { Outlet, Link } from "react-router-dom"
+import { Outlet, Link } from 'react-router-dom'
 
 export default function HomeLayout() {
   return (
     <>
-      <nav className="flex flex-row justify-center p-4 bg-gray-100">
-        <ul className="flex gap-6">
-          <li><Link to="/">Logo</Link></li>
+      <nav className="sticky top-10 flex flex-row justify-center z-30">
+        <ul className="flex flex-row justify-center gap-10 px-30 py-5 bg-white/30 backdrop-blur-lg rounded-3xl">
           <li><Link to="/contacto">Contacto</Link></li>
+          <li><Link to="/" className='font-bold'>Logo</Link></li>
           <li><Link to="/acerca">Acerca</Link></li>
         </ul>
       </nav>
-      
-      <main className="p-8">
+
+      <main>
         <Outlet />
       </main>
     </>
