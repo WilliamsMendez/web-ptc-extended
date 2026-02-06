@@ -1,5 +1,7 @@
 import HeroButton from "../components/HeroButton"
 import { QuoteIcon, Mail, MapPinned } from "lucide-react"
+import { motion } from "motion/react"
+import NumberCounter from "../components/NumberCounter"
 
 export default function Home() {
   return (
@@ -23,32 +25,40 @@ export default function Home() {
 
         {/* Q U I E N E S  S O M O S*/}
 
-    <section className="my-30">
-        <h1 className="flex justify-center text-white text-3xl">¿Quienes Somos?</h1>
-        <p className="text-white py-5 max-w-2xl text-center mx-auto">Somos
-parte de una empresa regional con más de 15 años de experiencia especializada
-en la comercialización , administración , operación y procemiento de negocios y
-productos de medios de pago electrónicos y otros servicios financieros . Más allá de
-ofrecer un servicio de procesamiento de Tarjetas de Crédito y Débito , nuestro modelo de
-negocio agrega ese valor adicional que nuestros clientes necesitan para lograr la
-prosperidad en sus negocios</p>
-    </section>
+    <motion.section className="my-30">
+        <motion.h1 initial={{ opacity: 0, blur: 2 }} whileInView={{ opacity: 1, blur: 1 }} transition={{duration: 0.8, delay: 0.3, ease: "easeOut"}} className="flex justify-center text-white text-3xl">¿Quienes Somos?</motion.h1>
+        <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1, blur: 1 }} transition={{duration: 0.8, delay: 0.4, ease: "easeOut"}} className="text-white py-5 max-w-2xl text-center mx-auto">Somos
+          parte de una empresa regional con más de 15 años de experiencia especializada
+          en la comercialización , administración , operación y procemiento de negocios y
+          productos de medios de pago electrónicos y otros servicios financieros . Más allá de
+          ofrecer un servicio de procesamiento de Tarjetas de Crédito y Débito , nuestro modelo de
+          negocio agrega ese valor adicional que nuestros clientes necesitan para lograr la
+          prosperidad en sus negocios</motion.p>
+    </motion.section>
 
-          {/*M I S I O N  Y  V I S I O N*/}
+          {/*M I S I O N  Y  V I S I O N */}
 
     <section className="flex flex-row gap-6 my-10">
       <div>
         <img src="https://placehold.co/600x400" alt="" />
       </div>
       <div className="flex flex-col gap-6 text-white max-w-2xl text-center mx-auto my-auto">
-        <div className="mx-10">
+        <motion.div initial={{ opacity: 0, blur: 2 }} whileInView={{ opacity: 1, blur: 1 }} transition={{duration: 0.8, delay: 0.3, ease: "easeOut"}} className="mx-10">
           <h1 className="font-bold">Misión</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed expedita provident eligendi similique consequuntur aut id culpa a tempore autem consequatur, omnis, nulla ab. Voluptatem, est reiciendis! Minus, similique perferendis?</p>
-        </div>
-        <div className="mx-10">
+          <p>"
+            Somos un aliado estratégico de empresas financieras , enfocados en satisfacer
+            las necesidades de los clientes de medios de pago con transparencia y
+            responsabilidad social."
+          </p>
+        </motion.div>
+        <motion.div initial={{ opacity: 0, blur: 2 }} whileInView={{ opacity: 1, blur: 1 }} transition={{duration: 0.8, delay: 0.3, ease: "easeOut"}} className="mx-10">
           <h1 className="font-bold">Visión</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus nemo, vitae explicabo harum ab repellat placeat assumenda quidem magnam ut, in voluptatum fugiat asperiores, velit ipsa illo laborum. Incidunt, molestiae?</p>
-        </div>
+          <p>
+            "Ocupar una posición de liderazgo en medios de pagos electrónicos ,
+            contribuyendo al desarrollo con responsabilidad social en el mercado donde
+            operen nuestros clientes"
+            </p>
+        </motion.div>
       </div>
     </section>
 
@@ -62,6 +72,10 @@ prosperidad en sus negocios</p>
         <hr className="h-30 w-px bg-white/40 border-1" />
       <div className="flex-row text-center">
         <h1 className="font-bold text-5xl">000,000+</h1>
+
+      <div className="text-5xl font-bold flex flex-row">
+        <NumberCounter value={100000} duration={3} /><p>+</p>
+      </div>
         <p className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#20304C] to-[#5D8BB5]">Lorem ipsu dolor sit</p>
       </div>
 
