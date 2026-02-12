@@ -1,7 +1,15 @@
 import HeroButton from "../components/HeroButton"
 import { QuoteIcon, Mail, MapPinned } from "lucide-react"
 import { motion } from "motion/react"
-import NumberCounter from "../components/NumberCounter"
+import NumberCounter from "../components/Landing/landingcomponents/NumberCounter"
+import CreditCard3D from "../components/Landing/landingcomponents/CreditCard3D"
+import QuienesSomos from "../components/Acerca/QuienesSomos"
+import Misionyvision from "../components/Landing/Misionyvision"
+import Estadistica from "../components/Landing/Estadistica"
+import Testimonios from "../components/Landing/Testimonios"
+import Contactanos from "../components/Landing/ContactanosSeccion"
+import { ChevronsDown } from "lucide-react"
+import { Link } from "react-router-dom"
 
 export default function Home() {
   return (
@@ -18,104 +26,47 @@ export default function Home() {
                 <img src="/src/assets/img/PTC_2-removebg-preview.png" alt="" className="h-30 w-30"/>
                 <h1 className="text-4xl md:text-6xl font-bold mb-6">Procesadora de Tarjetas de Crédito</h1>
               </div>
-            <HeroButton/>
+              <div className="w-40 flex flex-col justify-center mx-auto items-center gap-5">
+                <HeroButton/>
+                <div className="relative">
+                  <ChevronsDown className="w-15 h-15 text-white animate-pulse" />
+                </div>
+              </div>
+            
         </div>
     </div>
     </section>
 
-        {/* Q U I E N E S  S O M O S*/}
+      {/* Q U I E N E S  S O M O S*/}
 
-    <motion.section className="my-30">
-        <motion.h1 initial={{ opacity: 0, blur: 2 }} whileInView={{ opacity: 1, blur: 1 }} transition={{duration: 0.8, delay: 0.3, ease: "easeOut"}} className="flex justify-center text-white text-3xl">¿Quienes Somos?</motion.h1>
-        <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1, blur: 1 }} transition={{duration: 0.8, delay: 0.4, ease: "easeOut"}} className="text-white py-5 max-w-2xl text-center mx-auto">Somos
-          parte de una empresa regional con más de 15 años de experiencia especializada
-          en la comercialización , administración , operación y procemiento de negocios y
-          productos de medios de pago electrónicos y otros servicios financieros . Más allá de
-          ofrecer un servicio de procesamiento de Tarjetas de Crédito y Débito , nuestro modelo de
-          negocio agrega ese valor adicional que nuestros clientes necesitan para lograr la
-          prosperidad en sus negocios</motion.p>
-    </motion.section>
-
-          {/*M I S I O N  Y  V I S I O N */}
-
-    <section className="flex flex-row gap-6 my-10">
-      <div>
-        <img src="https://placehold.co/600x400" alt="" />
-      </div>
-      <div className="flex flex-col gap-6 text-white max-w-2xl text-center mx-auto my-auto">
-        <motion.div initial={{ opacity: 0, blur: 2 }} whileInView={{ opacity: 1, blur: 1 }} transition={{duration: 0.8, delay: 0.3, ease: "easeOut"}} className="mx-10">
-          <h1 className="font-bold">Misión</h1>
-          <p>"
-            Somos un aliado estratégico de empresas financieras , enfocados en satisfacer
-            las necesidades de los clientes de medios de pago con transparencia y
-            responsabilidad social."
-          </p>
-        </motion.div>
-        <motion.div initial={{ opacity: 0, blur: 2 }} whileInView={{ opacity: 1, blur: 1 }} transition={{duration: 0.8, delay: 0.3, ease: "easeOut"}} className="mx-10">
-          <h1 className="font-bold">Visión</h1>
-          <p>
-            "Ocupar una posición de liderazgo en medios de pagos electrónicos ,
-            contribuyendo al desarrollo con responsabilidad social en el mercado donde
-            operen nuestros clientes"
-            </p>
-        </motion.div>
-      </div>
-    </section>
-
-    {/* E S T A D I S T I C A S*/}
-    <section className="text-white flex flex-row gap-20 justify-center my-60">
-
-      <div className="flex-row text-center">
-        <h1 className="font-bold text-5xl">000,000+</h1>
-        <p className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#20304C] to-[#5D8BB5]">Lorem ipsu dolor sit</p>
-      </div>
-        <hr className="h-30 w-px bg-white/40 border-1" />
-      <div className="flex-row text-center">
-        <h1 className="font-bold text-5xl">000,000+</h1>
-
-      <div className="text-5xl font-bold flex flex-row">
-        <NumberCounter value={100000} duration={3} /><p>+</p>
-      </div>
-        <p className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#20304C] to-[#5D8BB5]">Lorem ipsu dolor sit</p>
-      </div>
-
-    </section>
-
-    <section className="flex flex-col justify-center mb-40">
-      <h1 className="text-white text-center text-3xl p-10">Testimonios</h1>
-      <div className="flex flex-row justify-center gap-10">
-        <div className="transition-transform duration-300 relative bg-white p-5 max-w-3xs rounded-lg text-center min-h-80 overflow-hidden hover:scale-110">
-          <QuoteIcon className="m-4 ml-0" />
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur et voluptatem</p>
-          <div className="absolute bottom-0 left-0 w-full h-6 bg-gradient-to-r from-[#20304C] to-[#5D8BB5]" />
-        </div>
-        <div className="transition-transform duration-300 relative bg-white p-5 max-w-3xs rounded-lg text-center min-h-80 overflow-hidden hover:scale-110">
-          <QuoteIcon className="m-4 ml-0" />
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur et voluptatem</p>
-          <div className="absolute bottom-0 left-0 w-full h-6 bg-gradient-to-r from-[#20304C] to-[#5D8BB5]" />
-        </div>
-        <div className="transition-transform duration-300 relative bg-white p-5 max-w-3xs rounded-lg text-center min-h-80 overflow-hidden hover:scale-110">
-          <QuoteIcon className="m-4 ml-0" />
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur et voluptatem</p>
-          <div className="absolute bottom-0 left-0 w-full h-6 bg-gradient-to-r from-[#20304C] to-[#5D8BB5]" />
-        </div>
-      </div>
-      
-    </section>
-
-    <section className="bg-white p-20">
-      <div className="flex flex-row justify-center gap-10">
-        <img src="https://placehold.co/300x300" alt="" />
-        <div className="flex flex-col text-center">
-          <h1 className="text-3xl text-center">Contáctanos</h1>
-          <div className="flex flex-row gap-5 justify-center p-5">
-            <button className="bg-black p-5 rounded-lg"> <Mail color="white" /> </button>
-            <button className="bg-black p-5 rounded-lg"> <MapPinned color="white" /> </button>
+        <div className="flex flex-col my-40">
+          <QuienesSomos/>
+        <Link to="/acerca" className="max-w-40 mx-auto group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md bg-[#5D8BB5] px-6 font-medium text-neutral-200 duration-500 hover:scale-110">
+          <div className="translate-x-0 opacity-100 transition group-hover:-translate-x-[150%] group-hover:opacity-0">Más Acerca</div>
+          <div className="absolute translate-x-[150%] opacity-0 transition group-hover:translate-x-0 group-hover:opacity-100">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-6 w-6">
+              <path d="M8.14645 3.14645C8.34171 2.95118 8.65829 2.95118 8.85355 3.14645L12.8536 7.14645C13.0488 7.34171 13.0488 7.65829 12.8536 7.85355L8.85355 11.8536C8.65829 12.0488 8.34171 12.0488 8.14645 11.8536C7.95118 11.6583 7.95118 11.3417 8.14645 11.1464L11.2929 8H2.5C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H11.2929L8.14645 3.85355C7.95118 3.65829 7.95118 3.34171 8.14645 3.14645Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"/>
+            </svg>
           </div>
+        </Link>
 
         </div>
-      </div>
-    </section>
+
+      {/*M I S I O N  Y  V I S I O N */}
+
+        <Misionyvision/>
+
+      {/* E S T A D I S T I C A S*/}
+        
+        <Estadistica/>
+
+      {/* T E S T I M O N I O S*/}
+
+        <Testimonios/>
+
+      {/* C O N T A C T A N O S*/}
+
+        <Contactanos/>
 
     </>
 

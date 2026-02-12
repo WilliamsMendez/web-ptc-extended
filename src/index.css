@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "daisyui";
 
 @font-face {
   font-family: "DM Sans";
@@ -33,8 +34,35 @@
 html, body, #root {
   margin: 0;
   padding: 0;
-  width: 100%;
-  min-height: 100vh;
-  background-color: #111111;
+  height: 100%;
+}
 
+::selection{
+
+  background-color: #5D8BB5;
+  color: black;
+
+}
+
+::-moz-selection{
+
+  background-color: #5D8BB5;
+  color: black;
+
+}
+
+@keyframes shimmerStroke {
+  0% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(2);
+  }
+  100% {
+    filter: brightness(1);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmerStroke 2s ease-in-out infinite;
 }
