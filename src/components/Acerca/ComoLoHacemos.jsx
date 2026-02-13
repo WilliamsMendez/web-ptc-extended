@@ -1,20 +1,20 @@
 import { TextHoverEffectDemo } from "../TextHoverEffect"
 import { UserRoundSearch, Wallet, Store, CreditCard } from "lucide-react"
 import { motion } from "framer-motion"
+import { fadeInBlur } from "../animations"
 
 
 export default function ComoLoHacemos(){
 
     return (
-
         <>
             {/* T I T U L O */}
             <motion.div initial={{ opacity: 0, blur: 2 }} whileInView={{ opacity: 1, blur: 1 }} transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }} className="relative flex items-center justify-center h-[400px] overflow-hidden">
                 <TextHoverEffectDemo texto="COMO" className="z-0" />
-                <h1 className="absolute top-1/2 -translate-y-1/2 text-white text-4xl z-10">¿Cómo lo hacemos?</h1>
+                <motion.h1 variants={fadeInBlur(1, 0.3)} initial="hidden" whileInView="visible" className="absolute top-1/2 -translate-y-1/2 text-white text-4xl z-10">¿Cómo lo hacemos?</motion.h1>
             </motion.div>
             {/* D I V S */}
-            <motion.div initial={{ opacity: 0, blur: 2 }} whileInView={{ opacity: 1, blur: 1 }} transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }} className="m-10 flex flex-row justify-center max-w-300 mx-auto gap-10 bg-[#111111]">
+            <motion.div variants={fadeInBlur(1, 0.3)} initial="hidden" whileInView="visible" className="m-10 px-10 flex flex-row justify-center max-w-300 mx-auto gap-10 bg-[#111111]">
                 <div className="flex flex-col gap-5 justify-center items-center">
                     <UserRoundSearch color="white"/>
                     <p>Análisis, elaboración, implementación y monitoreo de modelo de riesgo, estructuración de política crediticia, prospectación de clientes, investigación y análisis de solicitudes</p>

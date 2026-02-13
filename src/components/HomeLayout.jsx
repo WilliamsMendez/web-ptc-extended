@@ -75,7 +75,7 @@ export default function HomeLayout() {
         </ul>
       </nav>
 
-      <div className="m-0 p-0 bg-[#111111]">
+      <div className="m-0 p-0 bg-[#111111] overflow-auto">
       <main>
         <Outlet />
       </main>
@@ -87,7 +87,7 @@ export default function HomeLayout() {
           <div className='text-white text flex flex-row justify-normal pt-5 gap-10'>
             <ul className='flex flex-col'>
               <h1 className='font-bold py-2 pb-5'>Acerca</h1>
-              <li className='p-1'>¿Quienes Somos?</li>
+              <li className='p-1'> <Link to="/acerca#quienesSomos">¿Quienes Somos?</Link></li>
               <li className='p-1'>Mision y Vision</li>
               <li className='p-1'>¿Que hacemos?</li>
               <li className='p-1'>Nuestros Servicios</li>
