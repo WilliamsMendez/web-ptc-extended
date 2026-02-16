@@ -20,7 +20,7 @@ export default function Home() {
     <>
         {/* H E R O  P A N E L*/}
 
-    <section className="relative w-full min-h-screen overflow-hidden">
+    <section className="relative w-full min-h-screen overflow-hidden" id="titulo">
     <img src="https://picsum.photos/1920/1080" alt="Hero background" className="absolute inset-0 w-full h-full object-cover z-0"/>
     <div className="absolute inset-0 bg-black/50 z-0" />
         <div className="relative z-20 flex min-h-screen items-center justify-center text-white px-6">

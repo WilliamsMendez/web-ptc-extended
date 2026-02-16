@@ -4,7 +4,6 @@ import { useEffect, useRef } from "react";
 function NumberCounter({ value, duration = 2 }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
-
   const spring = useSpring(0, {
     duration: duration * 1000,
   });

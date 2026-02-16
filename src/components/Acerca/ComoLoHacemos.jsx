@@ -9,7 +9,7 @@ export default function ComoLoHacemos(){
     return (
         <>
             {/* T I T U L O */}
-            <motion.div initial={{ opacity: 0, blur: 2 }} whileInView={{ opacity: 1, blur: 1 }} transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }} className="relative flex items-center justify-center h-[400px] overflow-hidden">
+            <motion.div initial={{ opacity: 0, blur: 2 }} whileInView={{ opacity: 1, blur: 1 }} transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }} className="relative flex items-center justify-center h-[400px] overflow-hidden" id="comoLoHacemos">
                 <TextHoverEffectDemo texto="COMO" className="z-0" />
                 <motion.h1 variants={fadeInBlur(1, 0.3)} initial="hidden" whileInView="visible" className="absolute top-1/2 -translate-y-1/2 text-white text-4xl z-10">¿Cómo lo hacemos?</motion.h1>
             </motion.div>

@@ -16,20 +16,33 @@
   }
 }
 
-@layer base {
-  :root {
-    --color-bg-dark: 17 17 17;
-    --color-bg-white: 255 255 255;
-    --color-marino-primario: 16 34 63;
-    --color-marino-secundario: 32 48 76;
-    --color-celeste: 93 139 181;
-  }
-}
+
 
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root{
+
+  --brand-primary: #10223F;
+  --brand-secondary: #20304C;
+  --brand-accent: #5D8BB5;
+  --bg: #111111;
+  --text: #fff;
+
+}
+
+.light{
+
+  --brand-primary: #10223F;
+  --brand-secondary: #20304C;
+  --brand-accent: #5D8BB5;
+  --bg: #fafafa;
+  --text: #111;
+
+
+}
 
 
 html, body, #root {
@@ -67,3 +80,14 @@ html, body, #root {
 .animate-shimmer {
   animation: shimmerStroke 2s ease-in-out infinite;
 }
+
+.leaflet-container{
+
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  z-index: 1;
+  border-radius: 30px;
+
+}
+

@@ -2,20 +2,19 @@
 export default {
   content: [
     "./index.html",
-    "./src/**/*.{js,jsx}",
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
-        bg: {
-          dark: 'rgb(var(--color-bg-dark) / <alpha-value>)',
-          white: 'rgb(var(--color-bg-white) / <alpha-value>)',
+        brand: {
+          primary: "var(--brand-primary)",
+          secondary: "var(--brand-secondary)",
+          accent: "var(--brand-accent)",
         },
-        marino: {
-          primary: 'rgb(var(--color-marino-primario) / <alpha-value>)',
-          secondary: 'rgb(var(--color-marino-secundario) / <alpha-value>)',
-        },
-        celeste: 'rgb(var(--color-celeste) / <alpha-value>)',
+        bg: "var(--bg)",
+        text: "var(--text)",
       },
     },
   },

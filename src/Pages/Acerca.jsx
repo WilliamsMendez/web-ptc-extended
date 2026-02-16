@@ -9,7 +9,7 @@ export default function Acerca() {
   return (
     <>
       {/* M I N I  H E R O */}
-      <section className="relative w-full h-[55vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+      <section className="relative w-full h-[55vh] min-h-[400px] flex items-center justify-center overflow-hidden" id='titulo'>
         
         <img src="https://picsum.photos/1920/1080?grayscale" alt="Acerca Hero" className="absolute inset-0 w-full h-full object-cover"/>
 
@@ -30,7 +30,7 @@ export default function Acerca() {
 
       {/* CONTENIDO */}
       <div className="my-40">
-        <QuienesSomos id="quienesSomos"/>
+        <QuienesSomos/>
       </div>
 
       <QueHacemos />

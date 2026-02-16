@@ -1,7 +1,9 @@
 import ContactanosSeccion from "@/components/Landing/ContactanosSeccion";
 import MiniHero from "@/components/MiniHero";
-import { MapContainer, TileLayer, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css"
+import { ExternalLink } from "lucide-react";
+import MapaUbicacion from "@/components/Acerca/contactocomponents/MapaUbicacion";
 
 export default function Contacto(){
 
@@ -12,15 +14,23 @@ export default function Contacto(){
             <MiniHero titulo="Contacto" descripcion="Nuestro equipo está preparado para brindarte la asesoría que tu negocio necesita."/>
             <ContactanosSeccion/>
 
-            <MapContainer center={[14.0621, 87.1217]} zoom={13}>
 
-                <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors"'
-                    url="https:///{s}tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
+            <div className="flex flex-col m-10 justify-center text-center" id="#ubicacion">
 
-            </MapContainer>
+                <h1 className="p-10 text-3xl">Nuestra Ubicación</h1>
 
+                <MapaUbicacion/>
+                
+                <div className="flex flex-col">
+                    <h2 className="text-2xl p-10 pb-5">Referencia:</h2>
+                    <p className="w-200 mx-auto">Procesadora de Tarjetas de Crédito,
+                        Centro Comercial Novacentro, 2do y 3er Piso,
+                        Entre Bulevar Morazán y Avenida La Paz
+                        Tegucigalpa 11101, Francisco Morazán, Honduras.
+                    </p>
+                </div>
+            </div>
+            
         </>
 
     )
