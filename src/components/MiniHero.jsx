@@ -12,10 +12,10 @@ export default function MiniHero({titulo="", descripcion=""}){
 
         {/* Contenido Hero */}
         <div className="relative z-10 text-center px-6">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
+          <h1 className="text-4xl md:text-6xl font-bold text-text-primary mb-4">
             {titulo}
           </h1>
-          <p className="text-white/80 max-w-2xl mx-auto text-lg">{descripcion}</p>
+          <p className="text-text-primary/80 max-w-2xl mx-auto text-lg">{descripcion}</p>
         </div>
 
       </section>

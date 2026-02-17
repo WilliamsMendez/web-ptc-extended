@@ -10,7 +10,7 @@ export default function Valores(){
         <>
             <div className="mt-40 flex flex-col justify-center text-center gap-5" id="valores">
 
-                <motion.h1 variants={fadeInBlur(1, 0.3)} initial="hidden" whileInView="visible" className="flex justify-center text-white text-4xl">
+                <motion.h1 variants={fadeInBlur(1, 0.3)} initial="hidden" whileInView="visible" className="flex justify-center text-text-primary text-4xl">
                     Valores
                 </motion.h1>
 

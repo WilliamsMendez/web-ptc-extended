@@ -11,24 +11,17 @@ export default function Contacto(){
         
         <>
         
-            <MiniHero titulo="Contacto" descripcion="Nuestro equipo está preparado para brindarte la asesoría que tu negocio necesita."/>
+            <MiniHero titulo="Contacto" descripcion="Nuestro equipo está preparado para brindarte la asesoría que tu negocio necesita." id="titulo"/>
             <ContactanosSeccion/>
 
 
-            <div className="flex flex-col m-10 justify-center text-center" id="#ubicacion">
+            <div className="flex flex-col m-10 justify-center text-center" id="ubicacion">
 
                 <h1 className="p-10 text-3xl">Nuestra Ubicación</h1>
 
                 <MapaUbicacion/>
                 
-                <div className="flex flex-col">
-                    <h2 className="text-2xl p-10 pb-5">Referencia:</h2>
-                    <p className="w-200 mx-auto">Procesadora de Tarjetas de Crédito,
-                        Centro Comercial Novacentro, 2do y 3er Piso,
-                        Entre Bulevar Morazán y Avenida La Paz
-                        Tegucigalpa 11101, Francisco Morazán, Honduras.
-                    </p>
-                </div>
+
             </div>
             
         </>

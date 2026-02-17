@@ -25,7 +25,7 @@ export default function QueHacemos(){
     <>
     <motion.section className="flex flex-col gap-5 justify-center" id="queHacemos">
 
-    <motion.h1 variants={fadeInBlur(1, 0.3)} initial="hidden" whileInView="visible" className="flex justify-center text-white text-4xl">
+    <motion.h1 variants={fadeInBlur(1, 0.3)} initial="hidden" whileInView="visible" className="flex justify-center text-text-primary text-4xl">
         ¿Qué Hacemos?
     </motion.h1>
     

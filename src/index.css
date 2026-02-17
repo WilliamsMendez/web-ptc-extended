@@ -17,19 +17,17 @@
 }
 
 
-
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 :root{
 
   --brand-primary: #10223F;
   --brand-secondary: #20304C;
   --brand-accent: #5D8BB5;
   --bg: #111111;
-  --text: #fff;
+  --text-primary: #fff;
+  --text-inverse: #111111;
+  --surface: #171717;
+  --surface-light: #fff;
+
 
 }
 
@@ -39,9 +37,21 @@
   --brand-secondary: #20304C;
   --brand-accent: #5D8BB5;
   --bg: #fafafa;
-  --text: #111;
+  --text: #111; 
 
 
+}
+
+
+@theme {
+  --color-bg: var(--bg);
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-secondary: var(--brand-secondary);
+  --color-brand-accent: var(--brand-accent);
+  --color-text-primary: var(--text-primary);
+  --color-surface: var(--surface);
+  --color-surface-light: var(--surface-light);
+  --color-text-inverse: var(--text-inverse);
 }
 
 
@@ -84,7 +94,7 @@ html, body, #root {
 .leaflet-container{
 
   height: 80vh;
-  width: 100%;
+  width: 50%;
   display: flex;
   z-index: 1;
   border-radius: 30px;

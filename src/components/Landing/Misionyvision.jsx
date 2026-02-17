@@ -3,7 +3,7 @@ import CreditCard3D from "./landingcomponents/CreditCard3D"
 
 export default function Misionyvision() {
   return (
-    <section className="relative flex flex-row gap-4 my-40 mx-0 py-40 overflow-hidden">
+    <section className="relative flex flex-row gap-4 my-40 mx-0 py-40 overflow-hidden" id="misionYVision">
       
       {/* Imagen de fondo */}
       <img
@@ -20,7 +20,7 @@ export default function Misionyvision() {
         </div>
 
         {/* Texto */}
-        <div className="flex flex-col gap-6 text-white max-w-2xl text-center my-auto">
+        <div className="flex flex-col gap-6 text-text-white max-w-2xl text-center my-auto">
           
           <motion.div
             initial={{ opacity: 0, blur: 2 }}

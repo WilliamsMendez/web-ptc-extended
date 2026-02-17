@@ -15,12 +15,12 @@ export default function NuestrosServiciosCTA(){
         
         <div className="flex flex-row gap-5 justify-center place-items-center mx-auto">
           <div className="flex flex-col relative z-10 text-left px-6">
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">Nuestros Servicios</h1>
-            <p className="text-white/80 max-w-2xl mx-auto text-lg">Conecta tu negocio al futuro de los pagos digitales con respaldo y seguridad confiable.</p>
+            <h1 className="text-4xl md:text-6xl font-bold text-text-primary mb-4">Nuestros Servicios</h1>
+            <p className="text-text-primary/80 max-w-2xl mx-auto text-lg">Conecta tu negocio al futuro de los pagos digitales con respaldo y seguridad confiable.</p>
           </div>
           <div className="flex justify-center items-center gap-2">
-            <LinkButton linkto="/servicios" bg="#10223F"titulo="Servicios"/>
-            <LinkButton linkto="" bg="#5D8BB5" titulo="Contacto"/>
+            <LinkButton linkto="/servicios#titulo" bg="bg-brand-primary"titulo="Servicios"/>
+            <LinkButton linkto="/contacto#titulo" bg="bg-brand-accent" titulo="Contacto"/>
           </div>
         </div>
 
