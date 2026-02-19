@@ -10,7 +10,9 @@ export default function Acerca() {
   return (
     <>
       {/* M I N I  H E R O */}
-      <MiniHero titulo="Acerca de Nosotros" descripcion="Conoce quiénes somos, qué hacemos y cómo impulsamos soluciones innovadoras en el sector financiero." id="titulo"/>
+      <div id="titulo"></div>
+      <MiniHero titulo="Acerca de Nosotros" descripcion="Conoce quiénes somos, qué hacemos y cómo impulsamos soluciones innovadoras en el sector financiero." imgsrc="/src/assets/img/acercahero.jpg"/>
+      
 
 
 

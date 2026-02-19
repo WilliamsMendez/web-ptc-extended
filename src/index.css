@@ -18,15 +18,60 @@
 
 
 :root{
+  /*B R A N D  P R I M A R Y  P A L L E T T E  60 - 110*/
 
-  --brand-primary: #10223F;
+  --brand-primary: #0f1929;
+  
+  --brand-primary-110: color-mix(in srgb, var(--brand-primary), black 10%);
+  --brand-primary-120: color-mix(in srgb, var(--brand-primary), black 20%);
+  --brand-primary-130: color-mix(in srgb, var(--brand-primary), black 30%);
+  
+  --brand-primary-90: color-mix(in srgb, var(--brand-primary), white 10%);
+  --brand-primary-80: color-mix(in srgb, var(--brand-primary), white 20%);
+  --brand-primary-70: color-mix(in srgb, var(--brand-primary), white 30%);
+  --brand-primary-60: color-mix(in srgb, var(--brand-primary), white 40%);
+
+  /* B R A N D  S E C O N D A R Y  P A L E T T E  60 - 130 */
+
   --brand-secondary: #20304C;
+
+  --brand-secondary-110: color-mix(in srgb, var(--brand-secondary), black 10%);
+  --brand-secondary-120: color-mix(in srgb, var(--brand-secondary), black 20%);
+  --brand-secondary-130: color-mix(in srgb, var(--brand-secondary), black 30%);
+
+  --brand-secondary-90: color-mix(in srgb, var(--brand-secondary), white 10%);
+  --brand-secondary-80: color-mix(in srgb, var(--brand-secondary), white 20%);
+  --brand-secondary-70: color-mix(in srgb, var(--brand-secondary), white 30%);
+  --brand-secondary-60: color-mix(in srgb, var(--brand-secondary), white 40%);
+
+
   --brand-accent: #5D8BB5;
-  --bg: #111111;
+
+  /* B R A N D  A C C E N T  P A L E T T E  60 - 130 */
+
+    --brand-accent: #5D8BB5;
+
+    --brand-accent-110: color-mix(in srgb, var(--brand-accent), black 10%);
+    --brand-accent-120: color-mix(in srgb, var(--brand-accent), black 20%);
+    --brand-accent-130: color-mix(in srgb, var(--brand-accent), black 30%);
+
+    --brand-accent-90: color-mix(in srgb, var(--brand-accent), white 10%);
+    --brand-accent-80: color-mix(in srgb, var(--brand-accent), white 20%);
+    --brand-accent-70: color-mix(in srgb, var(--brand-accent), white 30%);
+    --brand-accent-60: color-mix(in srgb, var(--brand-accent), white 40%);
+
+
+  --bg: color-mix(in srgb, var(--brand-primary), black 30%);;
+
   --text-primary: #fff;
+  --text-primary-static: #fff;
   --text-inverse: #111111;
-  --surface: #171717;
+
+  --surface: color-mix(in srgb, var(--brand-primary), black 50%);
   --surface-light: #fff;
+
+  --bg-nav: #111111;
+  --bg-footer: #111111;
 
 
 }
@@ -37,22 +82,65 @@
   --brand-secondary: #20304C;
   --brand-accent: #5D8BB5;
   --bg: #fafafa;
-  --text: #111; 
+  --text-primary: color-mix(in srgb, var(--brand-primary), white 30%);
+  --text-primary-static: #fff;
+  --surface: color-mix(in srgb, var(--brand-accent), black 10%);
+  --bg-nav: #111111;
 
 
 }
 
 
 @theme {
+
+  /* ========== BASE ========== */
   --color-bg: var(--bg);
+
+  /* ========== BRAND PRIMARY ========== */
   --color-brand-primary: var(--brand-primary);
+  --color-brand-primary-60: var(--brand-primary-60);
+  --color-brand-primary-70: var(--brand-primary-70);
+  --color-brand-primary-80: var(--brand-primary-80);
+  --color-brand-primary-90: var(--brand-primary-90);
+  --color-brand-primary-110: var(--brand-primary-110);
+  --color-brand-primary-120: var(--brand-primary-120);
+  --color-brand-primary-130: var(--brand-primary-130);
+
+  /* ========== BRAND SECONDARY ========== */
   --color-brand-secondary: var(--brand-secondary);
+  --color-brand-secondary-60: var(--brand-secondary-60);
+  --color-brand-secondary-70: var(--brand-secondary-70);
+  --color-brand-secondary-80: var(--brand-secondary-80);
+  --color-brand-secondary-90: var(--brand-secondary-90);
+  --color-brand-secondary-110: var(--brand-secondary-110);
+  --color-brand-secondary-120: var(--brand-secondary-120);
+  --color-brand-secondary-130: var(--brand-secondary-130);
+
+  /* ========== BRAND ACCENT ========== */
   --color-brand-accent: var(--brand-accent);
-  --color-text-primary: var(--text-primary);
+  --color-brand-accent-60: var(--brand-accent-60);
+  --color-brand-accent-70: var(--brand-accent-70);
+  --color-brand-accent-80: var(--brand-accent-80);
+  --color-brand-accent-90: var(--brand-accent-90);
+  --color-brand-accent-110: var(--brand-accent-110);
+  --color-brand-accent-120: var(--brand-accent-120);
+  --color-brand-accent-130: var(--brand-accent-130);
+
+  /* ========== SURFACE ========== */
   --color-surface: var(--surface);
   --color-surface-light: var(--surface-light);
+
+  /* ========== TEXT ========== */
+  --color-text-primary: var(--text-primary);
   --color-text-inverse: var(--text-inverse);
+  --color-text-primary-static: var(--text-primary-static);
+
+  /* ========== NAV ========== */
+  --color-bg-nav: var(--bg-nav);
+
+  --color-bg-footer: var(--bg-footer);
 }
+
 
 
 html, body, #root {
@@ -77,13 +165,13 @@ html, body, #root {
 
 @keyframes shimmerStroke {
   0% {
-    filter: brightness(1);
+    filter: brightness(0);
   }
   50% {
     filter: brightness(2);
   }
   100% {
-    filter: brightness(1);
+    filter: brightness(0);
   }
 }
 
@@ -94,10 +182,38 @@ html, body, #root {
 .leaflet-container{
 
   height: 80vh;
-  width: 50%;
+  width: 100%;
   display: flex;
   z-index: 1;
   border-radius: 30px;
 
 }
+
+@theme inline {
+  --animate-scroll: scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite;
+
+  @keyframes scroll {
+    to {
+      transform: translate(calc(-50% - 0.5rem));
+    }
+  }
+}
+
+    .link-underline {
+        border-bottom-width: 0;
+        background-image: linear-gradient(transparent, transparent), linear-gradient(#fff, #fff);
+        background-size: 0 1px;
+        background-position: 0 100%;
+        background-repeat: no-repeat;
+        transition: background-size .2s ease-in-out;
+    }
+
+    .link-underline-black {
+        background-image: linear-gradient(transparent, transparent), linear-gradient(#000, #000)
+    }
+
+    .link-underline:hover {
+        background-size: 100% 1px;
+        background-position: 0 100%
+    }
 

@@ -14,8 +14,12 @@ import NuestrosServiciosCTA from "@/components/NuestrosServiciosCTA"
 import LinkButton from "@/components/LinkButton"
 import { fadeInBlur } from "@/components/animations"
 import HeroPanel from "@/components/Landing/HeroPanel"
+import AlgunosServiciosSeccion from "@/components/Landing/AlgunosServiciosSeccion"
+import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards"
+import CardsTestimonios from "@/components/Landing/landingcomponents/CardsTestimonios"
 
 export default function Home() {
+
   return (
     
     <>
@@ -42,7 +46,13 @@ export default function Home() {
 
       {/* T E S T I M O N I O S*/}
 
-        <Testimonios/>
+      {/* <Testimonios/> */}
+
+
+      {/* S E R V I C I O S*/}
+
+      <AlgunosServiciosSeccion/>
+
 
       {/* S E R V I C I O S  C  T A */}
 

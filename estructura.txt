@@ -1,0 +1,79 @@
+1.web-ptc
+    2.src
+        3.api
+        3.assets
+            4.fonts
+                5.DMSans-VariableFont //fuente global de la pagina
+            4.img //carpeta donde están todas las imagenes del proyecto
+                5.heroimg //carpeta dentro de img donde están las imagenes del hero panel
+                    6.hero1.png
+                    6.hero2.png
+                    6.hero3.png
+                    6.hero4.png
+                    6.hero5.png
+                    6.hero6.png
+                5.acercahero.jpg
+                5.contactohero.jpg
+                5.mail.png 
+                5.nuestrosservicioscta.jpg
+                5.PTC_2-removebg-preview
+                5.ptc-icon.svg
+                5.tarjetaMock.png
+                5. TV-1.png
+            4.components //carpeta donde están todos los componentes
+                5.Acerca //carpeta donde están todos los componentes de la página Acerca 
+                    6.acercacomponents //carpeta donde están los componentes de los componentes, está mal porque tiene componentes de contacto ya que no existe la carpeta Contacto
+                        7.QueHacemosCard.jsx
+                        7.ValoresRow.jsx
+                    6.contactocomponents //carpeta donde están los componentes de los componentes de contacto, debería ir en una carpeta Contacto
+                        7.MapaUbicacion.jsx
+                    6.ComoLoHacemos.jsx
+                    6.QueHacemos.jsx
+                    6.QuienesSomos.jsx
+                    6.Valores.jsx
+                5.emails //carpeta donde iba a estar el componente de los emails, no se usa
+                    6.Emails.jsx
+                5.Landing //aqui van todos los componentes de la landing page
+                    6.landingcomponents //aqui van todos los componentes de los componentes de la landing
+                        7.CardsTestimonios.jsx
+                        7.CreditCard3D.jsx
+                        7.InfiniteMovingCardsPrueba.jsx
+                        7.NuestrosServiciosCard.jsx
+                        7.NumberCounter.jsx
+                    6.AlgunosServiciosSeccion.jsx
+                    6.ContactanosSeccion.jsx
+                    6.Estadistica.jsx
+                    6.Footer.jsx
+                    6.FooterColumn.jsx
+                    6.HeroPanel.jsx
+                    6.Misionyvision.jsx
+                    6.Testimonios.jsx
+                    6.ThemeToggle.jsx
+                5.ui //carpeta donde estan los componentes de aceternity
+                    6.infinite-moving-cards.jsx
+                    6.text-hover-effect.jsx
+                5.animations.js
+                5.DropdownContacto
+                5.HeroButton.jsx
+                5.HomeLayout.jsx
+                5.LinkButton.jsx
+                5.MiniHero.jsx
+                5.NavBar.jsx
+                5.NuestrosServiciosCTA.jsx
+                5.NuestrosServiciosOL.jsx
+                5.TextHoverEffect.jsx
+            4.data
+                5.heroImages.js
+            4.lib 
+                5.utils.js
+            4.Pages
+                5.Acerca.jsx
+                5.Contactp.jsx
+                5.Home.jsx
+                5.NuestrosServicios.jsx
+                5.Router.jsx
+            4.
+            
+
+
+                

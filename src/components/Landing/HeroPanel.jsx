@@ -19,12 +19,12 @@ export default function HeroPanel(){
                 <div className="text-center max-w-3xl">
                 <div className="flex flex-row gap-1 justify-center">
                     <img src="/src/assets/img/PTC_2-removebg-preview.png" alt="" className="h-30 w-30"/>
-                    <h1 className="text-4xl md:text-6xl font-bold mb-6">Procesadora de Tarjetas de Crédito</h1>
+                    <h1 className="text-4xl text-text-primary-static md:text-6xl font-bold mb-6">Procesadora de Tarjetas de Crédito</h1>
                 </div>
                 <div className="w-40 flex flex-col justify-center mx-auto items-center gap-5">
                     <HeroButton/>
                     <div className="relative">
-                    <ChevronsDown className="w-15 h-15 text-text-primary animate-pulse" />
+                    <ChevronsDown className="w-15 h-15 text-text-primary-static animate-pulse" />
                     </div>
                 </div>
                 

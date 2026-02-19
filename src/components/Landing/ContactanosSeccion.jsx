@@ -41,7 +41,7 @@ export default function ContactanosSeccion(){
         <>
         
         
-        <section className="bg-white p-20 px-10"  id="#contactanosSeccion">
+        <section className="bg-white p-20 px-10"  id="contactanosSeccion">
         <div className="flex flex-row justify-center gap-10">
             <img src="/src/assets/img/mail.png" alt="" />
             <div className="flex flex-col text-center">

@@ -7,10 +7,10 @@ export default function NuestrosServicios(){
     return(
 
         <>
+            <div id="titulo"></div>
+            <MiniHero titulo="Nuestros Servicios" descripcion="Descubre el portafolio de soluciones diseñadas para optimizar, asegurar y potenciar cada una de tus transacciones." imgsrc="/src/assets/img/nuestrosservicioscta.jpg"/>
         
-            <MiniHero titulo="Nuestros Servicios" descripcion="Descubre el portafolio de soluciones diseñadas para optimizar, asegurar y potenciar cada una de tus transacciones." id="titulo"/>
-        
-            <div className="grid grid-cols-3 m-10">
+            <div className="grid grid-cols-3 m-10 text-text-primary">
 
                     <NuestrosServiciosOL titulo="Comercial" items={[
                         'Prospectación de clientes',

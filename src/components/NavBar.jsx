@@ -1,6 +1,7 @@
 import { HashLink } from "react-router-hash-link"
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import ThemeToggle from "./Landing/ThemeToggle";
 
 export default function NavBar(){
 
@@ -29,19 +30,19 @@ export default function NavBar(){
     <>
     
       <nav className="fixed top-5 left-0 w-full flex justify-center z-30">
-        <ul className="flex flex-row justify-center gap-20 w-full max-w-lg pb-0 items-center border-0 align-middle select-none font-sans text-center px-10 py-4 text-text-primary text-sm rounded-3xl bg-bg/90 backdrop-blur-xs transition-all duration-300 antialiased">
+        <ul className="flex flex-row justify-center gap-20 w-full max-w-lg pb-0 items-center border-0 align-middle select-none font-sans text-center px-10 py-4 text-text-primary-static text-sm rounded-3xl bg-bg-nav/90 backdrop-blur-xs transition-all duration-300 antialiased">
 
           {/* C O N T A C T O */}
              <li className="relative z-50 ">
               <div onMouseEnter={handleContactMouseEnter} onMouseLeave={handleContactMouseLeave} className="inline-block pb-5">
-                <Link to="/contacto" className="inline-flex items-center transition-transform duration-300 hover:scale-110">
+                <HashLink to="/contacto#titulo" className="inline-flex items-center transition-transform duration-300 hover:scale-110">
                   Contacto
-                </Link>
+                </HashLink>
                 {isContactHovering && (
                   <div className="absolute top-full left-1/2 -translate-x-1/2 w-40 rounded-lg bg-black/90 backdrop-blur-xl border border-white/20 shadow-2xl overflow-hidden p-2">
-                    <HashLink to='/contacto#contactanosSeccion'><p className="px-4 py-2 text-sm rounded-lg hover:bg-gray-700 cursor-pointer transition-colors hover:scale-110 transition-transform duration-200">Contactos</p></HashLink>
+                    <HashLink to='/contacto#contactanosSeccion'><p className="px-4 py-2 text-sm rounded-lg hover:bg-brand-accent-130 cursor-pointer transition-colors hover:scale-110 transition-transform duration-200">Contactos</p></HashLink>
                     <hr className='border-solid border-white/40 w-20 mx-auto text-center'/>
-                    <HashLink to='/contacto#ubicacion'><p className="px-4 py-2 text-sm rounded-lg hover:bg-gray-700 cursor-pointer transition-colors hover:scale-110 transition-transform duration-200">Ubicación</p></HashLink>
+                    <HashLink to='/contacto#ubicacion'><p className="px-4 py-2 text-sm rounded-lg hover:bg-brand-accent-130 cursor-pointer transition-colors hover:scale-110 transition-transform duration-200">Ubicación</p></HashLink>
                   </div>
                 )}
               </div>
@@ -64,18 +65,22 @@ export default function NavBar(){
               </HashLink>
               {isAcercaHovering && (
                 <div className="absolute top-full left-1/2 -translate-x-1/2 w-40 rounded-lg bg-black/90 backdrop-blur-xl border border-white/20 shadow-2xl overflow-hidden p-2">
-                  <HashLink to='/acerca#quienesSomos'><p className="px-4 py-2 text-sm rounded-lg hover:bg-gray-700 cursor-pointer transition-colors hover:scale-110 transition-transform duration-200">¿Quienes Somos?</p></HashLink> 
+                  <HashLink to='/acerca#quienesSomos'><p className="px-4 py-2 text-sm rounded-lg hover:bg-brand-accent-130 cursor-pointer transition-colors hover:scale-110 transition-transform duration-200">¿Quienes Somos?</p></HashLink> 
                   <hr className='border-solid border-white/40 w-20 mx-auto text-center'/>
-                  <HashLink to='/acerca#queHacemos'><p className="px-4 py-2 text-sm rounded-lg hover:bg-gray-700 cursor-pointer transition-colors hover:scale-110 transition-transform duration-200">¿Que hacemos?</p></HashLink>
+                  <HashLink to='/acerca#queHacemos'><p className="px-4 py-2 text-sm rounded-lg hover:bg-brand-accent-130 cursor-pointer transition-colors hover:scale-110 transition-transform duration-200">¿Que hacemos?</p></HashLink>
                   <hr className='border-solid border-white/40 w-20 mx-auto text-center'/>
-                  <HashLink to='/acerca#comoLoHacemos'><p className="px-4 py-2 text-sm rounded-lg hover:bg-gray-700 cursor-pointer transition-colors hover:scale-110 transition-transform duration-200">¿Cómo Lo Hacemos?</p></HashLink>
+                  <HashLink to='/acerca#comoLoHacemos'><p className="px-4 py-2 text-sm rounded-lg hover:bg-brand-accent-130 cursor-pointer transition-colors hover:scale-110 transition-transform duration-200">¿Cómo Lo Hacemos?</p></HashLink>
                   <hr className='border-solid border-white/40 w-20 mx-auto text-center'/>
-                  <HashLink to='/acerca#valores'><p className="px-4 py-2 text-sm rounded-lg hover:bg-gray-700 cursor-pointer transition-colors hover:scale-110 transition-transform duration-200">Valores</p></HashLink>
+                  <HashLink to='/acerca#valores'><p className="px-4 py-2 text-sm rounded-lg hover:bg-brand-accent-130 cursor-pointer transition-colors hover:scale-110 transition-transform duration-200">Valores</p></HashLink>
                   <hr className='border-solid border-white/40 w-20 mx-auto text-center'/>
-                  <HashLink to='/acerca#nuestrosServiciosCTA'><p className="px-4 py-2 text-sm rounded-lg hover:bg-gray-700 cursor-pointer transition-colors hover:scale-110 transition-transform duration-200">Nuestros Servicios</p></HashLink>
+                  <HashLink to='/acerca#nuestrosServiciosCTA'><p className="px-4 py-2 text-sm rounded-lg hover:bg-brand-accent-130 cursor-pointer transition-colors hover:scale-110 transition-transform duration-200">Nuestros Servicios</p></HashLink>
                 </div>
               )}
             </div>
+          </li>
+
+          <li className="pb-3">
+            <ThemeToggle/>
           </li>
 
         </ul>
