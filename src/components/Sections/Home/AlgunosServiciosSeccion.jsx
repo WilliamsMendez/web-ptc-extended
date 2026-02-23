@@ -1,7 +1,7 @@
 import { QuoteIcon } from "lucide-react"
 import { motion } from "framer-motion"
-import CardsTestimonios from "./landingcomponents/CardsTestimonios"
-import { InfiniteMovingCards } from "../ui/infinite-moving-cards";
+import CardsTestimonios from "./Components/CardsTestimonios"
+import { InfiniteMovingCards } from "../../ui/effects/infinite-moving-cards";
 
 export default function AlgunosServiciosSeccion(){
 

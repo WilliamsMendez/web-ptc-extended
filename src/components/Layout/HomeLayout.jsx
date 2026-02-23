@@ -1,10 +1,10 @@
 import { Outlet, Link } from 'react-router-dom'
 import { Linkedin } from 'lucide-react'
 import React, { useState } from 'react';
-import DropdownContacto from "../components/DropdownContacto";
+import DropdownContacto from "../DropdownContacto";
 import { HashLink } from 'react-router-hash-link';
 import NavBar from './NavBar';
-import Footer from './Landing/Footer';
+import Footer from './Footer';
 
 export default function HomeLayout() {
 

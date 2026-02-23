@@ -1,8 +1,8 @@
 1.web-ptc
     2.src
         3.api
-        3.assets
-            4.fonts
+        3.assets //donde estan imagenes, fonts, etc 
+            4.fonts //carpeta donde estan las fuentes
                 5.DMSans-VariableFont //fuente global de la pagina
             4.img //carpeta donde están todas las imagenes del proyecto
                 5.heroimg //carpeta dentro de img donde están las imagenes del hero panel
@@ -20,59 +20,72 @@
                 5.ptc-icon.svg
                 5.tarjetaMock.png
                 5. TV-1.png
-            4.components //carpeta donde están todos los componentes
-                5.Acerca //carpeta donde están todos los componentes de la página Acerca 
-                    6.acercacomponents //carpeta donde están los componentes de los componentes, está mal porque tiene componentes de contacto ya que no existe la carpeta Contacto
-                        7.QueHacemosCard.jsx
-                        7.ValoresRow.jsx
-                    6.contactocomponents //carpeta donde están los componentes de los componentes de contacto, debería ir en una carpeta Contacto
-                        7.MapaUbicacion.jsx
-                    6.ComoLoHacemos.jsx
-                    6.QueHacemos.jsx
-                    6.QuienesSomos.jsx
-                    6.Valores.jsx
-                5.emails //carpeta donde iba a estar el componente de los emails, no se usa
-                    6.Emails.jsx
-                5.Landing //aqui van todos los componentes de la landing page
-                    6.landingcomponents //aqui van todos los componentes de los componentes de la landing
-                        7.CardsTestimonios.jsx
-                        7.CreditCard3D.jsx
-                        7.InfiniteMovingCardsPrueba.jsx
-                        7.NuestrosServiciosCard.jsx
-                        7.NumberCounter.jsx
-                    6.AlgunosServiciosSeccion.jsx
-                    6.ContactanosSeccion.jsx
-                    6.Estadistica.jsx
-                    6.Footer.jsx
-                    6.FooterColumn.jsx
-                    6.HeroPanel.jsx
-                    6.Misionyvision.jsx
-                    6.Testimonios.jsx
-                    6.ThemeToggle.jsx
-                5.ui //carpeta donde estan los componentes de aceternity
-                    6.infinite-moving-cards.jsx
-                    6.text-hover-effect.jsx
-                5.animations.js
-                5.DropdownContacto
-                5.HeroButton.jsx
-                5.HomeLayout.jsx
-                5.LinkButton.jsx
-                5.MiniHero.jsx
-                5.NavBar.jsx
-                5.NuestrosServiciosCTA.jsx
-                5.NuestrosServiciosOL.jsx
-                5.TextHoverEffect.jsx
-            4.data
-                5.heroImages.js
-            4.lib 
-                5.utils.js
-            4.Pages
-                5.Acerca.jsx
-                5.Contactp.jsx
-                5.Home.jsx
-                5.NuestrosServicios.jsx
-                5.Router.jsx
-            4.
+        3.components //carpeta donde están todos los componentes
+            4.Acerca //carpeta donde están todos los componentes de la página Acerca 
+                5.acercacomponents //carpeta donde están los componentes de los componentes, está mal porque tiene componentes de contacto ya que no existe la carpeta Contacto
+                    6.QueHacemosCard.jsx //componente de card que se repite en la seccion Que Hacemos, de la pagina Acerca 
+                    6.ValoresRow.jsx //ya no se usa 
+                5.contactocomponents //carpeta donde están los componentes de los componentes de contacto, debería ir en una carpeta Contacto
+                    6.MapaUbicacion.jsx //componente de la seccion donde se muestra el mapa y referencia en la pagina de contact
+                5.ComoLoHacemos.jsx //seccion de como lo hacemos en la pagina Acerca 
+                5.QueHacemos.jsx //seccion de que hacemos en la pagina Acerca
+                5.QuienesSomos.jsx //seccion de quienes somos en la pagina Acerca
+                5.Valores.jsx //seccion de valores en la pagina Acerca
+            4.emails //carpeta donde iba a estar el componente de los emails, no se usa
+                5.Emails.jsx
+            4.Landing //aqui van todos los componentes de la landing page
+                5.landingcomponents //aqui van todos los componentes de los componentes de la landing
+                    6.CardsTestimonios.jsx //componente de diseño de card reutilizable que se repite para la seccion de testimonios 
+                    6.CreditCard3D.jsx //componente de daisyui de una tarjeta de credito3d que se muestra en la seccion mision y vision de la landing
+                    6.InfiniteMovingCardsPrueba.jsx //componente de aceternity de cards infinitas que muestran servicios 
+                    6.NuestrosServiciosCard.jsx //mismo diseño de CardsTestimonios que no se usa
+                    6.NumberCounter.jsx //componente de contador de numeros que se muestra en la sección de estadistica de la landing page
+                5.AlgunosServiciosSeccion.jsx //seccion donde se muestran las cards infinitas en la landing page  
+                5.ContactanosSeccion.jsx //seccion de contacto donde se encuentra el formulario para envio de correos
+                5.Estadistica.jsx //seccion en la landing page donde se encuentra el number counter
+                5.Footer.jsx //footer de la pagina donde se muestra el footercolumn
+                5.FooterColumn.jsx //seccion donde se establece el contenido del footer
+                5.HeroPanel.jsx //heropanel de la landing page 
+                5.Misionyvision.jsx //seccion de mision y vision de la landing page
+                5.Testimonios.jsx //seccion de testimonios de la landing page
+                5.ThemeToggle.jsx //toggle para switchear entre light y dark mode
+            4.ui //carpeta donde estan los componentes de aceternity
+                5.infinite-moving-cards.jsx //componente de aceternity para la seccion de AlgunosServiciosSeccion
+                5.text-hover-effect.jsx //componente de aceternity para un hover de la seccion como lo hacemos
+            4.animations.js //script donde se establecen las diferentes animaciones de framer motion
+            4.DropdownContacto //no se usa
+            4.HeroButton.jsx //boton del hero panel de la landing
+            4.HomeLayout.jsx //layout que se repite en todas las pgaineas (nav y footer)
+            4.LinkButton.jsx //componente de boton que se repite en varias secciones y componentes
+            4.MiniHero.jsx //hero que se repite en todas las sub-paginas (acerca, contacto, nuestros servicios, etc)
+            4.NavBar.jsx //barra de navegación
+            4.NuestrosServiciosCTA.jsx //call to action seccion para redirigir a contacto o nuestos servicios page
+            4.NuestrosServiciosOL.jsx //lista ordenada de todos los servicios
+            4.TextHoverEffect.jsx //componente de aceternity de un efecto que se hace en la seccion ComoLoHacemos de la pagina Acerca
+        3.data
+            4.heroImages.js //script que cambia las imagenes del hero de la landing cada que se recarga la página
+        3.lib 
+            5.utils.js //literal no se 
+        3.Pages //carpeta donde se guardan las pagiinas
+            4.Acerca.jsx //pagina de acerca 
+            4.Contacto.jsx //pagina de contacto
+            4.Home.jsx //pagina principal, la landing page
+            4.NuestrosServicios.jsx //pagina de sevicios
+            4.Router.jsx //router que enruta todas la paginas
+        3.App.css
+        3.App.jsx 
+        3.index.css
+        3.main.jsx
+    2.gitignore
+    2.components.json
+    2.eslint.config.js
+    2.index.html
+    2.jsconfig.json
+    2.package-lock.json
+    2.package.json
+    2.tailwind.config.js
+    2.vite.config.js
+
             
 
 

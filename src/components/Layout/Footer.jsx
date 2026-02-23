@@ -41,24 +41,39 @@ export default function Footer(){
       
         <>
         
-      <footer className='bg-bg-footer p-5 z-10'>
-        <div className='flex flex-row justify-evenly p-10'>
-         <div className="text-text-primary-static flex flex-row justify-normal pt-5 gap-10">
-          {footerData.map((column, idx) => (
-            <FooterColumn
-              key={idx}
-              title={column.title}
-              links={column.links}
-            />
-          ))}
-        </div>
+      <footer className="bg-bg-footer py-12 px-6 md:px-20">
 
-          <img src="/src/assets/img/PTC_2-removebg-preview.png" alt="" className='w-10 h-10'/>
-        </div>
+  <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center md:items-start gap-12">
 
-        <hr className='border-solid border-white/50 w-full flex flex-row items-center mx-auto' />
-        <p className='text-text-primary-static p-10 text-center'>© 2026 Procesadora de Tarjetas de Crédito | Todos los derechos reservados</p>
-      </footer>
+    {/* Columnas */}
+    <div className="text-text-primary-static flex flex-col sm:flex-row gap-12 text-center md:text-left">
+      {footerData.map((column, idx) => (
+        <FooterColumn
+          key={idx}
+          title={column.title}
+          links={column.links}
+        />
+      ))}
+    </div>
+
+    {/* Logo */}
+    <img
+      src="/src/assets/img/common/PTC_2-removebg-preview.png"
+      alt=""
+      className="w-12 h-12"
+    />
+
+  </div>
+
+  {/* Divider */}
+  <hr className="border-white/30 my-8" />
+
+  {/* Copyright */}
+  <p className="text-text-primary-static text-center text-sm">
+    © 2026 Procesadora de Tarjetas de Crédito | Todos los derechos reservados
+  </p>
+
+</footer>
         
         </>
 

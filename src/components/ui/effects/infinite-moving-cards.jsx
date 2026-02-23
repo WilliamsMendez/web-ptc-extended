@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import React, { useEffect, useState } from "react";
-import { ServicioCard } from "@/components/Landing/landingcomponents/NuestrosServiciosCard";
+import { ServicioCard } from "@/components/Sections/Home/Components/NuestrosServiciosCard";
 
 
 export const InfiniteMovingCards = ({

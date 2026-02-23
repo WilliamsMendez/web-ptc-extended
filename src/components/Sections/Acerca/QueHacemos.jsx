@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import QueHacemosCard from "/src/components/Acerca/acercacomponents/QueHacemosCard.jsx";
+import QueHacemosCard from "./Components/QueHacemosCard.jsx";
 import { CreditCard, ChartSpline, HandCoins, SmartphoneNfc, Workflow, BanknoteArrowDown, MonitorCog, ShieldCheck } from "lucide-react";
-import { fadeInBlur } from "../animations";
+import { fadeInBlur } from "../../animations";
 
 
 
@@ -29,7 +29,7 @@ export default function QueHacemos(){
         ¿Qué Hacemos?
     </motion.h1>
     
-      <motion.div variants={fadeInBlur(1, 0.5)} initial="hidden" whileInView="visible" className="grid grid-cols-6 gap-5 p-20">
+      <motion.div variants={fadeInBlur(1, 0.5)} initial="hidden" whileInView="visible" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-5 px-6 md:px-10 lg:p-20">
         <QueHacemosCard className="col-span-2" descripcion="Modelos de riesgo crediticio para la aprobación y emisión de tarjetas de crédito y productos financieros" icono={<CreditCard className="h-10 w-10 rounded-full" />}/>
         <QueHacemosCard className="col-span-2" descripcion="Análisis y estrategias para el desarrollo y rentabilidad de portfolios" icono={<ChartSpline className="h-10 w-10 rounded-full"/>} />
         <QueHacemosCard className="col-span-2" descripcion="Administración y gestión comercial de medios de pagos electrónicos y otros productos financieros" icono={<HandCoins className="h-10 w-10 rounded-full"/>}/>

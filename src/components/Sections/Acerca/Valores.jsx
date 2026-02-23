@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { fadeInBlur } from "../animations";
+import { fadeInBlur } from "../../animations";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function Valores() {
@@ -57,30 +57,30 @@ export default function Valores() {
   };
 
   return (
-    <section className="mt-40 text-center px-6" id="valores">
+    <section className="my-24 md:my-40 text-center px-6">
 
-      <motion.h1 variants={fadeInBlur(1, 0.3)} initial="hidden" whileInView="visible" className="text-text-primary text-4xl mb-16">
+      <motion.h1 variants={fadeInBlur(1, 0.3)} initial="hidden" whileInView="visible" className="text-text-primary text-3xl md:text-4xl lg:text-5xl mb-12 md:mb-16">
         Valores
       </motion.h1>
 
     <div className="relative max-w-4xl mx-auto">
 
     {/* Flecha izquierda */}
-    <button onClick={prev} className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-brand-secondary p-3 rounded-full hover:scale-110 transition shadow-xl mx-5 hover:text-text-inverse hover:bg-brand-accent">
+    <button onClick={prev} className="absolute left-2 md:left-0 top-1/2 -translate-y-1/2 z-20 bg-brand-secondary p-2 md:p-3 rounded-full hover:scale-110 transition shadow-xl hover:text-text-inverse hover:bg-brand-accent">
         <ChevronLeft />
     </button>
 
     {/* Flecha derecha */}
-    <button onClick={next} className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-brand-secondary p-3 rounded-full hover:scale-110 transition shadow-xl mx-5 hover:text-text-inverse hover:bg-brand-accent">
+    <button onClick={next} className="absolute right-2 md:right-0 top-1/2 -translate-y-1/2 z-20 bg-brand-secondary p-2 md:p-3 rounded-full hover:scale-110 transition shadow-xl hover:text-text-inverse hover:bg-brand-accent">
         <ChevronRight />
     </button>
 
 
         {/* Card */}
         <AnimatePresence mode="wait">
-          <motion.div key={index} initial={{ opacity: 0 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.5 }} className="bg-gradient-to-t from-brand-primary to-brand-accent rounded-3xl p-12 shadow-2xl">
+          <motion.div key={index} initial={{ opacity: 0 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.5 }} className="bg-gradient-to-t from-brand-primary to-brand-accent rounded-3xl p-6 md:p-12 shadow-2xl">
             <h2 className="text-2xl font-semibold mb-6 text-text-primary-static"> {valores[index].titulo} </h2>
-            <p className="text-gray-300 leading-relaxed w-xl mx-auto">{valores[index].descripcion}</p>
+            <p className="text-gray-300 leading-relaxed max-w-2xl mx-auto text-sm md:text-base">{valores[index].descripcion}</p>
           </motion.div>
         </AnimatePresence>
 

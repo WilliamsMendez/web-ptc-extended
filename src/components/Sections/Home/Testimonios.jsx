@@ -1,6 +1,6 @@
 import { QuoteIcon } from "lucide-react"
 import { motion } from "framer-motion"
-import CardsTestimonios from "./landingcomponents/CardsTestimonios"
+import CardsTestimonios from "./Components/CardsTestimonios.jsx"
 
 export default function Testimonios(){
 

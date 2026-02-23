@@ -10,6 +10,6 @@ export const heroImages = [
   { id: 2, src: hero2 },
   { id: 3, src: hero3 },
   { id: 4, src: hero4 },
-  { id: 4, src: hero5 },
-  { id: 4, src: hero6 },
+  { id: 5, src: hero5 },
+  { id: 6, src: hero6 },
 ]

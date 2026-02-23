@@ -180,13 +180,9 @@ html, body, #root {
 }
 
 .leaflet-container{
-
-  height: 80vh;
   width: 100%;
-  display: flex;
   z-index: 1;
   border-radius: 30px;
-
 }
 
 @theme inline {
