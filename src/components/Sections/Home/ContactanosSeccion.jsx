@@ -1,18 +1,21 @@
 "use client";
 
-import { Mail, SendHorizonal, ALargeSmall } from "lucide-react"
+import { Mail, SendHorizonal, ALargeSmall } from "lucide-react";
 import { useState } from "react";
+import ContactanosModalMensaje from "../Contacto/ContactanosModalMensaje";
 
+export default function ContactanosSeccion() {
 
-export default function ContactanosSeccion(){
+  const [modal, setModal] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-    const [formData, setFormData] = useState({
-        from:"",
-        subject: "",
-        message: ""
-    });
+  const [formData, setFormData] = useState({
+    replyEmail: "",
+    subject: "",
+    message: ""
+  });
 
-      const handleChange = (e) => {
+  const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -20,105 +23,128 @@ export default function ContactanosSeccion(){
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const res = await fetch("http://localhost:3001/send-email", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(formData)
-  });
+    try {
+      setLoading(true);
 
-  const data = await res.json();
-  console.log(data);
-};
+      const res = await fetch("http://localhost:3001/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      });
 
+      const data = await res.json();
 
+      if (!res.ok) {
+        alert(data.error || "Error enviando el mensaje");
+        return;
+      }
 
-    return(
+      setModal(true);
 
-        <>
-        
-        
-<section 
-  className="bg-white py-16 md:py-24 px-6 md:px-10"  
-  id="contactanosSeccion"
->
+      setFormData({
+        replyEmail: "",
+        subject: "",
+        message: ""
+      });
 
-  <div className="flex flex-col md:flex-row items-center justify-center gap-12 max-w-6xl mx-auto">
+    } catch (error) {
+      console.error("Error enviando el correo:", error);
+      alert("Error de conexión con el servidor.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    {/* Imagen */}
-    <img 
-      src="/src/assets/img/common/mail.png" 
-      alt="" 
-      className="w-48 md:w-64"
-    />
+  return (
+    <>
+      <section
+        className="bg-white py-16 md:py-24 px-6 md:px-10"
+        id="contactanosSeccion"
+      >
+        <div className="flex flex-col md:flex-row items-center justify-center gap-12 max-w-6xl mx-auto">
 
-    {/* Form */}
-    <div className="flex flex-col text-center md:text-left w-full max-w-lg">
-
-      <h1 className="text-3xl md:text-4xl text-text-inverse mb-6">
-        Contáctanos
-      </h1>
-
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
-
-        {/* Email */}
-        <div className="relative w-full">
-          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"/>
-          <input
-            type="email"
-            name="from"
-            placeholder="Correo"
-            value={formData.from}
-            onChange={handleChange}
-            className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-accent text-black"
+          {/* Imagen */}
+          <img
+            src="/src/assets/img/common/mail.png"
+            alt="Icono de Correo"
+            className="w-48 md:w-64"
           />
+
+          {/* Form */}
+          <div className="flex flex-col text-center md:text-left w-full max-w-lg">
+
+            <h1 className="text-3xl md:text-4xl text-text-inverse mb-6">
+              Contáctanos
+            </h1>
+
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
+
+              {/* Email */}
+              <div className="relative w-full">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <input
+                  type="email"
+                  name="replyEmail"
+                  placeholder="Correo"
+                  value={formData.replyEmail}
+                  onChange={handleChange}
+                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-accent text-black"
+                />
+              </div>
+
+              {/* Subject */}
+              <div className="relative w-full">
+                <ALargeSmall className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <input
+                  type="text"
+                  name="subject"
+                  placeholder="Asunto"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-accent text-black"
+                />
+              </div>
+
+              {/* Message */}
+              <textarea
+                name="message"
+                placeholder="Contenido"
+                rows="4"
+                value={formData.message}
+                onChange={handleChange}
+                className="w-full resize-none border border-gray-300 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-brand-accent text-black"
+              />
+
+              {/* Button */}
+              <button
+                type="submit"
+                disabled={loading}
+                className={`mt-4 flex justify-center items-center gap-2 py-3 rounded-xl 
+                ${loading
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-brand-primary hover:bg-brand-accent hover:scale-105"
+                  }
+                text-white transition-all duration-300`}
+              >
+                {loading ? "Enviando..." : (
+                  <>
+                    <SendHorizonal className="w-5 h-5" />
+                    Enviar
+                  </>
+                )}
+              </button>
+
+            </form>
+
+            {modal && <ContactanosModalMensaje setModal={setModal} />}
+
+          </div>
         </div>
-
-        {/* Subject */}
-        <div className="relative w-full">
-          <ALargeSmall className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"/>
-          <input
-            type="text"
-            name="subject"
-            placeholder="Asunto"
-            value={formData.subject}
-            onChange={handleChange}
-            className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-accent text-black"
-          />
-        </div>
-
-        {/* Message */}
-        <textarea
-          name="message"
-          placeholder="Contenido"
-          rows="4"
-          value={formData.message}
-          onChange={handleChange}
-          className="w-full resize-none border border-gray-300 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-brand-accent text-black"
-        />
-
-        {/* Button */}
-        <button
-          type="submit"
-          className="mt-4 flex justify-center items-center gap-2 py-3 rounded-xl bg-brand-primary text-white hover:bg-brand-accent transition-all duration-300 hover:scale-105"
-        >
-          <SendHorizonal className="w-5 h-5"/>
-          Enviar
-        </button>
-
-      </form>
-
-    </div>
-
-  </div>
-
-</section>
-        
-        </>
-
-    )
-
+      </section>
+    </>
+  );
 }
