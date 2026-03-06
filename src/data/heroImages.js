@@ -1,9 +1,9 @@
 import hero1 from "/src/assets/img/heroimg/hero1.png"
-import hero2 from "/src/assets/img/heroimg/hero2.png"
-import hero3 from "/src/assets/img/heroimg/hero3.png"
-import hero4 from "/src/assets/img/heroimg/hero4.png"
-import hero5 from "/src/assets/img/heroimg/hero5.png"
-import hero6 from "/src/assets/img/heroimg/hero6.png"
+import hero2 from "/src/assets/img/heroimg/hero2.webp"
+import hero3 from "/src/assets/img/heroimg/hero3.webp"
+import hero4 from "/src/assets/img/heroimg/hero4.webp"
+import hero5 from "/src/assets/img/heroimg/hero5.webp"
+import hero6 from "/src/assets/img/heroimg/hero6.webp"
 
 export const heroImages = [
   { id: 1, src: hero1 },

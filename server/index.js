@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { Resend } from "resend";
+import fetch from "node-fetch";
 
 dotenv.config();
 
@@ -21,7 +22,7 @@ app.post("/send-email", async (req, res) => {
     const cleanSubject = subject?.trim();
     const cleanMessage = message?.trim();
 
-    // Validaciones básicas
+    // Validaciones
     if (!cleanReplyEmail || !cleanSubject || !cleanMessage) {
       return res.status(400).json({
         error: "Todos los campos son obligatorios."
@@ -80,6 +81,59 @@ app.post("/send-email", async (req, res) => {
   } catch (error) {
     console.error("Error enviando email:", error);
     res.status(500).json({ error: "Error interno del servidor." });
+  }
+});
+
+app.get("/api/tipo-cambio", async (req, res) => {
+  try {
+
+    const response = await fetch(
+      "https://bchapi-am.azure-api.net/api/v1/indicadores/97/cifras",
+      {
+        method: "GET",
+        headers: {
+          "Cache-Control": "no-cache",
+          "clave": process.env.BCH_API_KEY
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    res.json(data[0]); // el más reciente
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error obteniendo tipo de cambio" });
+  }
+});
+
+app.get("/api/tipo-cambio-historial", async (req, res) => {
+  try {
+
+    const response = await fetch(
+      "https://bchapi-am.azure-api.net/api/v1/indicadores/97/cifras",
+      {
+        method: "GET",
+        headers: {
+          "Cache-Control": "no-cache",
+          "clave": process.env.BCH_API_KEY
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    const historial = data.slice(0, 7).map(item => ({
+      fecha: item.Fecha,
+      valor: item.Valor
+    }));
+
+    res.json(historial);
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error obteniendo historial" });
   }
 });
 

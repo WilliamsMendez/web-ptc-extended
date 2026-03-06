@@ -8,7 +8,7 @@ export default function Estadistica(){
         
 <section className="text-text-primary flex flex-col md:flex-row items-center justify-center gap-16 md:gap-20 my-24 md:my-40 px-6">
 
-  {/* Stat 1 */}
+  {/* Estadistica 1 */}
   <div className="text-center">
     <div className="text-3xl md:text-5xl font-bold flex justify-center">
       <NumberCounter value={100000} duration={1} />
@@ -19,11 +19,11 @@ export default function Estadistica(){
     </p>
   </div>
 
-  {/* Separator */}
-  <div className="hidden md:block h-24 w-px bg-white/40" />
-  <div className="block md:hidden w-24 h-px bg-white/40" />
+  {/* Separador */}
+  <div className="hidden md:block h-24 w-px bg-text-primary/40" />
+  <div className="block md:hidden w-24 h-px bg-text-primary/40" />
 
-  {/* Stat 2 */}
+  {/* Estadistica 2 */}
   <div className="text-center">
     <div className="text-3xl md:text-5xl font-bold flex justify-center">
       <NumberCounter value={100000} duration={1} />

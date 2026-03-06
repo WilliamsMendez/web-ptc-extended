@@ -32,7 +32,7 @@ export default function ThemeToggle() {
     <>
         <button
       onClick={toggleTheme}
-      className="relative w-12 h-6 bg-surface rounded-full transition flex items-center px-1"
+      className="relative w-12 h-6 bg-surface rounded-full transition flex items-center px-1 cursor-pointer"
     >
       <div
         className={`w-4 h-4 rounded-full bg-brand-accent-70 transition-transform duration-300 ${

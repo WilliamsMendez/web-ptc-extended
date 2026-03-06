@@ -4,6 +4,7 @@ import { useState } from "react";
 import ThemeToggle from "../ui/Buttons/ThemeToggle.jsx";
 import { TextAlignJustify } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import NavBarDropDown from "./NavBarDropDown.jsx";
 
 
 
@@ -53,11 +54,10 @@ export default function NavBar(){
                   Contacto
                 </HashLink>
                 {isContactHovering && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-40 mt-3 rounded-lg bg-black/90 ... before:absolute before:-top-4 before:left-0 before:w-full before:h-4 before:content-['']">
-                    <HashLink to='/contacto#contactanosSeccion'><p className="px-4 py-2 text-sm rounded-lg hover:bg-brand-accent-130 cursor-pointer transition-colors hover:scale-110 transition-transform duration-200">Contactos</p></HashLink>
-                    <hr className='border-solid border-white/40 w-20 mx-auto text-center'/>
-                    <HashLink to='/contacto#ubicacion'><p className="px-4 py-2 text-sm rounded-lg hover:bg-brand-accent-130 cursor-pointer transition-colors hover:scale-110 transition-transform duration-200">Ubicación</p></HashLink>
-                  </div>
+              <div className="absolute top-full left-1/2 -translate-x-1/2 w-40 mt-3 rounded-lg bg-black/90 ... before:absolute before:-top-4 before:left-0 before:w-full before:h-4 before:content-['']">
+                <NavBarDropDown to="/contacto#contactanosSeccion" title="Contactanos"/>
+                <NavBarDropDown to="/contacto#ubicacion" title="Ubicación"/>
+             </div>
                 )}
               </div>
             </li>
@@ -78,17 +78,13 @@ export default function NavBar(){
                 Acerca
               </HashLink>
               {isAcercaHovering && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 w-40 mt-3 rounded-lg bg-black/90 ... before:absolute before:-top-4 before:left-0 before:w-full before:h-4 before:content-['']">
-                  <HashLink to='/acerca#quienesSomos'><p className="px-4 py-2 text-sm rounded-lg hover:bg-brand-accent-130 cursor-pointer transition-colors hover:scale-110 transition-transform duration-200">¿Quienes Somos?</p></HashLink> 
-                  <hr className='border-solid border-white/40 w-20 mx-auto text-center'/>
-                  <HashLink to='/acerca#queHacemos'><p className="px-4 py-2 text-sm rounded-lg hover:bg-brand-accent-130 cursor-pointer transition-colors hover:scale-110 transition-transform duration-200">¿Que hacemos?</p></HashLink>
-                  <hr className='border-solid border-white/40 w-20 mx-auto text-center'/>
-                  <HashLink to='/acerca#comoLoHacemos'><p className="px-4 py-2 text-sm rounded-lg hover:bg-brand-accent-130 cursor-pointer transition-colors hover:scale-110 transition-transform duration-200">¿Cómo Lo Hacemos?</p></HashLink>
-                  <hr className='border-solid border-white/40 w-20 mx-auto text-center'/>
-                  <HashLink to='/acerca#valores'><p className="px-4 py-2 text-sm rounded-lg hover:bg-brand-accent-130 cursor-pointer transition-colors hover:scale-110 transition-transform duration-200">Valores</p></HashLink>
-                  <hr className='border-solid border-white/40 w-20 mx-auto text-center'/>
-                  <HashLink to='/acerca#nuestrosServiciosCTA'><p className="px-4 py-2 text-sm rounded-lg hover:bg-brand-accent-130 cursor-pointer transition-colors hover:scale-110 transition-transform duration-200">Nuestros Servicios</p></HashLink>
-                </div>
+              <div className="absolute top-full left-1/2 -translate-x-1/2 w-40 mt-3 rounded-lg bg-black/90 ... before:absolute before:-top-4 before:left-0 before:w-full before:h-4 before:content-['']">
+                <NavBarDropDown link="/acerca#quienesSomos" title="¿Quienes Somos?"/>
+                <NavBarDropDown link="/acerca#queHacemos" title="¿Qué Hacemos?"/>
+                <NavBarDropDown link="/acerca#comoLoHacemos" title="¿Cómo Lo Hacemos?"/>
+                <NavBarDropDown link="/acerca#valores" title="Valores"/>
+                <NavBarDropDown link="/servicios#titulo" title="Nuestros Servicios"/>
+              </div>
               )}
             </div>
           </li>

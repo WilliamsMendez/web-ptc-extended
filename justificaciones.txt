@@ -1,0 +1,21 @@
+- Al principo estaba 100% con la página web, haciendo mockups, viendo contenido, 
+siguiendo parametros establecidos por la empresa, etc.
+- Cree el ambiente para empezara desarrollar la web
+- Se me pidió iniciar el aprendizaje de RPG Free para una automatización
+- Creé el ambiente para iniciar el aprendizaje de como se maneja el servidor AS400
+mediante la terminal 5250
+- Aprendí a como conectar mi ambiente con un servidor público para pruebas
+llamado PUB400
+- Empecé a aprender como realizar scripts con RPG Free y a ejecutarlos en 5250
+- Se pausa el aprendizaje para seguir con el desarrollo de la web, implementando
+liberías y frameworks.
+- La creación de la página ha usado herramientas como Figma, Vite, NPM, React con JSX (HTML, CSS y JS), Tailwind, Resend, Express, Cors, Dotenv, Leaflet, Aceternity, DaisyUI, Lucide, Git, HashLink, Framer Motion, BCH WEB API
+- Queda pendiente el hosting y dominio de la aplicación web
+- Revisión y actualización de 
+- Empiezo a aprender de reportería diaria solicitada por adquirencia a TI, información que se saca desde la base de datos a un reporte excel.
+- Se envían estos reportes diariamente, semanalmente, y mensualmente. Cada plazo tiene un proceso.
+- Se hacen actualizaciones y/o modificaciones a las consultas que se hacen a la base de datos para la reportería diariamente
+- A su vez he estado recibiendo solicitudes departe de adquirencia para hacer ingreso, cambio o modificación de información en las terminales POS, a las cuales se accede por remoto a un servidor especializado.
+- Aprendizaje de como funciona la certificación de PIN Security la cual hace uso de criptografía, llaves, algoritmos, labels, su comunicación y validación por POS, ATMs, etc.
+
+

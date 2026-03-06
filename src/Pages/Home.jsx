@@ -18,6 +18,7 @@ import AlgunosServiciosSeccion from "@/components/Sections/Home/AlgunosServicios
 import { InfiniteMovingCards } from "@/components/ui/effects/infinite-moving-cards"
 import CardsTestimonios from "@/components/Sections/Home/Components/CardsTestimonios"
 import { ServicioCard } from "@/components/Sections/Home/Components/NuestrosServiciosCard"
+import FinanzasEstadisticas from "@/components/Sections/Home/FinanzasEstadisticas"
 
 export default function Home() {
 
@@ -49,6 +50,9 @@ export default function Home() {
 
       {/* <Testimonios/> */}
 
+      {/* F I N A N Z A S*/}
+
+      <FinanzasEstadisticas/>
 
       {/* S E R V I C I O S*/}
 

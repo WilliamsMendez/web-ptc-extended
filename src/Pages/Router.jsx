@@ -4,6 +4,7 @@ import Acerca from './Acerca'
 import Home from './Home'
 import NuestrosServicios from './NuestrosServicios'
 import Contacto from './Contacto'
+import HistorialTipoCambio from './HistorialTipoCambio.jsx'
 
 export default function Router() {
   return (
@@ -13,6 +14,7 @@ export default function Router() {
         <Route path='/acerca' element={<Acerca/>} />
         <Route path='/servicios' element={<NuestrosServicios/>} />
         <Route path='/contacto' element={<Contacto/>} />
+        <Route path='/historial-cambio' element={<HistorialTipoCambio/>} />
       </Route>
     </Routes>
   )

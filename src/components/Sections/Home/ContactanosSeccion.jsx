@@ -128,7 +128,7 @@ export default function ContactanosSeccion() {
                     ? "bg-gray-400 cursor-not-allowed"
                     : "bg-brand-primary hover:bg-brand-accent hover:scale-105"
                   }
-                text-white transition-all duration-300`}
+                text-white transition-all duration-300 cursor-pointer`}
               >
                 {loading ? "Enviando..." : (
                   <>
