@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { LoaderOne } from "@/components/ui/loader";
 
 function TipoCambio(){
 
@@ -31,7 +32,7 @@ function TipoCambio(){
   return (
     <>
       <h2 className="font-bold">
-        {tipoCambio ? `L ${tipoCambio}` : "Cargando..."}
+        {tipoCambio ? `L ${tipoCambio}` : <LoaderOne/>}
       </h2>
 
       {fecha && (
