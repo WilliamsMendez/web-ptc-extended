@@ -68,11 +68,7 @@ export default function ContactanosSeccion() {
         <div className="flex flex-col md:flex-row items-center justify-center gap-12 max-w-6xl mx-auto">
 
           {/* Imagen */}
-          <img
-            src="/src/assets/img/common/mail.png"
-            alt="Icono de Correo"
-            className="w-48 md:w-64"
-          />
+          <img src="src/assets/img/common/mail.png" alt="Icono de Correo" className="w-48 md:w-64"/>
 
           {/* Form */}
           <div className="flex flex-col text-center md:text-left w-full max-w-lg">

@@ -38,7 +38,7 @@ export default function NavBar(){
     
       <nav className="fixed top-3 md:top-5 left-0 w-full flex justify-center z-50 px-4">
 
-        <ul className="flex flex-row justify-center justify-between md:justify-center w-full max-w-2xl px-6 md:px-10 py-3 md:py-4 text-sm md:text-sm gap-10 md:gap-20 w-full p-3 items-center border-0 align-middle select-none font-sans text-center text-text-primary-static text-sm rounded-3xl bg-bg-nav/90 backdrop-blur-xs transition-all duration-300 antialiased">
+        <ul className="flex flex-row justify-center justify-between md:justify-center w-full max-w-2xl px-6 md:px-10 py-3 md:py-4 text-sm md:text-sm gap-10 md:gap-20 w-full p-3 items-center border-1 border-solid border-gray-700 align-middle select-none font-sans text-center text-text-primary-static text-sm rounded-3xl bg-bg-nav/90 backdrop-blur-xs transition-all duration-300 antialiased">
 
         {/* Mobile Hamburger */}
         <li className="md:hidden">
@@ -66,7 +66,7 @@ export default function NavBar(){
 
           <li>
             <HashLink to="/#titulo" className='inline-flex items-center transition-transform duration-300 scale-130 hover:scale-150 drop-shadow-none hover:drop-shadow-white/50 hover:drop-shadow-md'>
-              <img src="/src/assets/img/common/PTC_2-removebg-preview.png" alt="" className='h-5 w-5'/>
+              <img src="src/assets/img/common/PTC_2-removebg-preview.png" alt="" className='h-5 w-5'/>
             </HashLink>
           </li>
           

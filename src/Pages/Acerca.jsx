@@ -4,6 +4,7 @@ import QueHacemos from "../components/Sections/Acerca/QueHacemos"
 import QuienesSomos from "../components/Sections/Home/QuienesSomos"
 import NuestrosServiciosCTA from "../Components/Sections/Home/NuestrosServiciosCTA.jsx"
 import MiniHero from "@/components/Layout/MiniHero"
+import { ValoresCarousel } from "@/components/Sections/Acerca/ValoresCarousel"
 
 export default function Acerca() {
 
@@ -11,7 +12,7 @@ export default function Acerca() {
     <>
       {/* M I N I  H E R O */}
       <div id="titulo"></div>
-      <MiniHero titulo="Acerca de Nosotros" descripcion="Conoce quiénes somos, qué hacemos y cómo impulsamos soluciones innovadoras en el sector financiero." imgsrc="/src/assets/img/hero/acercahero.jpg"/>
+      <MiniHero titulo="Acerca de Nosotros" descripcion="Conoce quiénes somos, qué hacemos y cómo impulsamos soluciones innovadoras en el sector financiero." imgsrc="src/assets/img/hero/acercahero.jpg"/>
       
 
 
@@ -23,7 +24,7 @@ export default function Acerca() {
 
       <QueHacemos />
       <ComoLoHacemos/>
-      <Valores/>
+      <ValoresCarousel/>
       <NuestrosServiciosCTA/>
 
     </>

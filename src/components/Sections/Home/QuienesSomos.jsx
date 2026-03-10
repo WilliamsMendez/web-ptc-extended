@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { fadeInBlur } from "../../animations";
+import LampDemo from "@/components/ui/lamp";
 
 
 export default function QuienesSomos() {

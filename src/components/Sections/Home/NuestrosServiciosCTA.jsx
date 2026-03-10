@@ -7,15 +7,10 @@ export default function NuestrosServiciosCTA(){
 
         <>
         
-<section 
-  className="relative min-h-[350px] md:min-h-[400px] flex items-center overflow-hidden rounded-xl mx-6 md:m-10 py-16 px-6" 
-  id="nuestrosServiciosCTA"
->
+<section className="relative min-h-[350px] md:min-h-[400px] flex items-center overflow-hidden rounded-xl mx-6 md:m-10 py-16 px-6" id="nuestrosServiciosCTA">
 
   <img 
-    src="/src/assets/img/hero/nuestrosservicioscta.jpg" 
-    alt="Acerca Hero" 
-    className="rounded-xl absolute inset-0 w-full h-full object-cover"
+    src="src/assets/img/hero/nuestrosservicioscta.jpg" alt="Acerca Hero" className="rounded-xl absolute inset-0 w-full h-full object-cover"
   />
 
   <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-black/30 backdrop-blur-[5px]" />

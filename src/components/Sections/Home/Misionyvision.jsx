@@ -10,7 +10,7 @@ export default function Misionyvision() {
 
   {/* Imagen de fondo */}
   <img
-    src="/src/assets/img/TV - 1.png"
+    src="src/assets/img/TV - 1.png"
     alt=""
     className="absolute inset-0 w-full h-full object-cover z-0 opacity-70"
   />

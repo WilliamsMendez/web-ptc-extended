@@ -29,6 +29,8 @@ export default function Home() {
 
         <HeroPanel/>
 
+        <div id="#verMas"></div>
+
       {/* Q U I E N E S  S O M O S*/}
 
         <div className="flex flex-col my-40">

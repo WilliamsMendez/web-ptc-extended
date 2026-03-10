@@ -11,7 +11,7 @@ export default function ComoLoHacemos(){
             {/* T I T U L O */}
             <motion.div initial={{ opacity: 0, blur: 2 }} whileInView={{ opacity: 1, blur: 1 }} transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }} className="relative flex items-center justify-center h-[250px] md:h-[400px] overflow-hidden px-6">
                 <TextHoverEffectDemo texto="COMO" className="z-0" />
-                <motion.h1 variants={fadeInBlur(1, 0.3)} initial="hidden" whileInView="visible" className="absolute top-1/2 -translate-y-1/2 text-text-primary text-3xl md:text-4xl lg:text-5xl z-10 text-center">¿Cómo lo hacemos?</motion.h1>
+                <motion.h1 variants={fadeInBlur(1, 0.3)} id="comoLoHacemos" initial="hidden" whileInView="visible" className="absolute top-1/2 -translate-y-1/2 text-text-primary text-3xl md:text-4xl lg:text-5xl z-10 text-center">¿Cómo lo hacemos?</motion.h1>
             </motion.div>
             {/* D I V S */}
             <motion.div variants={fadeInBlur(1, 0.3)} initial="hidden" whileInView="visible" className="my-16 px-6 md:px-10 flex flex-col md:flex-row justify-center max-w-6xl mx-auto gap-12 text-text-primary">

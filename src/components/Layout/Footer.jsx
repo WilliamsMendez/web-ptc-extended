@@ -58,7 +58,7 @@ export default function Footer(){
 
     {/* Logo */}
     <img
-      src="/src/assets/img/common/PTC_2-removebg-preview.png"
+      src="src/assets/img/common/PTC_2-removebg-preview.png"
       alt=""
       className="w-12 h-12"
     />
