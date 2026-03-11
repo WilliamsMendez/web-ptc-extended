@@ -5,6 +5,7 @@ import ThemeToggle from "../ui/Buttons/ThemeToggle.jsx";
 import { TextAlignJustify } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import NavBarDropDown from "./NavBarDropDown.jsx";
+import { fadeDown } from "../animations.js";
 
 
 
@@ -36,7 +37,7 @@ export default function NavBar(){
 
     <>
     
-      <nav className="fixed top-3 md:top-5 left-0 w-full flex justify-center z-50 px-4">
+      <motion.nav variants={fadeDown(0.8, 0.3)} initial="initial" animate="animate" className="fixed top-3 md:top-5 left-0 w-full flex justify-center z-50 px-4">
 
         <ul className="flex flex-row justify-center justify-between md:justify-center w-full max-w-2xl px-6 md:px-10 py-3 md:py-4 text-sm md:text-sm gap-10 md:gap-20 w-full p-3 items-center border-1 border-solid border-gray-700 align-middle select-none font-sans text-center text-text-primary-static text-sm rounded-3xl bg-bg-nav/90 backdrop-blur-xs transition-all duration-300 antialiased">
 
@@ -114,7 +115,7 @@ export default function NavBar(){
             </motion.div>
           )}
         </AnimatePresence>
-      </nav>
+      </motion.nav>
     
     </>
 

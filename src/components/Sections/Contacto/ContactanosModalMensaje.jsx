@@ -22,7 +22,7 @@ export default function ContactanosModalMensaje({ setModal }) {
         </p>
 
         <button
-          className="px-6 py-3 rounded-full bg-brand-primary border-2 border-solid border-brand-accent text-white hover:bg-brand-accent transition-all duration-300 hover:scale-105"
+          className="px-6 py-3 rounded-full bg-brand-primary border-2 border-solid border-brand-accent text-white hover:bg-brand-accent transition-all duration-300 hover:scale-105 cursor-pointer"
           onClick={() => setModal(false)}
         >
           Cerrar

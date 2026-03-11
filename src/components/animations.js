@@ -7,4 +7,9 @@ export const fadeInBlur = (duration = 0.8, delay = 0) => ({
 export const fadeIn = (duration = 0.8, delay = 0) => ({
   hidden: { opacity: 0},
   visible: { opacity: 1, transition: { duration, delay } }
-})
+});
+
+export const fadeDown = (duration = 0.5, delay = 0) => ({
+  initial: { opacity: 0, y: -100 },
+  animate: { opacity: 1, y: 0, transition: { duration, delay }}
+});

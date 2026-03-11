@@ -62,7 +62,7 @@ export default function ContactanosSeccion() {
   return (
     <>
       <section
-        className="bg-white py-16 md:py-24 px-6 md:px-10"
+        className="bg-bg-contacto-seccion  py-16 md:py-24 px-6 md:px-10"
         id="contactanosSeccion"
       >
         <div className="flex flex-col md:flex-row items-center justify-center gap-12 max-w-6xl mx-auto">

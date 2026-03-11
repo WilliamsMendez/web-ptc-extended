@@ -17,7 +17,7 @@ export default function Acerca() {
 
 
 
-      {/* CONTENIDO */}
+      {/* C O N T E N I D O */}
       <div className="my-40">
         <QuienesSomos/>
       </div>

@@ -61,7 +61,8 @@
     --brand-accent-60: color-mix(in srgb, var(--brand-accent), white 40%);
 
 
-  --bg: color-mix(in srgb, var(--brand-primary), black 30%);;
+  --bg: color-mix(in srgb, var(--brand-primary), black 30%);
+  --bg-contacto-seccion: #fafafa; 
 
   --text-primary: #fff;
   --text-primary-static: #fff;
@@ -86,6 +87,7 @@
   --text-primary-static: #fff;
   --surface: color-mix(in srgb, var(--brand-accent), black 20%);
   --bg-nav: #111111;
+  --bg-contacto-seccion: #fafafa;
 
 
 }
@@ -105,6 +107,8 @@
   --color-brand-primary-110: var(--brand-primary-110);
   --color-brand-primary-120: var(--brand-primary-120);
   --color-brand-primary-130: var(--brand-primary-130);
+
+  --color-bg-contacto-seccion: var(--bg-contacto-seccion);
 
   /* ========== BRAND SECONDARY ========== */
   --color-brand-secondary: var(--brand-secondary);
@@ -152,14 +156,14 @@ html, body, #root {
 ::selection{
 
   background-color: #5D8BB5;
-  color: black;
+  color: #233c53;
 
 }
 
 ::-moz-selection{
 
   background-color: #5D8BB5;
-  color: black;
+  color: #233c53;
 
 }
 
