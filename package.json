@@ -27,6 +27,7 @@
     "react-leaflet": "^5.0.0",
     "react-router-dom": "^7.13.0",
     "react-router-hash-link": "^2.4.3",
+    "recharts": "^3.8.0",
     "resend": "^6.9.2",
     "tailwind-merge": "^3.4.0",
     "tailwindcss": "^4.1.18",

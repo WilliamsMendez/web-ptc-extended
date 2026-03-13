@@ -9,7 +9,7 @@ llamado PUB400
 - Empecé a aprender como realizar scripts con RPG Free y a ejecutarlos en 5250
 - Se pausa el aprendizaje para seguir con el desarrollo de la web, implementando
 liberías y frameworks.
-- La creación de la página ha usado herramientas como Figma, Vite, NPM, React con JSX (HTML, CSS y JS), Tailwind, Resend, Express, Cors, Dotenv, Leaflet, Aceternity, DaisyUI, Lucide, Git, HashLink, Framer Motion, BCH WEB API
+- La creación de la página ha usado herramientas como Figma, Vite, NPM, React con JSX (HTML, CSS y JS), Tailwind, Resend, Express, Cors, Dotenv, Leaflet, Aceternity, DaisyUI, Lucide, Git, HashLink, Framer Motion, BCH WEB API, GA4, GA API
 - Queda pendiente el hosting y dominio de la aplicación web
 - Revisión y actualización de 
 - Empiezo a aprender de reportería diaria solicitada por adquirencia a TI, información que se saca desde la base de datos a un reporte excel.

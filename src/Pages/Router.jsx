@@ -5,8 +5,12 @@ import Home from './Home'
 import NuestrosServicios from './NuestrosServicios'
 import Contacto from './Contacto'
 import HistorialTipoCambio from './HistorialTipoCambio.jsx'
-import AdminLogin from './AdminLogin'
+import AdminDashboard from './AdminDashboard'
 import ProtectedRoute from '@/components/auth/ProtectedRoutes'
+import { withAuthenticationRequired } from '@auth0/auth0-react'
+import AdminLayout from '@/components/Layout/AdminLayout'
+
+const ProtectedAdmin = withAuthenticationRequired(AdminLayout);
 
 export default function Router() {
   return (
@@ -18,7 +22,9 @@ export default function Router() {
         <Route path='/contacto' element={<Contacto/>} />
         <Route path='/historial-cambio' element={<HistorialTipoCambio/>} />
       </Route>
-      <Route path='/admin' element={ <ProtectedRoute><AdminLogin/></ProtectedRoute>} />
+      <Route path='/admin' element={<ProtectedAdmin />} >
+        <Route index element={<AdminDashboard />} /> 
+      </Route>
     </Routes>
   )
 }
