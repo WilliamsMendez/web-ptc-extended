@@ -84,6 +84,10 @@ app.post("/send-email", async (req, res) => {
   }
 });
 
+//-------API BANCO CENTRAL---------
+
+//TIPO DE CAMBIO
+
 app.get("/api/tipo-cambio", async (req, res) => {
   try {
 
@@ -107,6 +111,8 @@ app.get("/api/tipo-cambio", async (req, res) => {
     res.status(500).json({ error: "Error obteniendo tipo de cambio" });
   }
 });
+
+//HISTORIAL DE CAMBIO
 
 app.get("/api/tipo-cambio-historial", async (req, res) => {
   try {
@@ -136,6 +142,44 @@ app.get("/api/tipo-cambio-historial", async (req, res) => {
     res.status(500).json({ error: "Error obteniendo historial" });
   }
 });
+
+//--------API AUTH0---------
+
+app.get("/api/users", async (req, res) => {
+  try {
+    const tokenResponse = await fetch(`https://${process.env.AUTH0_DOMAIN}/oauth/token`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        client_id: process.env.AUTH0_CLIENT_ID,
+        client_secret: process.env.AUTH0_CLIENT_SECRET,
+        audience: `https://${process.env.AUTH0_DOMAIN}/api/v2/`,
+        grant_type: "client_credentials"
+      })
+    });
+
+    const tokenData = await tokenResponse.json();
+    console.log("Token response:", tokenData);  //log que devuelve datos del token
+
+    const { access_token } = tokenData;
+    console.log("Access token:", access_token); //log que devuelve acces token
+
+    const usersResponse = await fetch(`https://${process.env.AUTH0_DOMAIN}/api/v2/users`, {
+      headers: { Authorization: `Bearer ${access_token}` }
+    });
+
+    const users = await usersResponse.json();
+    console.log("Users response:", users); //log que devuelve respuesta de users
+    res.json(users);
+    
+  } catch (error) {
+    console.error("Error obteniendo usuarios:", error);
+    res.status(500).json({ error: "Error obteniendo usuarios" });
+  }
+});
+
+
+//CHECK DE BACKEND CORRIENDO
 
 app.listen(3001, () => {
   console.log("Server running on http://localhost:3001");

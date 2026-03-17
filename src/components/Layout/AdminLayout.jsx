@@ -1,4 +1,4 @@
-import { ChartArea, User, LogOut } from "lucide-react"
+import { ChartArea, User, LogOut, Undo2 } from "lucide-react"
 import { Outlet } from "react-router-dom"
 import { useAuth0 } from "@auth0/auth0-react"
 import ThemeToggle from "../ui/Buttons/ThemeToggle";
@@ -15,16 +15,16 @@ export default function AdminLayout(){
             <section className="flex flex-col bg-brand-primary h-full md:w-70 z-10">
 
                 <div>
-                    <h1 className="flex font-bold py-10 justify-center">Titulo</h1>
+                    <h1 className="flex font-bold py-10 justify-center text-text-primary-static">Titulo</h1>
                 </div>
                 <hr className="flex border-solid border-1 border-brand-accent items-center justify-center w-50 mx-auto"/>
-                <nav>
+                <nav className="text-text-primary-static">
                     <ul className="flex flex-col gap-1 py-6 px-2">
-                        <li className="flex flex-row gap-2 p-2 rounded-lg hover:bg-brand-accent hover:text-brand-primary/60 cursor-pointer hover:border-1 border-solid border-brand-accent-80"><ChartArea/> Dashboard</li>
-                        <HashLink to="/admin/users"><li className="flex flex-row gap-2 p-2 rounded-lg hover:bg-brand-accent hover:text-brand-primary/60 cursor-pointer hover:border-1 border-solid border-brand-accent-80"><User/> Usuarios</li></HashLink>
+                        <HashLink to="/admin"><li className="flex flex-row gap-2 p-2 rounded-lg hover:bg-brand-primary-120 hover:text-brand-accent-110 cursor-pointer hover:border-0 border-solid border-brand-accent-80"><ChartArea/> Dashboard</li></HashLink>
+                        <HashLink to="/admin/users"><li className="flex flex-row gap-2 p-2 rounded-lg hover:bg-brand-primary-120 hover:text-brand-accent-110 cursor-pointer hover:border-0 border-solid border-brand-accent-80"><User/> Usuarios</li></HashLink>
                     </ul>
                 </nav>
-                <div className="flex flex-col justify-end mt-auto">
+                <div className="flex flex-col justify-end mt-auto text-text-primary-static">
                     <div className="flex flex-col gap-2 bg-brand-secondary rounded-md mx-4">
                         <div className="flex justify-between items-center p-2 px-4">
                             <p>Modo:</p>
@@ -35,7 +35,7 @@ export default function AdminLayout(){
                             <div>{isAuthenticated && <p>{user.nickname}</p>}</div>
                             <button
                             onClick={()=> logout({ logoutParams: {returnTo: window.location.origin}})}
-                            className="p-2 bg-red-700 rounded-md hover:scale-110 hover:bg-red-600 transition cursor-pointer">
+                            className="p-2 bg-red-700 rounded-md hover:scale-110 hover:bg-red-600 transition cursor-pointer border-solid border-2 border-red-900">
                                 <LogOut/>
                             </button>
                         </div>

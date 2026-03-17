@@ -1,13 +1,14 @@
-import { ChartSpline, StickyNote, Earth } from "lucide-react"
+import { ChartSpline, StickyNote, Earth, Undo2 } from "lucide-react"
+import { HashLink } from "react-router-hash-link"
+import AdminHeader from "@/components/admin/AdminHeader"
 
 export default function AdminDashboard(){
 
     return(
         <>
-            <div className="p-8">
-                <h1 className="text-3xl font-bold text-text-primary">Analíticas</h1>
-                <p className="text-gray-400 mt-1">Bienvenido al panel de analíticas</p>
-            </div>
+
+            <AdminHeader title="Analíticas" desc="Analíticas"/>
+
             
             <section className="flex flex-col m-6 gap-6">
 
@@ -34,14 +35,14 @@ export default function AdminDashboard(){
 
                 </section>
 
-                <h1 className="font-bold text-2xl">Visitas los últimos 7 días</h1>
+                <h1 className="font-bold text-2xl text-text-primary">Visitas los últimos 7 días</h1>
 
                 <div className="text-gray-300 bg-white p-30 rounded-lg flex flex-row gap-2 justify-center mx-5">
                     <h1 className="text-2xl">Placeholder gráfico</h1>
                     <ChartSpline/>
                 </div>
 
-                <h1 className="font-bold text-2xl">Páginas Más Visitadas</h1>
+                <h1 className="font-bold text-2xl text-text-primary">Páginas Más Visitadas</h1>
 
                 <section className="flex gap-20 mx-6">
                     
@@ -51,7 +52,7 @@ export default function AdminDashboard(){
                             <StickyNote/>
                         </div>
                         <hr className="border-solid border-1 border-brand-accent"/>
-                        <ul className="flex flex-col gap-2 p-4">
+                        <ul className="flex flex-col gap-2 p-4 text-text-primary">
                             <li className="flex flex-row">top 1 
                                 <div className="flex justify-end mx-auto">
                                     <p>0</p>
@@ -77,7 +78,7 @@ export default function AdminDashboard(){
                             </div>
                                 <hr className="border-solid border-1 border-brand-accent"/>
                             <div>
-                        <ul className="flex flex-col gap-2 p-4">
+                        <ul className="flex flex-col gap-2 p-4 text-text-primary">
                             <li className="flex flex-row">top 1 
                                 <div className="flex justify-between mx-auto">
                                     <p>0</p>

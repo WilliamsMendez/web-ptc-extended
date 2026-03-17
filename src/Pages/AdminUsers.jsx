@@ -1,21 +1,19 @@
+import { Table } from "@/components/ui/table"
+import { DataTable } from "@/components/ui/DataTable"
+import AdminHeader from "@/components/admin/AdminHeader"
+
 export default function AdminUsers(){
 
     return(
 
         <>
         
-            <div className="p-8">
-                <h1 className="text-3xl font-bold text-text-primary">Usuarios</h1>
-                <p className="text-gray-400 mt-1">Bienvenido al panel de usuarios</p>
-            </div>
+        <AdminHeader title="Usuarios" desc="Usuarios"/>
 
-            <div>
-                <button>
-                    Crear
-                </button>
-                <button>
-                    Crear
-                </button>
+            <div className="m-8">
+                
+                <DataTable/>
+
             </div>
         
         </>
