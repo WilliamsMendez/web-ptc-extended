@@ -43,7 +43,7 @@ export default function AdminDashboard(){
 
                 <h1 className="font-bold text-2xl">Páginas Más Visitadas</h1>
 
-                <section className="flex gap-20">
+                <section className="flex gap-20 mx-6">
                     
                     <div>
                         <div className="text-brand-accent rounded-lg flex flex-row gap-2 justify-center p-6 pb-4">
@@ -79,17 +79,17 @@ export default function AdminDashboard(){
                             <div>
                         <ul className="flex flex-col gap-2 p-4">
                             <li className="flex flex-row">top 1 
-                                <div className="flex justify-end mx-auto">
+                                <div className="flex justify-between mx-auto">
                                     <p>0</p>
                                 </div>
                             </li>
                             <li className="flex flex-row">top 2 
-                                <div className="flex justify-end mx-auto">
+                                <div className="flex justify-between mx-auto">
                                     <p>0</p>
                                 </div>
                             </li>
                             <li className="flex flex-row">top 3 
-                                <div className="flex justify-end mx-auto">
+                                <div className="flex justify-between mx-auto">
                                     <p>0</p>
                                 </div>
                             </li>

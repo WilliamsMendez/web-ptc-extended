@@ -9,6 +9,7 @@ import AdminDashboard from './AdminDashboard'
 import ProtectedRoute from '@/components/auth/ProtectedRoutes'
 import { withAuthenticationRequired } from '@auth0/auth0-react'
 import AdminLayout from '@/components/Layout/AdminLayout'
+import AdminUsers from './AdminUsers'
 
 const ProtectedAdmin = withAuthenticationRequired(AdminLayout);
 
@@ -23,7 +24,8 @@ export default function Router() {
         <Route path='/historial-cambio' element={<HistorialTipoCambio/>} />
       </Route>
       <Route path='/admin' element={<ProtectedAdmin />} >
-        <Route index element={<AdminDashboard />} /> 
+        <Route index element={<AdminDashboard />} />
+        <Route path='/admin/users' element={<AdminUsers />} /> 
       </Route>
     </Routes>
   )

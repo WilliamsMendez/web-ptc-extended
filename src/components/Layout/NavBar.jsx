@@ -79,7 +79,7 @@ export default function NavBar(){
                 Acerca
               </HashLink>
               {isAcercaHovering && (
-              <div className="absolute top-full left-1/2 -translate-x-1/2 w-40 mt-3 rounded-lg bg-black/90 ... before:absolute before:-top-4 before:left-0 before:w-full before:h-4 before:content-['']">
+              <div className="absolute top-full left-1/2 -translate-x-1/2 w-40 mt-3 rounded-lg bg-black/90 before:absolute before:-top-4 before:left-0 before:w-full before:h-4 before:content-['']">
                 <NavBarDropDown link="/acerca#quienesSomos" title="¿Quienes Somos?"/>
                 <NavBarDropDown link="/acerca#queHacemos" title="¿Qué Hacemos?"/>
                 <NavBarDropDown link="/acerca#comoLoHacemos" title="¿Cómo Lo Hacemos?"/>

@@ -8,7 +8,7 @@ export default function QuienesSomos() {
 
     <>
     <div id="verMas"></div>
-<motion.section className="my-16 md:my-24 px-4" id="quienesSomos">
+<motion.section className="my-16 md:my-16 px-4" id="quienesSomos">
 
   <motion.h1 variants={fadeInBlur(1, 0.3)} initial="hidden" whileInView="visible" className="text-text-primary text-3xl md:text-4xl lg:text-5xl font-bold text-center">
     ¿Quiénes Somos?
