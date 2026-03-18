@@ -8,6 +8,7 @@ import {
   TableCell,
 } from "@/components/ui/table"
 import { Pen } from "lucide-react"
+import UserEditModal from "../admin/UserEditModal"
 
 export function DataTable() {
   const [users, setUsers] = useState([])
@@ -26,6 +27,9 @@ useEffect(() => {
         setLoading(false)
       })
   }, [])
+
+  const [open, setOpen] = useState(false)
+  const [selectedUser, setSelectedUser] = useState(null)
 
   if (loading) return <p className="text-gray-400">Cargando usuarios...</p>
 
@@ -48,11 +52,12 @@ useEffect(() => {
             <TableCell>{new Date(user.last_login).toLocaleDateString("es-HN")}</TableCell>
             <TableCell><span className={user.blocked ? "text-red-500" : "text-green-500"}>{user.blocked ? "Inactivo" : "Activo"}</span></TableCell>
             <TableCell>
-              <button className="p-1 rounded-sm text-text-primary"><Pen className="h-4 w-4"/></button>
+              <button onClick={()=>{setSelectedUser(user); setOpen(true)}} className="p-1 rounded-sm text-text-primary cursor-pointer"><Pen className="h-4 w-4"/></button>
             </TableCell>
           </TableRow>
         ))}
       </TableBody>
+      <UserEditModal open={open} onOpenChange={setOpen} user={selectedUser}/>
     </Table>
   )
 }

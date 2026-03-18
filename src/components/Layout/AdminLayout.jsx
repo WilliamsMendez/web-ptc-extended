@@ -35,8 +35,8 @@ export default function AdminLayout(){
                             <div>{isAuthenticated && <p>{user.nickname}</p>}</div>
                             <button
                             onClick={()=> logout({ logoutParams: {returnTo: window.location.origin}})}
-                            className="p-2 bg-red-700 rounded-md hover:scale-110 hover:bg-red-600 transition cursor-pointer border-solid border-2 border-red-900">
-                                <LogOut/>
+                            className="p-1 bg-red-700 rounded-md hover:scale-110 hover:bg-red-600 transition cursor-pointer border-solid border-2 border-red-900">
+                                <LogOut className="h-4 w-4"/>
                             </button>
                         </div>
                     </div>

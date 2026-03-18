@@ -13,21 +13,33 @@ export default function AdminDashboard(){
             <section className="flex flex-col m-6 gap-6">
 
             
-                <section className="flex flex-col md:flex-row gap-8">
+                <section className="mx-4 flex flex-col md:flex-row gap-8">
                 
-                    <div className="flex flex-col gap-1 bg-white rounded-lg p-10 md:min-w-70">
-                        <h1 className="text-brand-primary font-bold md:text-lg">Visitas Hoy</h1>
-                        <hr className="h-0 w-15 border-solid border-1 border-gray-300"/>
+                    <div className="flex flex-col shadow-md gap-2 bg-white rounded-lg p-10 md:min-w-50">
+                        <h1 className="text-brand-primary font-bold md:text-md">Visitas Hoy</h1>
                         <h1 className="text-brand-accent font-bold md:text-2xl">0</h1>
+                        <p className="text-emerald-500">+00% vs ayer</p>
                     </div>
 
-                    <div className="flex flex-col gap-1 bg-white rounded-lg p-10 md:min-w-70">
+                    <div className="flex flex-col shadow-md gap-1 bg-white rounded-lg p-10 md:min-w-50">
                         <h1 className="text-brand-primary font-bold md:text-lg">Página #1</h1>
                         <hr className="h-0 w-15 border-solid border-1 border-gray-300"/>
-                        <h1 className="text-brand-accent font-bold md:text-2xl">Home</h1>
+                        <div>
+                            <h1 className="text-brand-accent font-bold md:text-2xl">Home</h1>
+                            <p className="text-emerald-500">+00% vs ayer</p>
+                        </div>
                     </div>
 
-                    <div className="flex flex-col gap-1 bg-white rounded-lg p-10 md:min-w-90">
+                    <div className="flex flex-col shadow-md gap-1 bg-white rounded-lg p-10 md:min-w-50">
+                        <h1 className="text-brand-primary font-bold md:text-lg">Tiempo Promedio</h1>
+                        <hr className="h-0 w-15 border-solid border-1 border-gray-300"/>
+                        <div>
+                            <h1 className="text-brand-accent font-bold md:text-2xl">00m</h1>
+                            <p className="text-emerald-500">+00% vs ayer</p>
+                        </div>
+                    </div>
+
+                    <div className="flex flex-col shadow-md gap-1 bg-white rounded-lg p-10 md:min-w-50">
                         <h1 className="text-brand-primary font-bold md:text-lg">Tiempo Promedio</h1>
                         <hr className="h-0 w-15 border-solid border-1 border-gray-300"/>
                         <h1 className="text-brand-accent font-bold md:text-2xl">00m</h1>
@@ -37,7 +49,7 @@ export default function AdminDashboard(){
 
                 <h1 className="font-bold text-2xl text-text-primary">Visitas los últimos 7 días</h1>
 
-                <div className="text-gray-300 bg-white p-30 rounded-lg flex flex-row gap-2 justify-center mx-5">
+                <div className="text-gray-300 shadow-md bg-white p-30 rounded-lg flex flex-row gap-2 justify-center mx-5">
                     <h1 className="text-2xl">Placeholder gráfico</h1>
                     <ChartSpline/>
                 </div>
