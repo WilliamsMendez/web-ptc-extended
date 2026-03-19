@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { Resend } from "resend";
 import fetch from "node-fetch";
+import { BetaAnalyticsDataClient } from '@google-analytics/data'
 
 dotenv.config();
 
@@ -10,6 +11,8 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+//------CORREOS----------
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -178,6 +181,91 @@ app.get("/api/users", async (req, res) => {
   }
 });
 
+//--------GOOGLE ANALYTICS--------
+
+//DATOS GENERALES
+
+const analyticsClient = new BetaAnalyticsDataClient({
+  keyFilename: './service-account-key.json',
+})
+
+const PROPERTY_ID = '527465996'
+
+app.get('/api/analytics/resumen', async (req, res) => {
+  try {
+    const [response] = await analyticsClient.runReport({
+      property: `properties/${PROPERTY_ID}`,
+      dateRanges: [{ startDate: '7daysAgo', endDate: 'today' }],
+      metrics: [
+        { name: 'screenPageViews' },
+        { name: 'averageSessionDuration' },
+        { name: 'bounceRate' },
+        { name: 'newUsers' },
+        { name: 'totalUsers' },
+      ],
+    })
+
+    const values = response.rows[0].metricValues
+
+    const totalSeconds = Math.round(parseFloat(values[1].value))
+    const minutes = Math.floor(totalSeconds / 60)
+    const seconds = totalSeconds % 60
+
+    const parsed = {
+      pageViews: parseInt(values[0].value),
+      avgSessionDuration: `${minutes}m ${seconds}s`,
+      bounceRate: Math.round(parseFloat(values[2].value) * 100), // 0.258 → 26
+      newUsers: parseInt(values[3].value),
+      totalUsers: parseInt(values[4].value),
+    }
+
+    res.json(parsed)
+
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+})
+
+//DATOS HISTORICOS FILTRADOS POR LOS ULTIMOS 7 DÍAS
+
+app.get('/api/analytics/historial', async (req, res) => {
+  try {
+    const [response] = await analyticsClient.runReport({
+      property: `properties/${PROPERTY_ID}`,
+      dateRanges: [{ startDate: '7daysAgo', endDate: 'today' }],
+      dimensions: [{ name: 'date' }],
+      metrics: [
+        { name: 'screenPageViews' },
+        { name: 'averageSessionDuration' },
+        { name: 'bounceRate' },
+        { name: 'totalUsers' },
+      ],
+      orderBys: [{ dimension: { dimensionName: 'date' } }]
+    })
+
+    const parsed = response.rows.map(row => {
+      const raw = row.dimensionValues[0].value 
+      const fecha = `${raw.slice(6,8)}/${raw.slice(4,6)}`
+
+      const totalSeconds = Math.round(parseFloat(row.metricValues[1].value))
+      const minutes = Math.floor(totalSeconds / 60)
+      const seconds = totalSeconds % 60
+
+      return {
+        fecha,
+        pageViews: parseInt(row.metricValues[0].value),
+        avgSessionDuration: `${minutes}m ${seconds}s`,
+        bounceRate: Math.round(parseFloat(row.metricValues[2].value) * 100),
+        totalUsers: parseInt(row.metricValues[3].value),
+      }
+    })
+
+    res.json(parsed)
+
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+})
 
 //CHECK DE BACKEND CORRIENDO
 

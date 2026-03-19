@@ -56,6 +56,9 @@
   --bg: color-mix(in srgb, var(--brand-primary), black 30%);
   --bg-contacto-seccion: #fafafa;
   --bg-120: color-mix(in srgb, var(--bg), black 20%);
+  --bg-110: color-mix(in srgb, var(--bg), black 10%);
+  --bg-90: color-mix(in srgb, var(--bg), white 10%);
+  --bg-80: color-mix(in srgb, var(--bg), white 20%);
 
   --text-primary: #fff;
   --text-primary-static: #fff;
@@ -85,6 +88,9 @@
   /* ========== BASE ========== */
   --color-bg: var(--bg);
   --color-bg-120: var(--bg-120);
+  --color-bg-110: var(--bg-110);
+  --color-bg-90: var(--bg-90);
+  --color-bg-80: var(--bg-80);
   --color-bg-contacto-seccion: var(--bg-contacto-seccion);
 
   /* ========== BRAND PRIMARY ========== */
