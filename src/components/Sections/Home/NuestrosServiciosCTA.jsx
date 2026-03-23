@@ -10,7 +10,7 @@ export default function NuestrosServiciosCTA(){
 <section className="relative min-h-[350px] md:min-h-[400px] flex items-center overflow-hidden rounded-xl mx-6 md:m-10 py-16 px-6" id="nuestrosServiciosCTA">
 
   <img 
-    src="src/assets/img/hero/nuestrosservicioscta.jpg" alt="Acerca Hero" className="rounded-xl absolute inset-0 w-full h-full object-cover"
+    src="https://i.imgur.com/fcEkcSt.jpeg" alt="Acerca Hero" className="rounded-xl absolute inset-0 w-full h-full object-cover"
   />
 
   <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-black/30 backdrop-blur-[5px]" />
@@ -30,8 +30,8 @@ export default function NuestrosServiciosCTA(){
 
     {/* Botones */}
     <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center md:justify-start">
-      <LinkButton linkto="/servicios#titulo" bg="bg-brand-primary" titulo="Servicios"/>
-      <LinkButton linkto="/contacto#titulo" bg="bg-brand-accent" titulo="Contacto"/>
+      <LinkButton linkto="/servicios#titulo" bg="bg-brand-primary" titulo="Servicios" onClick={() => gtag('event', 'click_ver_mas')}/>
+      <LinkButton linkto="/contacto#titulo" bg="bg-brand-accent" titulo="Contacto" onClick={() => gtag('event', 'click_cta_contacto')}/>
     </div>
 
   </div>

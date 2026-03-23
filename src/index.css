@@ -79,7 +79,7 @@
   --bg-120: color-mix(in srgb, var(--bg), black 20%);
   --text-primary: color-mix(in srgb, var(--brand-primary), white 20%);
   --text-primary-static: #fff;
-  --surface: color-mix(in srgb, var(--brand-accent), black 20%);
+  --surface: #fefefe;
   --bg-nav: #111111;
   --bg-contacto-seccion: #fafafa;
 }

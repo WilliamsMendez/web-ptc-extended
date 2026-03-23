@@ -9,7 +9,7 @@ export default function AdminHeader({title, desc}){
 
         <>
         
-            <div className="flex items-center justify-between mx-8">             
+            <div className="flex md:flex-row flex-col items-center justify-between mx-8">             
                 <div className="p-8">
                     <h1 className="text-3xl font-bold text-text-primary">{title}</h1>
                     <p className="text-gray-400 mt-1">Bienvenido al panel de {desc}</p>

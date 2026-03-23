@@ -1,51 +1,67 @@
 import HeroButton from "../ui/Buttons/HeroButton"
-import { ChevronsDown } from "lucide-react"
+import { ChevronsDown, CreditCard, ShieldBan, HandCoins } from "lucide-react"
 import { heroImages } from "/src/data/heroImages"
 import { fadeInBlur } from "../animations"
 import { motion } from "framer-motion";
 
-export default function HeroPanel(){
 
-    
+export default function HeroPanel() {
+
+
   const randomIndex = Math.floor(Math.random() * heroImages.length)
   const randomImage = heroImages[randomIndex]
 
-    return(
+  return (
 
-        <>
-        
-<motion.section variants={fadeInBlur(1, 0.2)} initial="hidden" whileInView="visible" viewport={{once: true}} className="relative w-full min-h-screen overflow-hidden" id="titulo">
-  
-  <img src="src/assets/img/heroImg/herodisenoptc 1.png" alt="Hero background" className="absolute inset-0 w-full h-full object-cover z-0"/>
+    <>
 
-  <div className="absolute inset-0 z-10" />
+      <motion.section variants={fadeInBlur(1, 0.2)} initial="hidden" whileInView="visible" viewport={{ once: true }} className="relative w-full min-h-screen overflow-hidden" id="titulo">
 
-  <div className="relative z-20 flex min-h-screen items-center justify-center md:justify-end text-text-primary px-6">
-    
-    <motion.div variants={fadeInBlur(1, 0.6)} initial="hidden" whileInView="visible" viewport={{once: true}} className="text-center max-w-4xl">
+        <img src="https://i.imgur.com/vGoKQNZ.png" alt="Hero background" className="absolute inset-0 w-full h-full object-cover z-0" />
 
-      <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
+        <div className="absolute inset-0 z-10" />
 
-        <img src="src/assets/img/common/PTC_2-removebg-preview.png" alt="" className="h-16 w-16 md:h-24 md:w-24"/>
+        <div className="relative z-20 flex min-h-screen items-center justify-center md:justify-end text-text-primary px-10">
 
-        <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-text-primary-static leading-tight md:mr-20">
-          Procesadora de <br/> Tarjetas de Crédito
-        </h1>
+          <motion.div variants={fadeInBlur(1, 0.6)} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-center max-w-4xl">
 
-      </div>
+            <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
 
-      <div className="mt-8 flex flex-col items-center gap-6">
-        <HeroButton/>
-        <ChevronsDown className="w-10 h-10 md:w-12 md:h-12 text-text-primary-static animate-pulse" />
-      </div>
+              <img src="src/assets/img/common/PTC_2-removebg-preview.png" alt="" className="h-16 w-16 md:h-24 md:w-24" />
 
-    </motion.div>
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-text-primary-static leading-tight md:mr-20">
+                Procesadora de <br /> Tarjetas de Crédito
+              </h1>
 
-  </div>
-</motion.section>
-        
-        </>
+            </div>
+            <div className="flex flex-col md:flex-row gap-4 md:gap-6 p-4 items-center justify-center">
+              <p className="flex gap-2 text-white/80">
+                <svg width="0" height="0">
+                  <defs>
+                    <linearGradient id="gradient" gradientTransform="rotate(45)">
+                      <stop offset="0%" stopColor="#0f1929" />
+                      <stop offset="100%" stopColor="#5D8BB5" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+                <CreditCard stroke="url(#gradient)" />
+                 Procesamiento y Gestión Integral</p>
+              <p className="flex gap-2 text-white/80"><ShieldBan stroke="url(#gradient)"/> Seguridad en Tiempo Real</p>
+              <p className="flex gap-2 text-white/80"><HandCoins stroke="url(#gradient)"/> Inteligencia Financiera</p>
+            </div>
 
-    )
+            <div className="mt-8 flex flex-col items-center gap-6">
+              <HeroButton />
+              <ChevronsDown className="w-10 h-10 md:w-12 md:h-12 text-text-primary-static animate-pulse" />
+            </div>
+
+          </motion.div>
+
+        </div>
+      </motion.section>
+
+    </>
+
+  )
 
 }

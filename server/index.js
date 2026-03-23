@@ -4,19 +4,42 @@ import dotenv from "dotenv";
 import { Resend } from "resend";
 import fetch from "node-fetch";
 import { BetaAnalyticsDataClient } from '@google-analytics/data'
+import rateLimit from 'express-rate-limit'
+import { auth } from "express-oauth2-jwt-bearer";
 
 dotenv.config();
 
+//VERIFICACION TOKEN A LAS APIS
+
+const checkJwt = auth({
+  audience: process.env.AUTH0_AUDIENCE,
+  issuerBaseURL: `https://${process.env.AUTH0_DOMAIN}`,
+})
+
+
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:5173',           // desarrollo
+    'https://yeshuarodriguez.github.io/web-ptc/'      // producción
+  ]
+}));
 app.use(express.json());
+
 
 //------CORREOS----------
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-app.post("/send-email", async (req, res) => {
+const emailLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutos
+  max: 5,                    // máximo 5 emails por IP cada 15 minutos
+  message: { error: 'Demasiados intentos, esperá 15 minutos.' }
+})
+
+
+app.post("/send-email", emailLimiter, async (req, res) => {
   try {
     const { replyEmail, subject, message } = req.body;
 
@@ -95,7 +118,7 @@ app.get("/api/tipo-cambio", async (req, res) => {
   try {
 
     const response = await fetch(
-      "https://bchapi-am.azure-api.net/api/v1/indicadores/97/cifras",
+      process.env.BCH_API_URL,
       {
         method: "GET",
         headers: {
@@ -121,7 +144,7 @@ app.get("/api/tipo-cambio-historial", async (req, res) => {
   try {
 
     const response = await fetch(
-      "https://bchapi-am.azure-api.net/api/v1/indicadores/97/cifras",
+      process.env.BCH_API_URL,
       {
         method: "GET",
         headers: {
@@ -148,7 +171,8 @@ app.get("/api/tipo-cambio-historial", async (req, res) => {
 
 //--------API AUTH0---------
 
-app.get("/api/users", async (req, res) => {
+
+app.get("/api/users", checkJwt, async (req, res) => {
   try {
     const tokenResponse = await fetch(`https://${process.env.AUTH0_DOMAIN}/oauth/token`, {
       method: "POST",
@@ -162,17 +186,17 @@ app.get("/api/users", async (req, res) => {
     });
 
     const tokenData = await tokenResponse.json();
-    console.log("Token response:", tokenData);  //log que devuelve datos del token
+    //console.log("Token response:", tokenData);  //log que devuelve datos del token para verificar su conexión SOLO ACTIVAR EN DEV
 
     const { access_token } = tokenData;
-    console.log("Access token:", access_token); //log que devuelve acces token
+    //console.log("Access token:", access_token); //log que devuelve acces token para verificar su conexión SOLO ACTIVAR EN DEV
 
     const usersResponse = await fetch(`https://${process.env.AUTH0_DOMAIN}/api/v2/users`, {
       headers: { Authorization: `Bearer ${access_token}` }
     });
 
     const users = await usersResponse.json();
-    console.log("Users response:", users); //log que devuelve respuesta de users
+    //console.log("Users response:", users); //log que devuelve respuesta de users para verificar su conexión SOLO ACTIVAR EN DEV
     res.json(users);
     
   } catch (error) {
@@ -189,9 +213,9 @@ const analyticsClient = new BetaAnalyticsDataClient({
   keyFilename: './service-account-key.json',
 })
 
-const PROPERTY_ID = '527465996'
+const PROPERTY_ID = process.env.GA_PROPERTY_ID
 
-app.get('/api/analytics/resumen', async (req, res) => {
+app.get('/api/analytics/resumen', checkJwt, async (req, res) => {
   try {
     const [response] = await analyticsClient.runReport({
       property: `properties/${PROPERTY_ID}`,
@@ -228,7 +252,7 @@ app.get('/api/analytics/resumen', async (req, res) => {
 
 //DATOS HISTORICOS FILTRADOS POR LOS ULTIMOS 7 DÍAS
 
-app.get('/api/analytics/historial', async (req, res) => {
+app.get('/api/analytics/historial', checkJwt, async (req, res) => {
   try {
     const [response] = await analyticsClient.runReport({
       property: `properties/${PROPERTY_ID}`,
@@ -259,6 +283,185 @@ app.get('/api/analytics/historial', async (req, res) => {
         totalUsers: parseInt(row.metricValues[3].value),
       }
     })
+
+    res.json(parsed)
+
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+})
+
+//DATOS DE PAGINAS ESPECIFICAS
+app.get('/api/analytics/paginas', checkJwt, async (req, res) => {
+  try {
+    const [response] = await analyticsClient.runReport({
+      property: `properties/${PROPERTY_ID}`,
+      dateRanges: [{ startDate: '7daysAgo', endDate: 'today' }],
+      dimensions: [{ name: 'pagePath' }],
+      metrics: [{ name: 'screenPageViews' }],
+      orderBys: [{ metric: { metricName: 'screenPageViews' }, desc: true }],
+      dimensionFilter: {
+        notExpression: {
+          filter: {
+            fieldName: 'pagePath',
+            stringFilter: {
+              matchType: 'BEGINS_WITH',
+              value: '/admin'
+            }
+          }
+        }
+      },
+      limit: 5
+    })
+
+    const parsed = response.rows.map(row => ({
+      pagina: row.dimensionValues[0].value,
+      visitas: parseInt(row.metricValues[0].value)
+    }))
+
+    const unificado = parsed.map(item => ({
+      ...item,
+      pagina: item.pagina === '/web-ptc/' ? '/' : item.pagina
+    }))
+
+    const agrupado = Object.values(
+      unificado.reduce((acc, item) => {
+        if (acc[item.pagina]) {
+          acc[item.pagina].visitas += item.visitas
+        } else {
+          acc[item.pagina] = { ...item }
+        }
+        return acc
+      }, {})
+    ).sort((a, b) => b.visitas - a.visitas)
+
+    res.json(agrupado)
+
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+})
+
+//POR DONDE ENTRARON LAS VISITAS (URL MANUAL, REDIRECCION, UNASIGNED)
+
+app.get('/api/analytics/origen', checkJwt, async (req, res) => {
+  try {
+    const [response] = await analyticsClient.runReport({
+      property: `properties/${PROPERTY_ID}`,
+      dateRanges: [{ startDate: '7daysAgo', endDate: 'today' }],
+      dimensions: [{ name: 'sessionDefaultChannelGroup' }],
+      metrics: [{ name: 'sessions' }],
+      orderBys: [{ metric: { metricName: 'sessions' }, desc: true }]
+    })
+
+    const parsed = response.rows.map(row => ({
+      origen: row.dimensionValues[0].value,
+      sesiones: parseInt(row.metricValues[0].value)
+    }))
+
+    res.json(parsed)
+
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+})
+
+//LUGAR DE ORIGEN DE LAS VISITAS
+
+app.get('/api/analytics/ubicacion', checkJwt, async (req, res) => {
+  try {
+    const [response] = await analyticsClient.runReport({
+      property: `properties/${PROPERTY_ID}`,
+      dateRanges: [{ startDate: '7daysAgo', endDate: 'today' }],
+      dimensions: [{ name: 'country' }],
+      metrics: [{ name: 'sessions' }],
+      orderBys: [{ metric: { metricName: 'sessions' }, desc: true }],
+      limit: 5
+    })
+
+    const parsed = response.rows.map(row => ({
+      pais: row.dimensionValues[0].value,
+      sesiones: parseInt(row.metricValues[0].value)
+    }))
+
+    res.json(parsed)
+    
+
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+})
+
+//DISPOSITIVOS
+
+app.get('/api/analytics/dispositivos', checkJwt, async (req, res) => {
+  try {
+    const [response] = await analyticsClient.runReport({
+      property: `properties/${PROPERTY_ID}`,
+      dateRanges: [{ startDate: '7daysAgo', endDate: 'today' }],
+      dimensions: [{ name: 'deviceCategory' }],
+      metrics: [{ name: 'sessions' }],
+      orderBys: [{ metric: { metricName: 'sessions' }, desc: true }]
+    })
+
+    const parsed = response.rows.map(row => ({
+      name: row.dimensionValues[0].value,  // "mobile", "desktop", "tablet"
+      value: parseInt(row.metricValues[0].value)
+    }))
+
+    res.json(parsed)
+
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+})
+
+app.get('/api/analytics/horas', checkJwt, async (req, res) => {
+  try {
+    const [response] = await analyticsClient.runReport({
+      property: `properties/${PROPERTY_ID}`,
+      dateRanges: [{ startDate: '7daysAgo', endDate: 'today' }],
+      dimensions: [{ name: 'hour' }],
+      metrics: [{ name: 'sessions' }],
+      orderBys: [{ dimension: { dimensionName: 'hour' } }]
+    })
+
+    const parsed = response.rows.map(row => ({
+      hora: `${row.dimensionValues[0].value}:00`,
+      sesiones: parseInt(row.metricValues[0].value)
+    }))
+
+    res.json(parsed)
+
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+})
+
+//ENDPOINT DE EVENTOS
+
+app.get('/api/analytics/eventos', checkJwt, async (req, res) => {
+  try {
+    const [response] = await analyticsClient.runReport({
+      property: `properties/${PROPERTY_ID}`,
+      dateRanges: [{ startDate: '7daysAgo', endDate: 'today' }],
+      dimensions: [{ name: 'eventName' }],
+      metrics: [{ name: 'eventCount' }],
+      dimensionFilter: {
+        filter: {
+          fieldName: 'eventName',
+          inListFilter: {
+            values: ['click_cta_contacto', 'click_ver_mas', 'formulario_enviado']
+          }
+        }
+      },
+      orderBys: [{ metric: { metricName: 'eventCount' }, desc: true }]
+    })
+
+    const parsed = response.rows?.map(row => ({
+      evento: row.dimensionValues[0].value,
+      count: parseInt(row.metricValues[0].value)
+    })) ?? []
 
     res.json(parsed)
 

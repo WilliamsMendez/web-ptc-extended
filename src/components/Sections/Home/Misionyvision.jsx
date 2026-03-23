@@ -9,8 +9,12 @@ export default function Misionyvision() {
 >
 
   {/* Imagen de fondo */}
-  <img
-    src="src/assets/img/TV - 1.png"
+  <motion.img
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
+    transition={{ duration: 0.8, delay: 0.3 }}
+    viewport={{ once: true }}
+    src="https://i.imgur.com/9LNA1Il.png"
     alt=""
     className="absolute inset-0 w-full h-full object-cover z-0 opacity-70"
   />
@@ -28,7 +32,8 @@ export default function Misionyvision() {
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.3 }}
+        transition={{ duration: 0.8, delay: 0.5 }}
+        viewport={{ once: true }}
       >
         <h1 className="font-bold text-2xl md:text-3xl mb-2">Misión</h1>
         <p className="text-base md:text-lg leading-relaxed">
@@ -41,7 +46,8 @@ export default function Misionyvision() {
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.5 }}
+        transition={{ duration: 0.8, delay: 0.7 }}
+        viewport={{ once: true }}
       >
         <h1 className="font-bold text-2xl md:text-3xl mb-2">Visión</h1>
         <p className="text-base md:text-lg leading-relaxed">

@@ -8,7 +8,7 @@ export default function NuestrosServicios(){
 
         <>
             <div id="titulo"></div>
-            <MiniHero titulo="Nuestros Servicios" descripcion="Descubre el portafolio de soluciones diseñadas para optimizar, asegurar y potenciar cada una de tus transacciones." imgsrc="/src/assets/img/hero/nuestrosservicioscta.jpg"/>
+            <MiniHero titulo="Nuestros Servicios" descripcion="Descubre el portafolio de soluciones diseñadas para optimizar, asegurar y potenciar cada una de tus transacciones." imgsrc="https://i.imgur.com/fcEkcSt.jpeg"/>
         
             <div className="grid grid-cols-3 m-10 text-text-primary">
 

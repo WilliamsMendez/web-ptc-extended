@@ -8,47 +8,47 @@ export function ValoresCarousel(){
     {
       title: "Transparencia",
       button: "Explore Component",
-      src: "src/assets/img/valoresImg/transparencia.png",
+      src: "https://i.imgur.com/tfJK4fU.png",
     },
     {
       title: "Prudencia",
       button: "Explore Component",
-      src: "src/assets/img/valoresImg/prudencia.png",
+      src: "https://i.imgur.com/4X9Vwa6.jpeg",
     },
     {
       title: "Respeto",
       button: "Explore Component",
-      src: "src/assets/img/valoresImg/respeto.png",
+      src: "https://i.imgur.com/46nBN5H.png",
     },
     {
       title: "Responsabilidad",
       button: "Explore Component",
-      src: "src/assets/img/valoresImg/responsabilidad.png",
+      src: "https://i.imgur.com/Qd0FRsg.png",
     },
     {
       title: "Confianza",
       button: "Explore Component",
-      src: "src/assets/img/valoresImg/confianza.png",
+      src: "https://i.imgur.com/ov1WeWp.png",
     },
     {
       title: "Honestidad",
       button: "Explore Component",
-      src: "src/assets/img/valoresImg/honestidad.png",
+      src: "https://i.imgur.com/iW04aXI.png",
     },
     {
       title: "Trabajo en equipo",
       button: "Explore Component",
-      src: "src/assets/img/valoresImg/trabajoenequipo.png",
+      src: "https://i.imgur.com/bpuP1XS.jpeg",
     },
     {
       title: "Adaptación al cambio",
       button: "Explore Component",
-      src: "src/assets/img/valoresImg/adaptacion.png",
+      src: "https://i.imgur.com/FYUEPGp.jpeg",
     },
     {
       title: "Responsabilidad Social",
       button: "Explore Component",
-      src: "src/assets/img/valoresImg/responsabilidadsocial.png",
+      src: "https://i.imgur.com/C5sipa8.png",
     },
   ];
 

@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/table"
 import { Pen } from "lucide-react"
 import UserEditModal from "../admin/UserEditModal"
+import { LoaderOne } from "./loader"
 
 export function DataTable() {
   const [users, setUsers] = useState([])
@@ -31,7 +32,7 @@ useEffect(() => {
   const [open, setOpen] = useState(false)
   const [selectedUser, setSelectedUser] = useState(null)
 
-  if (loading) return <p className="text-gray-400">Cargando usuarios...</p>
+  if (loading) return <LoaderOne/>
 
   return (
     <Table>

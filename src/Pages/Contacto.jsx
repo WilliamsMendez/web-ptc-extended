@@ -11,7 +11,7 @@ export default function Contacto(){
         
         <>
             <div id="titulo"></div>
-            <MiniHero titulo="Contacto" descripcion="Nuestro equipo está preparado para brindarte la asesoría que tu negocio necesita." imgsrc="src/assets/img/hero/contactohero.jpg"/>
+            <MiniHero titulo="Contacto" descripcion="Nuestro equipo está preparado para brindarte la asesoría que tu negocio necesita." imgsrc="https://i.imgur.com/WQRuiHI.jpeg"/>
             <ContactanosSeccion/>
 
 

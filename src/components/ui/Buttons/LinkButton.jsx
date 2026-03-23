@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom"
 import { HashLink } from "react-router-hash-link"
 
-export default function LinkButton({ linkto = "", bg = "bg-brand-accent", titulo = "" }) {
+export default function LinkButton({ linkto = "", bg = "bg-brand-accent", titulo = "", onClick }) {
   return (
     <HashLink 
       to={linkto} 
+      onClick={onClick}
       className={`max-w-40 mx-auto group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md px-6 font-medium text-neutral-200 duration-500 hover:scale-110 ${bg}`}>
       <div className="translate-x-0 opacity-100 transition group-hover:-translate-x-[150%] group-hover:opacity-0">{titulo}</div>
       <div className="absolute translate-x-[150%] opacity-0 transition group-hover:translate-x-0 group-hover:opacity-100">

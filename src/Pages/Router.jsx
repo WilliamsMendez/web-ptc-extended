@@ -10,6 +10,7 @@ import ProtectedRoute from '@/components/auth/ProtectedRoutes'
 import { withAuthenticationRequired } from '@auth0/auth0-react'
 import AdminLayout from '@/components/Layout/AdminLayout'
 import AdminUsers from './AdminUsers'
+import AdminHistorial from './AdminHistorial'
 
 const ProtectedAdmin = withAuthenticationRequired(AdminLayout);
 
@@ -26,6 +27,7 @@ export default function Router() {
       <Route path='/admin' element={<ProtectedAdmin />} >
         <Route index element={<AdminDashboard />} />
         <Route path='/admin/users' element={<AdminUsers />} /> 
+        <Route path='/admin/historial' element={<AdminHistorial/>} />
       </Route>
     </Routes>
   )
