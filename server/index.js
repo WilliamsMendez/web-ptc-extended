@@ -6,6 +6,10 @@ import fetch from "node-fetch";
 import { BetaAnalyticsDataClient } from '@google-analytics/data'
 import rateLimit from 'express-rate-limit'
 import { auth } from "express-oauth2-jwt-bearer";
+import { auditLog } from './audit.js'
+import fs from 'fs'
+
+
 
 dotenv.config();
 
@@ -199,7 +203,7 @@ app.get("/api/users", checkJwt, async (req, res) => {
     const users = await usersResponse.json();
     //console.log("Users response:", users); //log que devuelve respuesta de users para verificar su conexión SOLO ACTIVAR EN DEV
     res.json(users);
-    
+
   } catch (error) {
     console.error("Error obteniendo usuarios:", error);
     res.status(500).json({ error: "Error obteniendo usuarios" });
@@ -257,6 +261,12 @@ app.post("/api/users", checkJwt, async (req, res) => {
     if (!createResponse.ok) {
       return res.status(createResponse.status).json(data);
     }
+
+    auditLog({
+      accion: 'CREAR_USUARIO',
+      realizadoPor: req.auth.payload.sub,
+      detalle: { email, username }
+    })
 
     res.status(201).json({
       message: "Usuario creado correctamente",
@@ -340,6 +350,12 @@ app.post("/api/roles", checkJwt, async (req, res) => {
       return res.status(createResponse.status).json({ error: data.message })
     }
 
+    auditLog({
+      accion: 'CREAR_ROL',
+      realizadoPor: req.auth.payload.sub,
+      detalle: { name, description }
+    })
+
     res.status(201).json({
       message: "Rol creado correctamente",
       role: { id: data.id, name: data.name, description: data.description }
@@ -355,14 +371,15 @@ app.post("/api/roles", checkJwt, async (req, res) => {
 //DATOS GENERALES
 
 const analyticsClient = new BetaAnalyticsDataClient({
-  keyFilename: './service-account-key.json',
+  credentials: JSON.parse(process.env.GA_SERVICE_ACCOUNT)
+
 })
 
 const PROPERTY_ID = process.env.GA_PROPERTY_ID
 
 
 const CACHE_TTL_SHORT = 10 * 60 * 1000       // 10 min — rango que incluye hoy
-const CACHE_TTL_LONG  = 24 * 60 * 60 * 1000  // 24h   — rango completamente pasado
+const CACHE_TTL_LONG = 24 * 60 * 60 * 1000  // 24h   — rango completamente pasado
 const PAGE_SIZE = 15
 const analyticsCache = new Map()
 
@@ -419,8 +436,8 @@ app.get('/api/analytics/historial', checkJwt, async (req, res) => {
     })
 
     const parsed = response.rows.map(row => {
-      const raw = row.dimensionValues[0].value 
-      const fecha = `${raw.slice(6,8)}/${raw.slice(4,6)}`
+      const raw = row.dimensionValues[0].value
+      const fecha = `${raw.slice(6, 8)}/${raw.slice(4, 6)}`
 
       const totalSeconds = Math.round(parseFloat(row.metricValues[1].value))
       const minutes = Math.floor(totalSeconds / 60)
@@ -536,7 +553,7 @@ app.get('/api/analytics/ubicacion', checkJwt, async (req, res) => {
     }))
 
     res.json(parsed)
-    
+
 
   } catch (error) {
     res.status(500).json({ error: error.message })
@@ -696,6 +713,12 @@ app.patch("/api/users/:id", checkJwt, async (req, res) => {
       return res.status(response.status).json({ error: data.message })
     }
 
+    auditLog({
+      accion: 'EDITAR_USUARIO',
+      realizadoPor: req.auth.payload.sub,
+      detalle: { userId, cambios: payload }
+    })
+
     res.json({
       message: "Usuario actualizado correctamente",
       user: {
@@ -746,6 +769,12 @@ app.patch("/api/users/:id/password", checkJwt, async (req, res) => {
     if (!response.ok) {
       return res.status(response.status).json({ error: data.message });
     }
+
+    auditLog({
+      accion: 'CAMBIAR_CONTRASEÑA',
+      realizadoPor: req.auth.payload.sub,
+      detalle: { userId }
+    })
 
     res.json({ message: "Contraseña actualizada correctamente" });
 
@@ -807,7 +836,12 @@ app.post("/api/users/:id/roles", checkJwt, async (req, res) => {
       body: JSON.stringify({ roles })
     });
 
-    // Auth0 devuelve 204 sin body cuando sale bien
+    auditLog({
+      accion: 'ASIGNAR_ROL',
+      realizadoPor: req.auth.payload.sub,
+      detalle: { userId, roles }
+    })
+
     if (response.status === 204) {
       return res.json({ message: "Rol(es) asignado(s) correctamente" });
     }
@@ -878,6 +912,12 @@ app.patch("/api/roles/:id", checkJwt, async (req, res) => {
       return res.status(response.status).json({ error: data.message });
     }
 
+    auditLog({
+      accion: active ? 'ACTIVAR_ROL' : 'DESACTIVAR_ROL',
+      realizadoPor: req.auth.payload.sub,
+      detalle: { roleId }
+    })
+
     res.json({
       message: `Rol ${active ? "activado" : "desactivado"} correctamente`,
       role: {
@@ -936,6 +976,12 @@ app.put("/api/users/:id/roles", checkJwt, async (req, res) => {
       body: JSON.stringify({ roles: [roleId] })
     })
 
+    auditLog({
+      accion: 'REEMPLAZAR_ROL',
+      realizadoPor: req.auth.payload.sub,
+      detalle: { userId, roleId }
+    })
+
     if (assignRes.status === 204 || assignRes.ok) {
       return res.json({ message: "Rol actualizado correctamente" })
     }
@@ -967,9 +1013,9 @@ app.get('/api/analytics/historico', checkJwt, async (req, res) => {
       return res.status(400).json({ error: 'Formato de fecha inválido. Usá YYYY-MM-DD' })
     }
 
-    const start    = new Date(startDate)
-    const end      = new Date(endDate)
-    const today    = new Date()
+    const start = new Date(startDate)
+    const end = new Date(endDate)
+    const today = new Date()
     today.setHours(0, 0, 0, 0)
 
     if (start > end) {
@@ -991,10 +1037,10 @@ app.get('/api/analytics/historico', checkJwt, async (req, res) => {
     }
 
     // Caché inteligente — clave sin página (cacheamos todo el rango)
-    const cacheKey  = `historico_${startDate}_${endDate}`
-    const cached    = analyticsCache.get(cacheKey)
+    const cacheKey = `historico_${startDate}_${endDate}`
+    const cached = analyticsCache.get(cacheKey)
     const endIsToday = end.getTime() === today.getTime()
-    const ttl       = endIsToday ? CACHE_TTL_SHORT : CACHE_TTL_LONG
+    const ttl = endIsToday ? CACHE_TTL_SHORT : CACHE_TTL_LONG
 
     let allData
 
@@ -1015,19 +1061,19 @@ app.get('/api/analytics/historico', checkJwt, async (req, res) => {
       })
 
       allData = response.rows.map(row => {
-        const raw    = row.dimensionValues[0].value
-        const fecha  = `${raw.slice(6, 8)}/${raw.slice(4, 6)}/${raw.slice(0, 4)}`
+        const raw = row.dimensionValues[0].value
+        const fecha = `${raw.slice(6, 8)}/${raw.slice(4, 6)}/${raw.slice(0, 4)}`
 
         const totalSeconds = Math.round(parseFloat(row.metricValues[1].value))
-        const minutes      = Math.floor(totalSeconds / 60)
-        const seconds      = totalSeconds % 60
+        const minutes = Math.floor(totalSeconds / 60)
+        const seconds = totalSeconds % 60
 
         return {
           fecha,
-          pageViews:          parseInt(row.metricValues[0].value),
+          pageViews: parseInt(row.metricValues[0].value),
           avgSessionDuration: `${minutes}m ${seconds}s`,
-          bounceRate:         Math.round(parseFloat(row.metricValues[2].value) * 100),
-          totalUsers:         parseInt(row.metricValues[3].value),
+          bounceRate: Math.round(parseFloat(row.metricValues[2].value) * 100),
+          totalUsers: parseInt(row.metricValues[3].value),
         }
       })
 
@@ -1035,10 +1081,10 @@ app.get('/api/analytics/historico', checkJwt, async (req, res) => {
     }
 
     // Paginación desde memoria
-     if (req.query.export === 'true') {
+    if (req.query.export === 'true') {
       return res.json({ data: allData, pagination: null })
     }
-    const total      = allData.length
+    const total = allData.length
     const totalPages = Math.ceil(total / PAGE_SIZE)
 
     if (pageNum > totalPages) {
@@ -1046,16 +1092,16 @@ app.get('/api/analytics/historico', checkJwt, async (req, res) => {
     }
 
     const startIdx = (pageNum - 1) * PAGE_SIZE
-    const data     = allData.slice(startIdx, startIdx + PAGE_SIZE)
+    const data = allData.slice(startIdx, startIdx + PAGE_SIZE)
 
     res.json({
       data,
       pagination: {
         total,
-        page:       pageNum,
+        page: pageNum,
         totalPages,
-        hasNext:    pageNum < totalPages,
-        hasPrev:    pageNum > 1,
+        hasNext: pageNum < totalPages,
+        hasPrev: pageNum > 1,
       }
     })
 
@@ -1165,6 +1211,12 @@ app.post("/api/roles/:id/permissions", checkJwt, async (req, res) => {
     );
 
     if (response.status === 201 || response.ok) {
+
+      auditLog({
+        accion: 'ASIGNAR_PERMISOS_ROL',
+        realizadoPor: req.auth.payload.sub,
+        detalle: { roleId, permissions }
+      })
       return res.json({ message: "Permisos asignados correctamente" });
     }
 
@@ -1208,7 +1260,13 @@ app.delete("/api/roles/:id/permissions", checkJwt, async (req, res) => {
       }
     );
 
+
     if (response.status === 204 || response.ok) {
+      auditLog({
+        accion: 'QUITAR_PERMISOS_ROL',
+        realizadoPor: req.auth.payload.sub,
+        detalle: { roleId, permissions }
+      })
       return res.json({ message: "Permisos eliminados correctamente" });
       console.log("Permisos eliminados correctamente")
     }
@@ -1272,6 +1330,12 @@ app.post("/api/permissions", checkJwt, async (req, res) => {
       return res.status(patchRes.status).json({ error: patchData.message })
     }
 
+    auditLog({
+      accion: 'CREAR_PERMISO',
+      realizadoPor: req.auth.payload.sub,
+      detalle: { value, description }
+    })
+
     res.status(201).json({ message: "Permiso creado correctamente", permission: { value, description } })
 
   } catch (error) {
@@ -1282,7 +1346,7 @@ app.post("/api/permissions", checkJwt, async (req, res) => {
 
 // DELETE /api/permissions — Eliminar permiso de PTC Backend
 app.delete("/api/permissions", checkJwt, async (req, res) => {
-  try {
+  try { 
     const { value } = req.body
 
     if (!value) {
@@ -1321,6 +1385,12 @@ app.delete("/api/permissions", checkJwt, async (req, res) => {
     if (!patchRes.ok) {
       return res.status(patchRes.status).json({ error: patchData.message })
     }
+
+    auditLog({
+      accion: 'ELIMINAR_PERMISO',
+      realizadoPor: req.auth.payload.sub,
+      detalle: { value }
+    })
 
     res.json({ message: "Permiso eliminado correctamente" })
 
@@ -1367,9 +1437,9 @@ app.patch("/api/permissions", checkJwt, async (req, res) => {
     const scopesActualizados = scopesActuales.map(s =>
       s.value === oldValue
         ? {
-            value: newValue?.trim() ?? s.value,
-            description: description?.trim() ?? s.description
-          }
+          value: newValue?.trim() ?? s.value,
+          description: description?.trim() ?? s.description
+        }
         : s
     )
 
@@ -1391,11 +1461,27 @@ app.patch("/api/permissions", checkJwt, async (req, res) => {
       return res.status(patchRes.status).json({ error: patchData.message })
     }
 
+    auditLog({
+      accion: 'EDITAR_PERMISO',
+      realizadoPor: req.auth.payload.sub,
+      detalle: { oldValue, newValue, description }
+    })
+
     res.json({ message: "Permiso actualizado correctamente" })
 
   } catch (error) {
     console.error("Error editando permiso:", error)
     res.status(500).json({ error: "Error interno del servidor" })
+  }
+})
+
+app.get('/api/auditoria', checkJwt, async (req, res) => {
+  try {
+    if (!fs.existsSync('./logs/auditoria.json')) return res.json([])
+    const logs = JSON.parse(fs.readFileSync('./logs/auditoria.json', 'utf-8'))
+    res.json(logs)
+  } catch (error) {
+    res.status(500).json({ error: 'Error leyendo logs' })
   }
 })
 

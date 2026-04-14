@@ -14,6 +14,7 @@ import AdminRoles from './AdminRoles'
 import AdminProtectedError from '@/components/admin/AdminProtectedError'
 import ProtectedRoute from '@/components/admin/protection/ProtectedRoute'
 import AdminPermissions from './AdminPermissions'
+import AdminLogs from './AdminLogs'
 
 const ProtectedAdmin = withAuthenticationRequired(AdminLayout);
 
@@ -22,38 +23,43 @@ export default function Router() {
     <Routes>
       <Route path="/" element={<HomeLayout />}>
         <Route index element={<Home />} />
-        <Route path='/acerca' element={<Acerca/>} />
-        <Route path='/servicios' element={<NuestrosServicios/>} />
-        <Route path='/contacto' element={<Contacto/>} />
-        <Route path='/historial-cambio' element={<HistorialTipoCambio/>} />
+        <Route path='/acerca' element={<Acerca />} />
+        <Route path='/servicios' element={<NuestrosServicios />} />
+        <Route path='/contacto' element={<Contacto />} />
+        <Route path='/historial-cambio' element={<HistorialTipoCambio />} />
       </Route>
       <Route path='/admin' element={<ProtectedAdmin />} >
         <Route index element={
           <ProtectedRoute requiredPermission="read:analytics">
             <AdminDashboard />
           </ProtectedRoute>
-          } />
+        } />
         <Route path='/admin/users' element={
           <ProtectedRoute requiredPermission="read:users">
             <AdminUsers />
           </ProtectedRoute>
-          } /> 
+        } />
         <Route path='/admin/historial' element={
           <ProtectedRoute requiredPermission="read:analytics">
-            <AdminHistorial/>
+            <AdminHistorial />
           </ProtectedRoute>
-          } />
+        } />
         <Route path='/admin/roles' element={
           <ProtectedRoute requiredPermission="read:roles">
-            <AdminRoles/>
+            <AdminRoles />
           </ProtectedRoute>
-          } />
-          <Route path='/admin/permissions' element={
+        } />
+        <Route path='/admin/permissions' element={
           <ProtectedRoute requiredPermission="read:permissions">
-            <AdminPermissions/>
+            <AdminPermissions />
           </ProtectedRoute>
-          } />
-        <Route path='/admin/protected-error' element={<AdminProtectedError/>} />
+        } />
+        <Route path='/admin/logs' element={
+          <ProtectedRoute requiredPermission="read:logs">
+            <AdminLogs />
+          </ProtectedRoute>
+        } />
+        <Route path='/admin/protected-error' element={<AdminProtectedError />} />
       </Route>
     </Routes>
   )

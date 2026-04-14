@@ -1,4 +1,3 @@
-// App.jsx
 import { useEffect } from "react"
 import { useLocation } from "react-router-dom"
 import Lenis from "lenis"
@@ -11,11 +10,11 @@ export default function App() {
   const isAdmin = location.pathname.startsWith("/admin")
 
   useEffect(() => {
-    ReactGA.initialize("G-3K09HY978C")
+    ReactGA.initialize(import.meta.env.VITE_GA_MEASUREMENT_ID)
   }, [])
 
   useEffect(() => {
-    if (isAdmin) return // 👈 no inicializa Lenis en rutas de admin
+    if (isAdmin) return
 
     const lenis = new Lenis({
       duration: 1.2,

@@ -1,4 +1,4 @@
-import { ChartArea, User, LogOut, TableProperties, ChevronDown, ChevronUp, Shield } from "lucide-react"
+import { ChartArea, User, LogOut, TableProperties, ChevronDown, ChevronUp, Shield, FileText, Menu } from "lucide-react"
 import { Outlet } from "react-router-dom"
 import { useAuth0 } from "@auth0/auth0-react"
 import ThemeToggle from "../ui/Buttons/ThemeToggle";
@@ -6,7 +6,7 @@ import { HashLink } from "react-router-hash-link";
 import { useState } from "react";
 import { IconUserKey } from "@tabler/icons-react";
 
-export default function AdminLayout(){
+export default function AdminLayout() {
   const { user, isAuthenticated, logout } = useAuth0();
   const [usuariosOpen, setUsuariosOpen] = useState(false)
 
@@ -15,14 +15,14 @@ export default function AdminLayout(){
 
       <section className="hidden md:flex flex-col bg-brand-primary h-full w-70 z-10">
         <div className="p-4">
-          <img src="https://i.imgur.com/r1sB3MS.png" alt="logo procesadora de tarjetas de credito" className="h-13 static"/>
+          <img src="https://i.imgur.com/r1sB3MS.png" alt="logo procesadora de tarjetas de credito" className="h-13 static" />
         </div>
-        <hr className="flex border-solid border-1 border-brand-accent items-center justify-center w-50 mx-auto"/>
+        <hr className="flex border-solid border-1 border-brand-accent items-center justify-center w-50 mx-auto" />
         <nav className="text-text-primary-static">
           <ul className="flex flex-col gap-1 py-6 px-2">
             <HashLink to="/admin">
               <li className="flex flex-row gap-2 p-2 rounded-lg hover:bg-brand-primary-120 hover:text-brand-accent-110 cursor-pointer">
-                <ChartArea/> Dashboard
+                <ChartArea /> Dashboard
               </li>
             </HashLink>
 
@@ -31,24 +31,24 @@ export default function AdminLayout(){
               <button
                 onClick={() => setUsuariosOpen(!usuariosOpen)}
                 className="w-full flex flex-row items-center justify-between gap-2 p-2 rounded-lg hover:bg-brand-primary-120 hover:text-brand-accent-110 cursor-pointer">
-                <span className="flex items-center gap-2"><User/> Admin Usuarios</span>
-                {usuariosOpen ? <ChevronUp className="h-4 w-4"/> : <ChevronDown className="h-4 w-4"/>}
+                <span className="flex items-center gap-2"><User /> Admin Usuarios</span>
+                {usuariosOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
               </button>
               {usuariosOpen && (
                 <ul className="flex flex-col gap-1 pl-4 mt-1">
                   <HashLink to="/admin/users">
                     <li className="flex flex-row gap-2 p-2 rounded-lg hover:bg-brand-primary-120 hover:text-brand-accent-110 cursor-pointer text-sm">
-                      <User className="h-4 w-4"/> Usuarios
+                      <User className="h-4 w-4" /> Usuarios
                     </li>
                   </HashLink>
                   <HashLink to="/admin/roles">
                     <li className="flex flex-row gap-2 p-2 rounded-lg hover:bg-brand-primary-120 hover:text-brand-accent-110 cursor-pointer text-sm">
-                      <IconUserKey className="h-4 w-4"/> Roles
+                      <IconUserKey className="h-4 w-4" /> Roles
                     </li>
                   </HashLink>
                   <HashLink to="/admin/permissions">
                     <li className="flex flex-row gap-2 p-2 rounded-lg hover:bg-brand-primary-120 hover:text-brand-accent-110 cursor-pointer text-sm">
-                      <Shield className="h-4 w-4"/> Permisos
+                      <Shield className="h-4 w-4" /> Permisos
                     </li>
                   </HashLink>
                 </ul>
@@ -57,7 +57,12 @@ export default function AdminLayout(){
 
             <HashLink to="/admin/historial">
               <li className="flex flex-row gap-2 p-2 rounded-lg hover:bg-brand-primary-120 hover:text-brand-accent-110 cursor-pointer">
-                <TableProperties/> Historial
+                <TableProperties /> Historial
+              </li>
+            </HashLink>
+            <HashLink to="/admin/logs">
+              <li className="flex flex-row gap-2 p-2 rounded-lg hover:bg-brand-primary-120 hover:text-brand-accent-110 cursor-pointer">
+                <FileText /> Logs
               </li>
             </HashLink>
           </ul>
@@ -66,15 +71,15 @@ export default function AdminLayout(){
           <div className="flex flex-col gap-2 bg-brand-secondary rounded-md mx-4">
             <div className="flex justify-between items-center p-2 px-4">
               <p>Modo:</p>
-              <ThemeToggle/>
+              <ThemeToggle />
             </div>
-            <hr className="mx-2 border-solid border-1 border-brand-secondary-80"/>
+            <hr className="mx-2 border-solid border-1 border-brand-secondary-80" />
             <div className="flex justify-between items-center p-2 px-4">
               <div>{isAuthenticated && <p>{user.nickname}</p>}</div>
               <button
-                onClick={() => logout({ logoutParams: { returnTo: window.location.origin }})}
+                onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
                 className="p-1 bg-warning-primary rounded-md hover:scale-110 hover:bg-rose-800 transition cursor-pointer border-solid border-2 border-red-900">
-                <LogOut className="h-4 w-4"/>
+                <LogOut className="h-4 w-4" />
               </button>
             </div>
           </div>
@@ -84,7 +89,7 @@ export default function AdminLayout(){
 
       <div className="m-0 p-0 bg-bg w-full overflow-y-auto h-full pb-16 md:pb-0">
         <main>
-          <Outlet/>
+          <Outlet />
         </main>
       </div>
 
@@ -93,7 +98,7 @@ export default function AdminLayout(){
         <ul className="flex flex-row justify-around items-center h-16">
           <HashLink to="/admin" className="flex-1">
             <li className="flex flex-col items-center justify-center gap-1 py-2 text-text-primary-static hover:text-brand-accent transition">
-              <ChartArea className="h-5 w-5"/>
+              <ChartArea className="h-5 w-5" />
               <span className="text-xs">Dashboard</span>
             </li>
           </HashLink>
@@ -102,32 +107,54 @@ export default function AdminLayout(){
             <button
               onClick={() => setUsuariosOpen(!usuariosOpen)}
               className="w-full flex flex-col items-center justify-center gap-1 py-2 text-text-primary-static hover:text-brand-accent transition">
-              <User className="h-5 w-5"/>
-              <span className="text-xs">Usuarios</span>
+              <Menu className="h-5 w-5" />
+
+              <span className="text-xs">Más</span>
             </button>
             {usuariosOpen && (
-              <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-brand-primary border border-brand-accent rounded-lg overflow-hidden w-32 shadow-lg">
+              <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-brand-primary border border-brand-accent rounded-lg overflow-hidden w-40 shadow-lg">
+
                 <HashLink to="/admin/users" onClick={() => setUsuariosOpen(false)}>
                   <div className="flex items-center gap-2 px-3 py-2 text-text-primary-static hover:bg-brand-primary-120 text-sm">
-                    <User className="h-4 w-4"/> Usuarios
+                    <User className="h-4 w-4" /> Usuarios
                   </div>
                 </HashLink>
+
                 <HashLink to="/admin/roles" onClick={() => setUsuariosOpen(false)}>
                   <div className="flex items-center gap-2 px-3 py-2 text-text-primary-static hover:bg-brand-primary-120 text-sm">
-                    <Shield className="h-4 w-4"/> Roles
+                    <IconUserKey className="h-4 w-4" /> Roles
                   </div>
                 </HashLink>
+
+                <HashLink to="/admin/permissions" onClick={() => setUsuariosOpen(false)}>
+                  <div className="flex items-center gap-2 px-3 py-2 text-text-primary-static hover:bg-brand-primary-120 text-sm">
+                    <Shield className="h-4 w-4" /> Permisos
+                  </div>
+                </HashLink>
+
+                <HashLink to="/admin/historial" onClick={() => setUsuariosOpen(false)}>
+                  <div className="flex items-center gap-2 px-3 py-2 text-text-primary-static hover:bg-brand-primary-120 text-sm">
+                    <TableProperties className="h-4 w-4" /> Historial
+                  </div>
+                </HashLink>
+
+                <HashLink to="/admin/logs" onClick={() => setUsuariosOpen(false)}>
+                  <div className="flex items-center gap-2 px-3 py-2 text-text-primary-static hover:bg-brand-primary-120 text-sm">
+                    <FileText className="h-4 w-4" /> Logs
+                  </div>
+                </HashLink>
+
               </div>
             )}
           </li>
 
           <li className="flex flex-col items-center justify-center gap-1 py-2 flex-1">
-            <ThemeToggle/>
+            <ThemeToggle />
           </li>
-          <li 
-            onClick={() => logout({ logoutParams: { returnTo: window.location.origin }})}
+          <li
+            onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
             className="flex flex-col items-center justify-center gap-1 py-2 flex-1 cursor-pointer text-red-400 hover:text-red-300 transition">
-            <LogOut className="h-5 w-5"/>
+            <LogOut className="h-5 w-5" />
             <span className="text-xs">Salir</span>
           </li>
         </ul>
