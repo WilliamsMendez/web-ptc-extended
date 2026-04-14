@@ -69,6 +69,22 @@
 
   --bg-nav: #111111;
   --bg-footer: #111111;
+
+  --spotlight-fill: #577b9e;
+
+  --quienes-somos-top: oklch(98.4% 0.003 247.858);
+  --quienes-somos-bottom: oklch(44.6% 0.043 257.281);
+
+  --warning-primary: oklch(58.6% 0.253 17.585);
+
+  --warning-primary-110: color-mix(in srgb, var(--warning-primary), black 10%);
+  --warning-primary-90: color-mix(in srgb, var(--warning-primary), white 10%);
+
+
+  --warning-secondary: oklch(85.2% 0.199 91.936);
+
+  
+
 }
 
 .light {
@@ -82,6 +98,12 @@
   --surface: #fefefe;
   --bg-nav: #111111;
   --bg-contacto-seccion: #fafafa;
+
+  --spotlight-fill: #fff;
+
+  --quienes-somos-top: #20304C;
+  --quienes-somos-bottom: #8d9cb7;
+
 }
 
 @theme {
@@ -135,6 +157,14 @@
   /* ========== NAV ========== */
   --color-bg-nav: var(--bg-nav);
   --color-bg-footer: var(--bg-footer);
+
+  --color-spotlight-fill: var(--spotlight-fill);
+
+  --color-quienes-somos-top: var(--quienes-somos-top);
+  --color-quienes-somos-bottom: var(--quienes-somos-bottom);
+
+  --color-warning-primary: var(--warning-primary);
+  --color-warning-secondary: var(--warning-secondary);
 }
 
 html, body, #root {
@@ -195,4 +225,20 @@ html, body, #root {
 .link-underline:hover {
   background-size: 100% 1px;
   background-position: 0 100%;
+}
+
+ 
+@theme inline {
+  --animate-spotlight: spotlight 2s ease 0.75s 1 forwards;
+}
+ 
+@keyframes spotlight {
+  0% {
+    opacity: 0;
+    transform: translate(-72%, -62%) scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -40%) scale(1);
+  }
 }

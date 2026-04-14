@@ -9,7 +9,7 @@ export default function SevenDaysViewsGraph({ historial = [] }) {
         <XAxis dataKey="fecha" />
         <YAxis />
         <Tooltip />
-        <Line type="monotone" dataKey="pageViews" stroke="#5D8BB5" strokeWidth={2} dot={{ fill: '#5D8BB5' }} />
+        <Line type="monotone" dataKey="pageViews" stroke="var(--brand-accent)" strokeWidth={2} dot={{ fill: '#5D8BB5' }} />
       </LineChart>
     </ResponsiveContainer>
   )

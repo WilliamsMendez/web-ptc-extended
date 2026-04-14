@@ -29,7 +29,7 @@ export default function HeroPanel() {
 
               <img src="src/assets/img/common/PTC_2-removebg-preview.png" alt="" className="h-16 w-16 md:h-24 md:w-24" />
 
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-text-primary-static leading-tight md:mr-20">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold bg-linear-to-br from-slate-50 to-slate-400 bg-clip-text text-transparent leading-tight md:mr-20">
                 Procesadora de <br /> Tarjetas de Crédito
               </h1>
 

@@ -6,11 +6,14 @@ import NuestrosServicios from './NuestrosServicios'
 import Contacto from './Contacto'
 import HistorialTipoCambio from './HistorialTipoCambio.jsx'
 import AdminDashboard from './AdminDashboard'
-import ProtectedRoute from '@/components/auth/ProtectedRoutes'
 import { withAuthenticationRequired } from '@auth0/auth0-react'
 import AdminLayout from '@/components/Layout/AdminLayout'
 import AdminUsers from './AdminUsers'
 import AdminHistorial from './AdminHistorial'
+import AdminRoles from './AdminRoles'
+import AdminProtectedError from '@/components/admin/AdminProtectedError'
+import ProtectedRoute from '@/components/admin/protection/ProtectedRoute'
+import AdminPermissions from './AdminPermissions'
 
 const ProtectedAdmin = withAuthenticationRequired(AdminLayout);
 
@@ -25,9 +28,32 @@ export default function Router() {
         <Route path='/historial-cambio' element={<HistorialTipoCambio/>} />
       </Route>
       <Route path='/admin' element={<ProtectedAdmin />} >
-        <Route index element={<AdminDashboard />} />
-        <Route path='/admin/users' element={<AdminUsers />} /> 
-        <Route path='/admin/historial' element={<AdminHistorial/>} />
+        <Route index element={
+          <ProtectedRoute requiredPermission="read:analytics">
+            <AdminDashboard />
+          </ProtectedRoute>
+          } />
+        <Route path='/admin/users' element={
+          <ProtectedRoute requiredPermission="read:users">
+            <AdminUsers />
+          </ProtectedRoute>
+          } /> 
+        <Route path='/admin/historial' element={
+          <ProtectedRoute requiredPermission="read:analytics">
+            <AdminHistorial/>
+          </ProtectedRoute>
+          } />
+        <Route path='/admin/roles' element={
+          <ProtectedRoute requiredPermission="read:roles">
+            <AdminRoles/>
+          </ProtectedRoute>
+          } />
+          <Route path='/admin/permissions' element={
+          <ProtectedRoute requiredPermission="read:permissions">
+            <AdminPermissions/>
+          </ProtectedRoute>
+          } />
+        <Route path='/admin/protected-error' element={<AdminProtectedError/>} />
       </Route>
     </Routes>
   )

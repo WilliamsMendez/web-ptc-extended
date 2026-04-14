@@ -19,6 +19,7 @@ import { InfiniteMovingCards } from "@/components/ui/effects/infinite-moving-car
 import CardsTestimonios from "@/components/Sections/Home/Components/CardsTestimonios"
 import { ServicioCard } from "@/components/Sections/Home/Components/NuestrosServiciosCard"
 import FinanzasEstadisticas from "@/components/Sections/Home/FinanzasEstadisticas"
+import { Spotlight } from "@/components/ui/spotlight"
 
 export default function Home() {
 
@@ -26,7 +27,10 @@ export default function Home() {
     
     <>
         {/* H E R O  P A N E L*/}
-
+      <Spotlight
+        className="-top-40 left-0 md:-top-20 md:left-60"
+        fill="#5D8BB5"
+      />
         <HeroPanel/>
 
         <div id="#verMas"></div>

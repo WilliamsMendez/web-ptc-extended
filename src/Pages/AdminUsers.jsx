@@ -11,23 +11,26 @@ import {   Dialog,
   DialogTitle,
   DialogTrigger } from "@/components/ui/dialog"
 import { Plus } from "lucide-react"
+import { useState } from "react"
+import UserCreateModal from "@/components/admin/UserCreateModal"
+
 
 export default function AdminUsers(){
+
+    const [open, setOpen] = useState(false)
 
     return(
 
         <>
         
         <AdminHeader title="Usuarios" desc="Usuarios"/>
-        
-
-
+    
             <div className="m-8">
                 <div>
-                    <button className="text-text-primary/70 border border-solid border-bg-120/70 bg-bg hover:bg-bg-110 cursor-pointer transition p-2 rounded-md flex gap-2 items-center my-4"><Plus/>Agregar Usuario</button>
+                    <button onClick={() => {setOpen(true) }} className="text-text-primary/70 border border-solid border-bg-120/70 bg-bg hover:bg-bg-110 cursor-pointer transition p-2 rounded-md flex gap-2 items-center my-4"><Plus/>Agregar Usuario</button>
                 </div>
                 <DataTable/>
-
+                <UserCreateModal open={open} onOpenChange={setOpen}/>
             </div>
         
         </>

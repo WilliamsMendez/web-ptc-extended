@@ -56,8 +56,8 @@ export default function NavBar(){
                 </HashLink>
                 {isContactHovering && (
               <div className="absolute top-full left-1/2 -translate-x-1/2 w-40 mt-3 rounded-lg bg-black/90 ... before:absolute before:-top-4 before:left-0 before:w-full before:h-4 before:content-['']">
-                <NavBarDropDown to="/contacto#contactanosSeccion" title="Contactanos"/>
-                <NavBarDropDown to="/contacto#ubicacion" title="Ubicación"/>
+                <NavBarDropDown link="/contacto#contactanosSeccion" title="Contactanos"/>
+                <NavBarDropDown link="/contacto#ubicacion" title="Ubicación"/>
              </div>
                 )}
               </div>

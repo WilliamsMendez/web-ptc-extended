@@ -1,9 +1,14 @@
 import { HashLink } from "react-router-hash-link"
 import { Undo2, Download } from "lucide-react"
+import { useState } from "react";
+import ExportarExcelModal from "./ExportarExcelModal";
+import PermissionGate from "./protection/PermissionGate";
 
 export default function AdminHeader({title, desc}){
 
     const fechaActual = new Date().toLocaleDateString();
+    const [exportarModal, setExportarModal] = useState(false);
+
 
     return(
 
@@ -22,10 +27,18 @@ export default function AdminHeader({title, desc}){
                         <p className="text-text-primary">{fechaActual}</p>
                     </div>
 
-                    <button className="text-text-primary border border-solid border-bg-120/70 bg-bg hover:bg-bg-110 cursor-pointer transition p-2 rounded-md flex gap-2 items-center">
+                    <PermissionGate requiredPermission="export:analytics">
+                        <button className="text-text-primary border border-solid border-bg-120/70 bg-bg hover:bg-bg-110 cursor-pointer transition p-2 rounded-md flex gap-2 items-center" onClick={()=> setExportarModal(true)}>
                         <p>Exportar Excel</p>
                         <Download className="h-4"/>
                     </button>
+                    </PermissionGate>
+                    {exportarModal && (
+                        
+                        <ExportarExcelModal setExportarModal={setExportarModal}/>
+
+                    )}
+
 
                     <div className="text-text-primary border border-solid border-bg-120/70 bg-bg hover:bg-bg-110 cursor-pointer transition p-2 rounded-md">
                         <HashLink to="/">

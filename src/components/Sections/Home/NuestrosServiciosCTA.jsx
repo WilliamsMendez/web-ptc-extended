@@ -1,7 +1,23 @@
 import { Link } from "react-router-dom"
 import LinkButton from "/src/components/ui/Buttons/LinkButton.jsx"
+import { motion, useScroll, useTransform } from "framer-motion"
+import { useRef } from "react"
 
 export default function NuestrosServiciosCTA(){
+
+    const sectionRef = useRef(null)
+  
+    const { scrollYProgress } = useScroll({
+      target: sectionRef,
+      offset: ["start end", "end start"],
+    })
+  
+    // El img se mueve lento (parallax suave al fondo)
+    const imgY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"])
+  
+    // El contenido se mueve más rápido (parece estar al frente)
+    const contentY = useTransform(scrollYProgress, [0, 1], ["6%", "-6%"])
+  
 
     return(
 
@@ -9,13 +25,14 @@ export default function NuestrosServiciosCTA(){
         
 <section className="relative min-h-[350px] md:min-h-[400px] flex items-center overflow-hidden rounded-xl mx-6 md:m-10 py-16 px-6" id="nuestrosServiciosCTA">
 
-  <img 
+  <motion.img 
+  style={{ y: imgY }}
     src="https://i.imgur.com/fcEkcSt.jpeg" alt="Acerca Hero" className="rounded-xl absolute inset-0 w-full h-full object-cover"
   />
 
   <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-black/30 backdrop-blur-[5px]" />
         
-  <div className="relative z-10 flex flex-col md:flex-row items-center md:items-start justify-between w-full max-w-6xl mx-auto gap-10">
+  <motion.div className="relative z-10 flex flex-col md:flex-row items-center md:items-start justify-between w-full max-w-6xl mx-auto gap-10" style={{ y: contentY }}>
     
     {/* Texto */}
     <div className="text-center md:text-left">
@@ -34,7 +51,7 @@ export default function NuestrosServiciosCTA(){
       <LinkButton linkto="/contacto#titulo" bg="bg-brand-accent" titulo="Contacto" onClick={() => gtag('event', 'click_cta_contacto')}/>
     </div>
 
-  </div>
+  </motion.div>
 
 </section>
         
