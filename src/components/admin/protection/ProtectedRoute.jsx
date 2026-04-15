@@ -1,11 +1,12 @@
 import AdminProtectedError from "../AdminProtectedError";
 import { usePermissions } from "@/hooks/usePermissions";
+import { LoaderOne } from "@/components/ui/loader";
 
 const ProtectedRoute = ({ children, requiredPermission }) => {
   const { hasPermission, loading } = usePermissions();
 
   // Mientras carga el token, no mostramos nada todavía
-  if (loading) return null;
+  if (loading) return <LoaderOne/>;
 
   // Si no tiene el permiso, mostramos el componente de error
   if (!hasPermission(requiredPermission)) {

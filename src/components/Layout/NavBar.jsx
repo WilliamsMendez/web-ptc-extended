@@ -67,7 +67,7 @@ export default function NavBar(){
 
           <li>
             <HashLink to="/#titulo" className='inline-flex items-center transition-transform duration-300 scale-130 hover:scale-150 drop-shadow-none hover:drop-shadow-white/50 hover:drop-shadow-md'>
-              <img src="src/assets/img/common/PTC_2-removebg-preview.png" alt="" className='h-5 w-5'/>
+              <img src="https://i.imgur.com/VYRPzmj.png" alt="" className='h-5 w-5'/>
             </HashLink>
           </li>
           

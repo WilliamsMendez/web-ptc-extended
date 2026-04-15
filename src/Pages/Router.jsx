@@ -15,6 +15,7 @@ import AdminProtectedError from '@/components/admin/AdminProtectedError'
 import ProtectedRoute from '@/components/admin/protection/ProtectedRoute'
 import AdminPermissions from './AdminPermissions'
 import AdminLogs from './AdminLogs'
+import Pruebas from './Pruebas'
 
 const ProtectedAdmin = withAuthenticationRequired(AdminLayout);
 
@@ -27,6 +28,7 @@ export default function Router() {
         <Route path='/servicios' element={<NuestrosServicios />} />
         <Route path='/contacto' element={<Contacto />} />
         <Route path='/historial-cambio' element={<HistorialTipoCambio />} />
+        <Route path="/pruebas" element={<Pruebas/>} />
       </Route>
       <Route path='/admin' element={<ProtectedAdmin />} >
         <Route index element={
