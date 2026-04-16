@@ -33,11 +33,11 @@ export default function ProcesamosSection() {
   const words = ["admisores", "adquirentes", "ustedes"]
 
   return (
-    <div className="m-30">
+    <div className="w-200 flex flex-col justify-center gap-2 m-10">
       <h1 className="text-3xl font-bold hover:scale-102 transition">
         Procesadora para <AnimatedWord words={words} />
       </h1>
-      <p className="mr-80 hover:scale-102 transition">
+      <p className="hover:scale-102 transition">
         Procesamos cada transacción en tiempo real, aseguramos su validación
         y liquidación, y acompañamos a nuestros clientes en toda la operación:
         emisión de tarjetas, administración, cobranza, monitoreo y prevención
