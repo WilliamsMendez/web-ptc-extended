@@ -17,7 +17,9 @@ export default function HeroPanel() {
 
       <motion.section variants={fadeInBlur(1, 0.2)} initial="hidden" whileInView="visible" viewport={{ once: true }} className="relative w-full min-h-screen overflow-hidden" id="titulo">
 
-        <img src="https://i.imgur.com/vGoKQNZ.png" alt="Hero background" className="absolute inset-0 w-full h-full object-cover z-0" />
+        <img src="src/assets/img/hero/herodisenoptcvisa.png" alt="Hero background" className="absolute inset-0 w-full h-full object-cover z-0" />
+
+        <div className="absolute inset-0 bg-black/30" />
 
         <div className="absolute inset-0 z-10" />
 

@@ -16,11 +16,11 @@ export default function QuienesSomos() {
         fill="var(--color-spotlight-fill)"
       />    
 
-  <motion.h1 variants={fadeInBlur(1, 0.3)} initial="hidden" whileInView="visible" viewport={{ once: true }} className="bg-linear-to-br from-quienes-somos-top to-quienes-somos-bottom bg-clip-text text-transparent text-3xl md:text-4xl lg:text-5xl font-bold text-center">
-    ¿Quiénes Somos?
-  </motion.h1>
+      <motion.h1 variants={fadeInBlur(1, 0.3)} initial="hidden" whileInView="visible" viewport={{ once: true }} className="bg-linear-to-br from-quienes-somos-top to-quienes-somos-bottom bg-clip-text text-transparent text-3xl md:text-4xl lg:text-5xl font-bold text-center hover:scale-105 transition">
+        ¿Quiénes Somos?
+      </motion.h1>
 
-      <motion.p variants={fadeInBlur(1, 0.5)} initial="hidden" whileInView="visible" viewport={{ once: true }}  className="bg-linear-to-br from-quienes-somos-top to-quienes-somos-bottom bg-clip-text text-transparent py-6 px-2 md:px-0 max-w-2xl text-center mx-auto text-base md:text-lg leading-relaxed">
+      <motion.p variants={fadeInBlur(1, 0.5)} initial="hidden" whileInView="visible" viewport={{ once: true }}  className="bg-linear-to-br from-quienes-somos-top to-quienes-somos-bottom bg-clip-text text-transparent py-6 px-2 md:px-0 max-w-2xl text-center mx-auto text-base md:text-lg leading-relaxed hover:scale-105 transition">
         Somos parte de una empresa regional con más de 15 años de experiencia especializada
         en la comercialización, administración, operación y procesamiento de negocios y
         productos de medios de pago electrónicos y otros servicios financieros. Más allá de

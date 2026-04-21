@@ -76,26 +76,32 @@ export const InfiniteMovingCards = ({
 >
   {items.map((item, idx) => (
     <li
-      key={idx}
-      className="relative w-[350px] max-w-full shrink-0 rounded-2xl border border-b-0 border-zinc-200 bg-[linear-gradient(180deg,var(--brand-primary),var(--brand-secondary))] px-8 py-6 md:w-[450px] dark:border-blue-900 dark:bg-[linear-gradient(180deg,var(--brand-primary),var(--brand-secondary))] hover:scale-105 transition-all duration-200"
-    >
-      <blockquote>
+  key={idx}
+  className="relative w-[350px] max-w-full shrink-0 rounded-2xl border border-0 border-white/20 overflow-hidden px-8 py-6 md:w-[450px] hover:scale-105 transition-all duration-200"
+>
+  {/* Imagen de fondo */}
+  <img
+    src={item.imgSrc}
+    alt={item.name}
+    className="absolute inset-0 w-full h-full object-cover"
+  />
 
-        <span className="flex flex-col gap-1">
-            <span className="text-lg font-semibold font-normal text-text-primary-static">
-              {item.name}
-            </span>
-          </span>
+  {/* Overlay para que el texto sea legible */}
+  <div className="absolute inset-0 bg-black/80 rounded-2xl" />
 
-        <span className="relative z-20 text-sm leading-[1.6] font-normal text-text-primary-static/50">
-          {item.quote}
-        </span>
-
-        <div className="relative z-20 mt-6 flex flex-row items-center">
-          
-        </div>
-      </blockquote>
-    </li>
+  {/* Contenido */}
+  <blockquote className="relative z-10">
+    <span className="flex flex-col gap-1">
+      <span className="text-lg font-semibold text-white">
+        {item.name}
+      </span>
+    </span>
+    <span className="relative z-20 text-sm leading-[1.6] font-normal text-white/70">
+      {item.quote}
+    </span>
+    <div className="relative z-20 mt-6 flex flex-row items-center" />
+  </blockquote>
+</li>
   ))}
 </ul>
 

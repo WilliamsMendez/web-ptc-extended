@@ -1,5 +1,6 @@
 import BoxesSection from "@/components/pruebas/BoxesSection";
 import ProcesamosSection from "@/components/pruebas/ProcesamosSection";
+import ProcessTimeline from "@/components/pruebas/ProcessTimeLine";
 
 export default function Pruebas(){
 
@@ -11,6 +12,8 @@ export default function Pruebas(){
                 <BoxesSection/>
 
                 <ProcesamosSection/>
+
+                <ProcessTimeline/>
 
             </div>
             

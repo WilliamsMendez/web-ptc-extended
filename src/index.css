@@ -64,6 +64,8 @@
   --text-primary-static: #fff;
   --text-inverse: #111111;
 
+  --surface-80: color-mix(in srgb, var(--brand-primary), black 30%);
+  --surface-90: color-mix(in srgb, var(--brand-primary), black 40%);
   --surface: color-mix(in srgb, var(--brand-primary), black 50%);
   --surface-light: #fff;
 
@@ -148,6 +150,8 @@
 
   /* ========== SURFACE ========== */
   --color-surface: var(--surface);
+   --color-surface-90: var(--surface-90);
+    --color-surface-80: var(--surface-80);
   --color-surface-light: var(--surface-light);
 
   /* ========== TEXT ========== */

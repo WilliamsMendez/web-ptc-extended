@@ -20,6 +20,10 @@ import CardsTestimonios from "@/components/Sections/Home/Components/CardsTestimo
 import { ServicioCard } from "@/components/Sections/Home/Components/NuestrosServiciosCard"
 import FinanzasEstadisticas from "@/components/Sections/Home/FinanzasEstadisticas"
 import { Spotlight } from "@/components/ui/spotlight"
+import ProcessTimeline from "@/components/pruebas/ProcessTimeLine"
+import { ShineCard } from "@/components/pruebas/ShineCard"
+import BoxesSection from "@/components/pruebas/BoxesSection"
+import ProcesamosSection from "@/components/pruebas/ProcesamosSection"
 
 export default function Home() {
 
@@ -27,11 +31,9 @@ export default function Home() {
     
     <>
         {/* H E R O  P A N E L*/}
-      <Spotlight
-        className="-top-40 left-0 md:-top-20 md:left-60"
-        fill="#5D8BB5"
-      />
-        <HeroPanel/>
+      
+        <HeroPanel />
+
 
         <div id="#verMas"></div>
 
@@ -44,9 +46,11 @@ export default function Home() {
 
         </div>
 
-      {/*M I S I O N  Y  V I S I O N */}
+        <BoxesSection/>
 
-        <Misionyvision/>
+        <ProcesamosSection/>
+
+        <ProcessTimeline/>
 
       {/* E S T A D I S T I C A S*/}
         
@@ -60,9 +64,14 @@ export default function Home() {
 
       <FinanzasEstadisticas/>
 
+      {/*M I S I O N  Y  V I S I O N */}
+
+      <Misionyvision/>
+
       {/* S E R V I C I O S*/}
 
       <AlgunosServiciosSeccion/>
+      
 
 
       {/* S E R V I C I O S  C  T A */}

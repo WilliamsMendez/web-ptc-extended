@@ -25,8 +25,7 @@ export default function NuestrosServiciosCTA(){
         
 <section className="relative min-h-[350px] md:min-h-[400px] flex items-center overflow-hidden rounded-xl mx-6 md:m-10 py-16 px-6" id="nuestrosServiciosCTA">
 
-  <motion.img 
-  style={{ y: imgY }}
+  <img 
     src="https://i.imgur.com/fcEkcSt.jpeg" alt="Acerca Hero" className="rounded-xl absolute inset-0 w-full h-full object-cover"
   />
 
