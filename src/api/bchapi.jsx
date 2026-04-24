@@ -1,43 +1,50 @@
 import { useEffect, useState } from "react";
 import { LoaderOne } from "@/components/ui/loader";
 
-function TipoCambio(){
+function TipoCambio() {
 
-  const [tipoCambio, setTipoCambio] = useState(null);
-  const [fecha, setFecha] = useState(null);
-
-  function fechaFinal(fechaISO){
-    const fechaObj = new Date(fechaISO);
-    return fechaObj.toLocaleDateString("es-HN", {
-      year: "numeric",
-      month: "long",
-      day: "numeric"
-    });
-  }
+  const [compraDolar, setCompraDolar] = useState(null);
+  const [ventaDolar, setVentaDolar] = useState(null);
 
   useEffect(() => {
-    const obtenerTipoCambio = async () => {
-
-      const response = await fetch("http://localhost:3001/api/tipo-cambio");
+    const obtenerCompraDolar = async () => {
+      const response = await fetch("http://localhost:3001/api/compra-dolar");
       const data = await response.json();
-
-      setTipoCambio(data.Valor);
-      setFecha(fechaFinal(data.Fecha));
-
+      setCompraDolar(data.Valor);
     };
 
-    obtenerTipoCambio();
+    obtenerCompraDolar();
+  }, []);
+
+  useEffect(() => {
+    const obtenerVentaDolar = async () => {
+      const response = await fetch("http://localhost:3001/api/venta-dolar");
+      const data = await response.json();
+      setVentaDolar(data.Valor);
+    };
+
+    obtenerVentaDolar();
   }, []);
 
   return (
     <>
-      <h2 className="font-bold">
-        {tipoCambio ? `L ${tipoCambio}` : <LoaderOne/>}
-      </h2>
+      <div className="flex md:flex-row flex-col justify-center items-center gap-15 my-20 text-text-primary">
 
-      {fecha && (
-        <p className="italic text-sm">{fecha}</p>
-      )}
+        <div className="flex flex-col justify-center items-center text-lg md:text-3xl">
+          <h1 className="pb-5 tracking-tight">Valor <span className="text-brand-accent font-black">Compra</span> USD hoy:</h1>
+          <h2 className="font-bold md:text-3xl text-3xl">
+            {compraDolar ? `L ${compraDolar}` : <LoaderOne />}
+          </h2>
+        </div>
+
+        <div className="flex flex-col justify-center items-center text-lg md:text-3xl">
+          <h1 className="pb-5 tracking-tight">Valor <span className="text-brand-accent font-black">Venta</span> USD hoy:</h1>
+          <h2 className="font-bold md:text-3xl text-3xl">
+            {ventaDolar ? `L ${ventaDolar}` : <LoaderOne />}
+          </h2>
+        </div>
+
+      </div>
     </>
   );
 

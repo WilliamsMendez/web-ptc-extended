@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ShineCard } from "./ShineCard"
 import { fadeUp } from "../animations"
+import { ShineCardInverse } from "./ShineCardInverse"
 
 const MotionImg = motion.img
 
@@ -48,17 +49,16 @@ export default function BoxesSection() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-      />
+      /> 
 
-      <ShineCard
-        rowSpan={1}
+        <ShineCardInverse         rowSpan={1}
         title={<AnimatedWord words={statWords} />}
         subtitle="Servimos a"
         desc=""
         isHrOn={false}
         textSize="4xl"
         delay={0.1}
-      />
+        />
 
       <ShineCard rowSpan={2} title="POS" textSize="3xl"  subtitle="Retiros y autoservicio" desc="Procesamos pagos en puntos de venta de forma rápida y segura. Conectamos comercios con bancos para que cada compra con tarjeta se apruebe en segundos." delay={0.2} />
       <ShineCard rowSpan={2} title="ATM" textSize="3xl" subtitle="Retiros y autoservicio" desc="Gestionamos transacciones en cajeros automáticos, permitiendo retiros, consultas y más. Aseguramos disponibilidad, control y continuidad en cada operación." delay={0.3} />

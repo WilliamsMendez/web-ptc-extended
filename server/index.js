@@ -160,6 +160,54 @@ app.get("/api/tipo-cambio", async (req, res) => {
   }
 });
 
+//COMPRA DOLAR
+app.get("/api/compra-dolar", async (req, res) => {
+  try {
+    const response = await fetch(
+      `${process.env.BCH_API_COMPRA_URL}?formato=Json`,
+      {
+        method: "GET",
+        headers: {
+          "Cache-Control": "no-cache",
+          "clave": process.env.BCH_API_KEY
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    res.json(data[0]); // el más reciente
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error obteniendo compra del dólar" });
+  }
+});
+
+//VENTA DOLAR
+app.get("/api/venta-dolar", async (req, res) => {
+  try {
+    const response = await fetch(
+      `${process.env.BCH_API_VENTA_URL}?formato=Json`,
+      {
+        method: "GET",
+        headers: {
+          "Cache-Control": "no-cache",
+          "clave": process.env.BCH_API_KEY
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    res.json(data[0]); // el más reciente
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error obteniendo venta del dólar" });
+  }
+});
+
 //HISTORIAL DE CAMBIO
 
 app.get("/api/tipo-cambio-historial", async (req, res) => {
@@ -190,6 +238,70 @@ app.get("/api/tipo-cambio-historial", async (req, res) => {
     res.status(500).json({ error: "Error obteniendo historial" });
   }
 });
+
+//HISTORIAL COMPRA
+
+app.get("/api/compra-dolar-historial", async (req, res) => {
+  try {
+
+    const response = await fetch(
+      process.env.BCH_API_COMPRA_URL,
+      {
+        method: "GET",
+        headers: {
+          "Cache-Control": "no-cache",
+          "clave": process.env.BCH_API_KEY
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    const historialCompra = data.slice(0, 7).map(item => ({
+      fecha: item.Fecha,
+      valor: item.Valor
+    }));
+
+    res.json(historialCompra);
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error obteniendo historial" });
+  }
+});
+
+//HISTORIAL VENTA
+
+app.get("/api/venta-dolar-historial", async (req, res) => {
+  try {
+
+    const response = await fetch(
+      process.env.BCH_API_VENTA_URL,
+      {
+        method: "GET",
+        headers: {
+          "Cache-Control": "no-cache",
+          "clave": process.env.BCH_API_KEY
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    const historialVenta = data.slice(0, 7).map(item => ({
+      fecha: item.Fecha,
+      valor: item.Valor
+    }));
+
+    res.json(historialVenta);
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error obteniendo historial" });
+  }
+});
+
+
 
 //--------API AUTH0---------
 

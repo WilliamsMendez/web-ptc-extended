@@ -1,4 +1,6 @@
 import { motion } from "framer-motion"
+import pixelpayImg from "../../assets/img/pixelpay.png";
+import tapToPhoneImg from "../../assets/img/21ba60abe91bb5a43aefec5c0c7bbace.jpg";
 
 const fadeUp = (duration = 0.6, delay = 0) => ({
   hidden: { opacity: 0, y: 40 },
@@ -111,14 +113,14 @@ export default function TecnologiasSection() {
       {/* Cards */}
       <div className="flex flex-col md:flex-row gap-6 max-w-6xl mx-auto">
         <TechCard
-          img="src/assets/img/pixelpay.png"
-          name="PixelPay"
+          img={pixelpayImg}
+          name="E-commerce"
           tag="Pagos digitales"
           description="Plataforma de pagos digitales diseñada para simplificar cada transacción. Rápida, segura y construida para escalar con tu negocio desde el primer día."
           delay={0.15}
         />
         <TechCard
-          img="src/assets/img/21ba60abe91bb5a43aefec5c0c7bbace.jpg"
+          img={tapToPhoneImg}
           name="TapToPhone"
           tag="Punto de venta"
           description="Convierte cualquier smartphone en un terminal de pago. Sin hardware adicional, sin complicaciones — solo acerca la tarjeta y listo."
