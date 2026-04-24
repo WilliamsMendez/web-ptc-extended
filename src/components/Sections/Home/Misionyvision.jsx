@@ -50,9 +50,10 @@ export default function Misionyvision() {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
             viewport={{ once: true }}
+            className="hover:scale-105 transition duration-500"
           >
-            <h1 className="font-bold text-2xl md:text-3xl mb-2">Misión</h1>
-            <p className="text-base md:text-lg leading-relaxed">
+            <h1 className="font-black text-2xl md:text-4xl mb-2 text-text-primary-static tracking-tight">Misión</h1>
+            <p className="md:text-lg leading-relaxed text-text-primary-static">
               Somos un aliado estratégico de empresas financieras, enfocados en
               satisfacer las necesidades de los clientes de medios de pago con
               transparencia y responsabilidad social.
@@ -64,9 +65,10 @@ export default function Misionyvision() {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.7 }}
             viewport={{ once: true }}
+            className="hover:scale-105 transition duration-500"
           >
-            <h1 className="font-bold text-2xl md:text-3xl mb-2">Visión</h1>
-            <p className="text-base md:text-lg leading-relaxed">
+            <h1 className="font-black text-2xl md:text-4xl mb-2 text-text-primary-static tracking-tight">Visión</h1>
+            <p className="text-text-primary-static md:text-lg leading-relaxed">
               Ocupar una posición de liderazgo en medios de pagos electrónicos,
               contribuyendo al desarrollo con responsabilidad social en el
               mercado donde operen nuestros clientes.

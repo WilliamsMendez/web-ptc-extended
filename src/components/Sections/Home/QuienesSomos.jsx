@@ -16,7 +16,7 @@ export default function QuienesSomos() {
         fill="var(--color-spotlight-fill)"
       />    
 
-      <motion.h1 variants={fadeInBlur(1, 0.3)} initial="hidden" whileInView="visible" viewport={{ once: true }} className="bg-linear-to-br from-quienes-somos-top to-quienes-somos-bottom bg-clip-text text-transparent text-3xl md:text-4xl lg:text-5xl font-bold text-center hover:scale-105 transition">
+      <motion.h1 variants={fadeInBlur(1, 0.3)} initial="hidden" whileInView="visible" viewport={{ once: true }} className="bg-linear-to-br from-quienes-somos-top to-quienes-somos-bottom bg-clip-text text-transparent text-3xl md:text-5xl font-black text-center hover:scale-105 transition tracking-tight">
         ¿Quiénes Somos?
       </motion.h1>
 

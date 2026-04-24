@@ -24,6 +24,7 @@ import ProcessTimeline from "@/components/pruebas/ProcessTimeLine"
 import { ShineCard } from "@/components/pruebas/ShineCard"
 import BoxesSection from "@/components/pruebas/BoxesSection"
 import ProcesamosSection from "@/components/pruebas/ProcesamosSection"
+import TecnologiasSection from "@/components/pruebas/TecnologiasSection"
 
 export default function Home() {
 
@@ -51,6 +52,8 @@ export default function Home() {
         <ProcesamosSection/>
 
         <ProcessTimeline/>
+
+        <TecnologiasSection/>
 
       {/* E S T A D I S T I C A S*/}
         

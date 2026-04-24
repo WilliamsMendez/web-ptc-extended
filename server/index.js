@@ -45,12 +45,14 @@ const emailLimiter = rateLimit({
 
 app.post("/send-email", emailLimiter, async (req, res) => {
   try {
-    const { replyEmail, subject, message } = req.body;
+    const { replyEmail, subject, message, name, phone } = req.body;
 
     // Limpiar espacios
     const cleanReplyEmail = replyEmail?.trim();
     const cleanSubject = subject?.trim();
     const cleanMessage = message?.trim();
+    const cleanName = name?.trim();
+    const cleanPhone = phone?.trim();
 
     // Validaciones
     if (!cleanReplyEmail || !cleanSubject || !cleanMessage) {
@@ -80,6 +82,16 @@ app.post("/send-email", emailLimiter, async (req, res) => {
       });
     }
 
+        if (!cleanName) {
+      return res.status(400).json({ error: "El nombre es obligatorio." });
+    }
+    if (cleanName.length < 2 || cleanName.length > 80) {
+      return res.status(400).json({ error: "El nombre debe tener entre 2 y 80 caracteres." });
+    }
+    if (cleanPhone && !/^\+?[\d\s\-()]{7,20}$/.test(cleanPhone)) {
+      return res.status(400).json({ error: "Número de celular inválido." });
+    }
+
     const escapeHTML = (str) =>
       str.replace(/[&<>"']/g, (match) => ({
         "&": "&amp;",
@@ -92,12 +104,17 @@ app.post("/send-email", emailLimiter, async (req, res) => {
     const safeMessage = escapeHTML(cleanMessage);
     const safeReplyEmail = escapeHTML(cleanReplyEmail);
     const safeSubject = escapeHTML(cleanSubject);
+    const safeName = escapeHTML(cleanName);
+  const safePhone = cleanPhone ? escapeHTML(cleanPhone) : null;
 
-    const html = `
-      <h2>Nuevo mensaje desde el formulario web</h2>
-      <p><strong>Correo de contacto:</strong> ${safeReplyEmail}</p>
-      <p>${safeMessage}</p>
-    `;
+const html = `
+  <h2>Nuevo mensaje desde el formulario web</h2>
+  <p><strong>Nombre:</strong> ${safeName}</p>
+  <p><strong>Correo:</strong> ${safeReplyEmail}</p>
+  ${safePhone ? `<p><strong>Celular:</strong> ${safePhone}</p>` : ""}
+  <p><strong>Mensaje:</strong></p>
+  <p>${safeMessage}</p>
+`;
 
     const data = await resend.emails.send({
       from: "onboarding@resend.dev",

@@ -1,19 +1,23 @@
 "use client";
 
-import { Mail, SendHorizonal, ALargeSmall } from "lucide-react";
 import { useState } from "react";
 import ContactanosModalMensaje from "../Contacto/ContactanosModalMensaje";
+import { Mail, SendHorizonal, ALargeSmall, User, Phone } from "lucide-react";
+
 
 export default function ContactanosSeccion() {
 
   const [modal, setModal] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const [formData, setFormData] = useState({
-    replyEmail: "",
-    subject: "",
-    message: ""
-  });
+const [formData, setFormData] = useState({
+  name: "",
+  phone: "",
+  replyEmail: "",
+  subject: "",
+  message: ""
+});
+
 
   const handleChange = (e) => {
     setFormData({
@@ -94,6 +98,32 @@ export default function ContactanosSeccion() {
                   className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-accent text-black"
                 />
               </div>
+
+              {/* Nombre */}
+<div className="relative w-full">
+  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+  <input
+    type="text"
+    name="name"
+    placeholder="Nombre completo"
+    value={formData.name}
+    onChange={handleChange}
+    className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-accent text-black"
+  />
+</div>
+
+{/* Celular */}
+<div className="relative w-full">
+  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+  <input
+    type="tel"
+    name="phone"
+    placeholder="Celular (opcional)"
+    value={formData.phone}
+    onChange={handleChange}
+    className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-accent text-black"
+  />
+</div>
 
               {/* Subject */}
               <div className="relative w-full">

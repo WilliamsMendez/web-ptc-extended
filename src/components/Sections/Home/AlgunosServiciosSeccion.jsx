@@ -37,7 +37,7 @@ const servicios = [
     return(
         <>
         <section className="flex flex-col justify-center mb-40 my-40">
-            <h1 className="text-text-primary text-center text-3xl p-10">Algunos de nuestros servicios</h1>
+            <h1 className="text-text-primary text-center text-4xl p-10">Algunos de <span className="text-brand-accent">nuestros servicios</span></h1>
             <div className="flex flex-row justify-center gap-10">
             
                       <InfiniteMovingCards
