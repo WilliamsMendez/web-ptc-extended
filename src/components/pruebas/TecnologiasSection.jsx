@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
-import pixelpayImg from "../../assets/img/pixelpay.png";
-import tapToPhoneImg from "../../assets/img/21ba60abe91bb5a43aefec5c0c7bbace.jpg";
+import pixelpayImg from "../../assets/img/ecommerce.jpeg";
+import tapToPhoneImg from "../../assets/img/taptophone.png";
 
 const fadeUp = (duration = 0.6, delay = 0) => ({
   hidden: { opacity: 0, y: 40 },
@@ -116,7 +116,7 @@ export default function TecnologiasSection() {
           img={pixelpayImg}
           name="E-commerce"
           tag="Pagos digitales"
-          description="Plataforma de pagos digitales diseñada para simplificar cada transacción. Rápida, segura y construida para escalar con tu negocio desde el primer día."
+          description="Contamos con plataformas de pagos digitales diseñadas para simplificar cada transacción. Rápida, segura y construida para escalar con tu negocio desde el primer día."
           delay={0.15}
         />
         <TechCard
