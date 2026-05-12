@@ -59,7 +59,7 @@ export default function BoxesSection() {
           subtitle="Servimos a"
           desc=""
           isHrOn={false}
-          textSize="4xl"
+          textSize="5xl"
           delay={0.1}
         />
       </div>

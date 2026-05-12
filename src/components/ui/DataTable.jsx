@@ -32,15 +32,32 @@ export function DataTable() {
       setUsers(usersList)
 
       // Por cada usuario traemos sus roles en paralelo
-      const rolesEntries = await Promise.all(
+      const rolesEntries = await Promise.allSettled(
         usersList.map(async (user) => {
           const rolesRes = await fetch(`${import.meta.env.VITE_API_URL}/api/users/${encodeURIComponent(user.user_id)}/roles`, { headers })
+          if (!rolesRes.ok) {
+            throw new Error(`Error obteniendo roles para ${user.user_id}`)
+          }
           const rolesData = await rolesRes.json()
           return [user.user_id, Array.isArray(rolesData) ? rolesData : []]
         })
       )
 
-      setUserRoles(Object.fromEntries(rolesEntries))
+      setUserRoles((prev) => {
+        const next = { ...prev }
+        usersList.forEach((user, index) => {
+          const result = rolesEntries[index]
+          if (result.status === "fulfilled") {
+            const [userId, roles] = result.value
+            next[userId] = roles
+            return
+          }
+          // Si falla una llamada puntual, conservamos el valor anterior
+          // para evitar pisar roles reales con "Sin rol".
+          next[user.user_id] = prev[user.user_id] ?? []
+        })
+        return next
+      })
 
     } catch (err) {
       console.error("Error:", err)
@@ -70,9 +87,10 @@ export function DataTable() {
       <TableBody>
         {users.map((user) => {
           const roles = userRoles[user.user_id] ?? []
+          const displayName = user.username ?? user.nickname ?? user.name ?? user.email
           return (
             <TableRow key={user.user_id}>
-              <TableCell>{user.name}</TableCell>
+              <TableCell>{displayName}</TableCell>
               <TableCell>{user.email}</TableCell>
               <TableCell>{new Date(user.last_login).toLocaleDateString("es-HN")}</TableCell>
               <TableCell>

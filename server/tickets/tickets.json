@@ -1,0 +1,26 @@
+[
+  {
+    "id": "ticket-001",
+    "titulo": "No carga la página principal",
+    "descripcion": "Al ingresar a la URL principal el sitio no carga, solo muestra pantalla en blanco.",
+    "estado": "recibido",
+    "motivo_rechazo": null,
+    "creado_en": "2026-04-28T10:30:00Z"
+  },
+  {
+    "id": "ticket-002",
+    "titulo": "Error al enviar formulario de contacto",
+    "descripcion": "El formulario de contacto muestra un error 500 al intentar enviar el mensaje.",
+    "estado": "hecho",
+    "motivo_rechazo": null,
+    "creado_en": "2026-04-25T08:15:00Z"
+  },
+  {
+    "id": "ticket-003",
+    "titulo": "Solicitud de cambio de logo",
+    "descripcion": "Quiero cambiar el logo del sitio por uno nuevo que ya tengo listo.",
+    "estado": "rechazado",
+    "motivo_rechazo": "Fuera del alcance del soporte técnico. Contactar al equipo de diseño.",
+    "creado_en": "2026-04-20T14:00:00Z"
+  }
+]

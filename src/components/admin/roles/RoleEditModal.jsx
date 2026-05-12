@@ -12,6 +12,7 @@ import { useState, useEffect } from "react"
 
 export default function RoleEditModal({ open, onOpenChange, role, onRoleUpdated }) {
   const { getAccessTokenSilently } = useAuth0()
+  const isSuperAdmin = role?.name === "SuperAdmin"
 
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
@@ -75,6 +76,7 @@ export default function RoleEditModal({ open, onOpenChange, role, onRoleUpdated 
   }, [open, role, getAccessTokenSilently])
 
   const togglePerm = (permValue) => {
+    if (isSuperAdmin) return
     setSelectedPerms(prev =>
       prev.includes(permValue)
         ? prev.filter(p => p !== permValue)
@@ -133,6 +135,11 @@ export default function RoleEditModal({ open, onOpenChange, role, onRoleUpdated 
 
   // Guardar permisos — calcula diff y llama POST y/o DELETE
   const handlePermsSubmit = async () => {
+    if (isSuperAdmin) {
+      setPermsError("No se pueden modificar permisos del rol SuperAdmin")
+      return
+    }
+
     setPermsLoading(true)
     setPermsError(null)
     setPermsSuccess(false)
@@ -271,6 +278,7 @@ export default function RoleEditModal({ open, onOpenChange, role, onRoleUpdated 
                       type="checkbox"
                       className="mt-1 cursor-pointer accent-brand-primary"
                       checked={selectedPerms.includes(perm.value)}
+                      disabled={isSuperAdmin}
                       onChange={() => togglePerm(perm.value)}
                     />
                     <div className="flex flex-col">
@@ -284,13 +292,14 @@ export default function RoleEditModal({ open, onOpenChange, role, onRoleUpdated 
           </div>
 
           {permsError && <p className="text-sm text-red-500 px-2">{permsError}</p>}
+          {isSuperAdmin && <p className="text-sm text-yellow-500 px-2">SuperAdmin siempre conserva todos los permisos.</p>}
           {permsSuccess && <p className="text-sm text-green-500 px-2">Permisos actualizados correctamente</p>}
 
           <div className="flex justify-end pt-2">
             <Button
               className="bg-brand-accent cursor-pointer hover:bg-brand-accent-80"
               onClick={handlePermsSubmit}
-              disabled={permsLoading}
+              disabled={permsLoading || isSuperAdmin}
             >
               {permsLoading ? "Guardando..." : "Guardar permisos"}
             </Button>

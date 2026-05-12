@@ -62,6 +62,7 @@
 
   --text-primary: #fff;
   --text-primary-static: #fff;
+  --text-dark-static: #111111;
   --text-inverse: #111111;
 
   --surface-80: color-mix(in srgb, var(--brand-primary), black 30%);
@@ -80,10 +81,26 @@
   --warning-primary: oklch(58.6% 0.253 17.585);
 
   --warning-primary-110: color-mix(in srgb, var(--warning-primary), black 10%);
+  --warning-primary-120: color-mix(in srgb, var(--warning-primary), black 20%);
   --warning-primary-90: color-mix(in srgb, var(--warning-primary), white 10%);
-
+  --warning-primary-80: color-mix(in srgb, var(--warning-primary), white 20%);
+  --warning-primary-70: color-mix(in srgb, var(--warning-primary), white 30%);
 
   --warning-secondary: oklch(85.2% 0.199 91.936);
+  --warning-secondary-110: color-mix(in srgb, var(--warning-secondary), black 10%);
+  --warning-secondary-120: color-mix(in srgb, var(--warning-secondary), black 20%);
+  --warning-secondary-90: color-mix(in srgb, var(--warning-secondary), white 10%);
+  --warning-secondary-80: color-mix(in srgb, var(--warning-secondary), white 20%);
+  --warning-secondary-70: color-mix(in srgb, var(--warning-secondary), white 30%);
+  --warning-secondary-60: color-mix(in srgb, var(--warning-secondary), white 40%);
+
+  --warning-tertiary: oklch(69.6% 0.17 162.48);
+  --warning-tertiary-110: color-mix(in srgb, var(--warning-tertiary), black 10%);
+  --warning-tertiary-120: color-mix(in srgb, var(--warning-tertiary), black 20%);
+  --warning-tertiary-90: color-mix(in srgb, var(--warning-tertiary), white 10%);
+  --warning-tertiary-80: color-mix(in srgb, var(--warning-tertiary), white 20%);
+  --warning-tertiary-70: color-mix(in srgb, var(--warning-tertiary), white 30%);
+  --warning-tertiary-60: color-mix(in srgb, var(--warning-tertiary), white 40%);
 
   
   
@@ -158,6 +175,7 @@
   --color-text-primary: var(--text-primary);
   --color-text-inverse: var(--text-inverse);
   --color-text-primary-static: var(--text-primary-static);
+  --color-text-dark-static: var(--text-dark-static);
 
   /* ========== NAV ========== */
   --color-bg-nav: var(--bg-nav);
@@ -169,7 +187,25 @@
   --color-quienes-somos-bottom: var(--quienes-somos-bottom);
 
   --color-warning-primary: var(--warning-primary);
+  --color-warning-primary-110: var(--warning-primary-110);
+  --color-warning-primary-120: var(--warning-primary-120);
+  --color-warning-primary-90: var(--warning-primary-90);
+  --color-warning-primary-80: var(--warning-primary-80);
+  --color-warning-primary-70: var(--warning-primary-70);
   --color-warning-secondary: var(--warning-secondary);
+  --color-warning-secondary-110: var(--warning-secondary-110);
+  --color-warning-secondary-120: var(--warning-secondary-120);
+  --color-warning-secondary-90: var(--warning-secondary-90);
+  --color-warning-secondary-80: var(--warning-secondary-80);
+  --color-warning-secondary-70: var(--warning-secondary-70);
+  --color-warning-secondary-60: var(--warning-secondary-60);
+  --color-warning-tertiary: var(--warning-tertiary);
+  --color-warning-tertiary-110: var(--warning-tertiary-110);
+  --color-warning-tertiary-120: var(--warning-tertiary-120);
+  --color-warning-tertiary-90: var(--warning-tertiary-90);
+  --color-warning-tertiary-80: var(--warning-tertiary-80);
+  --color-warning-tertiary-70: var(--warning-tertiary-70);
+  --color-warning-tertiary-60: var(--warning-tertiary-60);
 }
 
 html, body, #root {

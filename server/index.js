@@ -8,6 +8,7 @@ import rateLimit from 'express-rate-limit'
 import { auth } from "express-oauth2-jwt-bearer";
 import { auditLog } from './audit.js'
 import fs from 'fs'
+import path from "path"
 
 
 
@@ -19,6 +20,23 @@ const checkJwt = auth({
   audience: process.env.AUTH0_AUDIENCE,
   issuerBaseURL: `https://${process.env.AUTH0_DOMAIN}`,
 })
+
+const requestHasPermission = (req, permission) => {
+  const permissions = req.auth?.payload?.permissions
+  if (Array.isArray(permissions) && permissions.includes(permission)) return true
+
+  const scope = req.auth?.payload?.scope
+  if (typeof scope === "string" && scope.split(" ").includes(permission)) return true
+
+  return false
+}
+
+const requirePermission = (permission) => (req, res, next) => {
+  if (!requestHasPermission(req, permission)) {
+    return res.status(403).json({ error: `Permiso requerido: ${permission}` })
+  }
+  next()
+}
 
 
 const app = express();
@@ -131,6 +149,209 @@ const html = `
     res.status(500).json({ error: "Error interno del servidor." });
   }
 });
+
+// LISTAR EMAILS ENVIADOS DESDE RESEND
+app.get("/api/mails", checkJwt, async (req, res) => {
+  try {
+    const limitRaw = Number(req.query.limit)
+    const limit = Number.isFinite(limitRaw) ? Math.min(Math.max(limitRaw, 1), 100) : 50
+
+    const response = await fetch(`https://api.resend.com/emails?limit=${limit}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${process.env.RESEND_API_KEY}`
+      }
+    })
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      return res.status(response.status).json({
+        error: data?.message || "Error obteniendo correos desde Resend"
+      })
+    }
+
+    res.json(Array.isArray(data?.data) ? data.data : [])
+  } catch (error) {
+    console.error("Error obteniendo emails de Resend:", error)
+    res.status(500).json({ error: "Error interno del servidor" })
+  }
+})
+
+app.get("/api/mails/:id", checkJwt, async (req, res) => {
+  try {
+    const response = await fetch(`https://api.resend.com/emails/${req.params.id}`, {
+      headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}` }
+    })
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      return res.status(response.status).json({ error: data.message })
+    }
+
+    res.json(data)
+  } catch (error) {
+    res.status(500).json({ error: "Error obteniendo detalle del correo" })
+  }
+})
+
+app.get("/api/tickets", checkJwt, requirePermission("read:tickets"), async (req, res) => {
+  try {
+    const ticketsPath = path.join(process.cwd(), "server", "tickets", "tickets.json")
+
+    if (!fs.existsSync(ticketsPath)) {
+      return res.json([])
+    }
+
+    const raw = fs.readFileSync(ticketsPath, "utf-8")
+    const data = JSON.parse(raw)
+
+    res.json(Array.isArray(data) ? data : [])
+  } catch (error) {
+    console.error("Error obteniendo tickets:", error)
+    res.status(500).json({ error: "Error interno del servidor" })
+  }
+})
+
+app.post("/api/tickets", checkJwt, requirePermission("create:tickets"), async (req, res) => {
+  try {
+    const { titulo, descripcion } = req.body
+
+    const cleanTitulo = titulo?.trim()
+    const cleanDescripcion = descripcion?.trim()
+
+    if (!cleanTitulo || !cleanDescripcion) {
+      return res.status(400).json({ error: "titulo y descripcion son obligatorios" })
+    }
+
+    const ticketsDir = path.join(process.cwd(), "server", "tickets")
+    const ticketsPath = path.join(ticketsDir, "tickets.json")
+
+    if (!fs.existsSync(ticketsDir)) {
+      fs.mkdirSync(ticketsDir, { recursive: true })
+    }
+
+    let tickets = []
+    if (fs.existsSync(ticketsPath)) {
+      const raw = fs.readFileSync(ticketsPath, "utf-8")
+      const parsed = JSON.parse(raw)
+      tickets = Array.isArray(parsed) ? parsed : []
+    }
+
+    const maxId = tickets.reduce((max, t) => {
+      const match = String(t.id || "").match(/^ticket-(\d+)$/i)
+      if (!match) return max
+      return Math.max(max, Number(match[1]))
+    }, 0)
+
+    const newTicket = {
+      id: `ticket-${String(maxId + 1).padStart(3, "0")}`,
+      titulo: cleanTitulo,
+      descripcion: cleanDescripcion,
+      estado: "recibido",
+      motivo_rechazo: null,
+      creado_en: new Date().toISOString()
+    }
+
+    tickets.unshift(newTicket)
+    fs.writeFileSync(ticketsPath, JSON.stringify(tickets, null, 2))
+
+    res.status(201).json(newTicket)
+  } catch (error) {
+    console.error("Error creando ticket:", error)
+    res.status(500).json({ error: "Error interno del servidor" })
+  }
+})
+
+app.patch("/api/tickets/:id", checkJwt, requirePermission("update:ticket_status"), async (req, res) => {
+  try {
+    const { id } = req.params
+    const { estado, motivo_rechazo } = req.body
+
+    const estadosValidos = ["recibido", "hecho", "rechazado"]
+    if (!estadosValidos.includes(estado)) {
+      return res.status(400).json({ error: "estado invalido" })
+    }
+
+    const ticketsPath = path.join(process.cwd(), "server", "tickets", "tickets.json")
+    if (!fs.existsSync(ticketsPath)) {
+      return res.status(404).json({ error: "No existe el archivo de tickets" })
+    }
+
+    const raw = fs.readFileSync(ticketsPath, "utf-8")
+    const tickets = JSON.parse(raw)
+
+    if (!Array.isArray(tickets)) {
+      return res.status(500).json({ error: "Formato de tickets invalido" })
+    }
+
+    const index = tickets.findIndex(t => t.id === id)
+    if (index === -1) {
+      return res.status(404).json({ error: "Ticket no encontrado" })
+    }
+
+    const actual = tickets[index]
+
+    // Si ya fue rechazado, no permitimos cambios posteriores.
+    if (actual.estado === "rechazado" && estado !== "rechazado") {
+      return res.status(400).json({ error: "No se puede modificar un ticket rechazado" })
+    }
+
+    if (estado === "rechazado") {
+      const motivo = motivo_rechazo?.trim()
+      if (!motivo) {
+        return res.status(400).json({ error: "motivo_rechazo es obligatorio para rechazar" })
+      }
+      tickets[index] = {
+        ...actual,
+        estado: "rechazado",
+        motivo_rechazo: motivo
+      }
+    } else {
+      tickets[index] = {
+        ...actual,
+        estado,
+        motivo_rechazo: null
+      }
+    }
+
+    fs.writeFileSync(ticketsPath, JSON.stringify(tickets, null, 2))
+    res.json(tickets[index])
+  } catch (error) {
+    console.error("Error actualizando ticket:", error)
+    res.status(500).json({ error: "Error interno del servidor" })
+  }
+})
+
+app.delete("/api/tickets/:id", checkJwt, requirePermission("delete:tickets"), async (req, res) => {
+  try {
+    const { id } = req.params
+    const ticketsPath = path.join(process.cwd(), "server", "tickets", "tickets.json")
+
+    if (!fs.existsSync(ticketsPath)) {
+      return res.status(404).json({ error: "No existe el archivo de tickets" })
+    }
+
+    const raw = fs.readFileSync(ticketsPath, "utf-8")
+    const tickets = JSON.parse(raw)
+
+    if (!Array.isArray(tickets)) {
+      return res.status(500).json({ error: "Formato de tickets invalido" })
+    }
+
+    const filtered = tickets.filter(t => t.id !== id)
+    if (filtered.length === tickets.length) {
+      return res.status(404).json({ error: "Ticket no encontrado" })
+    }
+
+    fs.writeFileSync(ticketsPath, JSON.stringify(filtered, null, 2))
+    res.json({ message: "Ticket eliminado correctamente" })
+  } catch (error) {
+    console.error("Error eliminando ticket:", error)
+    res.status(500).json({ error: "Error interno del servidor" })
+  }
+})
 
 //-------API BANCO CENTRAL---------
 
@@ -770,6 +991,12 @@ app.get('/api/analytics/eventos', checkJwt, async (req, res) => {
 
 // HELPER: M2M Token reutilizable
 
+let managementTokenCache = {
+  accessToken: null,
+  expiresAt: 0
+}
+let managementTokenPromise = null
+
 
 async function getManagementToken() {
   const response = await fetch(`https://${process.env.AUTH0_DOMAIN}/oauth/token`, {
@@ -794,6 +1021,37 @@ async function getManagementToken() {
 
 
 // PATCH /api/users/:id — Editar usuario (nombre, email, blocked)
+async function getManagementTokenCached() {
+  const now = Date.now()
+  const safetyWindowMs = 30 * 1000
+
+  if (
+    managementTokenCache.accessToken &&
+    managementTokenCache.expiresAt - safetyWindowMs > now
+  ) {
+    return managementTokenCache.accessToken
+  }
+
+  if (managementTokenPromise) {
+    return managementTokenPromise
+  }
+
+  managementTokenPromise = (async () => {
+    const token = await getManagementToken()
+    managementTokenCache = {
+      accessToken: token,
+      expiresAt: Date.now() + 60 * 60 * 1000
+    }
+    return token
+  })()
+
+  try {
+    return await managementTokenPromise
+  } finally {
+    managementTokenPromise = null
+  }
+}
+
 app.patch("/api/users/:id", checkJwt, async (req, res) => {
   try {
     const userId = decodeURIComponent(req.params.id)
@@ -819,7 +1077,7 @@ app.patch("/api/users/:id", checkJwt, async (req, res) => {
       return res.status(400).json({ error: "El nombre debe tener al menos 2 caracteres" })
     }
 
-    const access_token = await getManagementToken()
+    const access_token = await getManagementTokenCached()
 
     // Armamos solo los campos que vienen
     const payload = {}
@@ -882,7 +1140,7 @@ app.patch("/api/users/:id/password", checkJwt, async (req, res) => {
       return res.status(400).json({ error: "La contraseña debe tener al menos 8 caracteres" });
     }
 
-    const access_token = await getManagementToken();
+    const access_token = await getManagementTokenCached();
 
     const response = await fetch(`https://${process.env.AUTH0_DOMAIN}/api/v2/users/${encodeURIComponent(userId)}`, {
       method: "PATCH",
@@ -920,7 +1178,7 @@ app.patch("/api/users/:id/password", checkJwt, async (req, res) => {
 app.get("/api/users/:id/roles", checkJwt, async (req, res) => {
   try {
     const userId = decodeURIComponent(req.params.id);
-    const access_token = await getManagementToken();
+    const access_token = await getManagementTokenCached();
 
     const response = await fetch(`https://${process.env.AUTH0_DOMAIN}/api/v2/users/${encodeURIComponent(userId)}/roles`, {
       headers: { Authorization: `Bearer ${access_token}` }
@@ -954,7 +1212,7 @@ app.post("/api/users/:id/roles", checkJwt, async (req, res) => {
       return res.status(400).json({ error: "'roles' debe ser un array con al menos un ID de rol" });
     }
 
-    const access_token = await getManagementToken();
+    const access_token = await getManagementTokenCached();
 
     const response = await fetch(`https://${process.env.AUTH0_DOMAIN}/api/v2/users/${encodeURIComponent(userId)}/roles`, {
       method: "POST",
@@ -1003,7 +1261,7 @@ app.patch("/api/roles/:id", checkJwt, async (req, res) => {
       return res.status(400).json({ error: "'active' debe ser true o false" });
     }
 
-    const access_token = await getManagementToken();
+    const access_token = await getManagementTokenCached();
 
     // Auth0 no tiene campo nativo de estado en roles,
     // lo guardamos en la descripción con un prefijo controlado
@@ -1073,7 +1331,7 @@ app.put("/api/users/:id/roles", checkJwt, async (req, res) => {
       return res.status(400).json({ error: "roleId es obligatorio" })
     }
 
-    const access_token = await getManagementToken()
+    const access_token = await getManagementTokenCached()
     const headers = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${access_token}`
@@ -1250,10 +1508,26 @@ async function getResourceServerId(access_token) {
   return data[0].id;
 }
 
+async function getRoleByName(access_token, roleName) {
+  const response = await fetch(
+    `https://${process.env.AUTH0_DOMAIN}/api/v2/roles?name_filter=${encodeURIComponent(roleName)}`,
+    { headers: { Authorization: `Bearer ${access_token}` } }
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Error obteniendo roles");
+  }
+
+  if (!Array.isArray(data)) return null;
+  return data.find((r) => r.name === roleName) ?? null;
+}
+
 //GET Permissions
 app.get("/api/permissions", checkJwt, async (req, res) => {
   try {
-    const access_token = await getManagementToken();
+    const access_token = await getManagementTokenCached();
 
     const url = `https://${process.env.AUTH0_DOMAIN}/api/v2/resource-servers?identifier=${encodeURIComponent(process.env.AUTH0_AUDIENCE)}`
 
@@ -1285,7 +1559,7 @@ app.get("/api/permissions", checkJwt, async (req, res) => {
 app.get("/api/roles/:id/permissions", checkJwt, async (req, res) => {
   try {
     const roleId = req.params.id
-    const access_token = await getManagementToken()
+    const access_token = await getManagementTokenCached()
 
     const response = await fetch(
       `https://${process.env.AUTH0_DOMAIN}/api/v2/roles/${roleId}/permissions`,
@@ -1316,7 +1590,16 @@ app.post("/api/roles/:id/permissions", checkJwt, async (req, res) => {
       return res.status(400).json({ error: "'permissions' debe ser un array con al menos un permiso" });
     }
 
-    const access_token = await getManagementToken();
+    const access_token = await getManagementTokenCached();
+    const targetRole = await fetch(
+      `https://${process.env.AUTH0_DOMAIN}/api/v2/roles/${roleId}`,
+      { headers: { Authorization: `Bearer ${access_token}` } }
+    ).then(r => r.json());
+
+    if (targetRole?.name === "SuperAdmin") {
+      return res.status(403).json({ error: "No se pueden modificar permisos del rol SuperAdmin" });
+    }
+
     const resourceServerId = await getResourceServerId(access_token);
 
     // Auth0 requiere que cada permiso venga con el resource_server_identifier
@@ -1368,7 +1651,15 @@ app.delete("/api/roles/:id/permissions", checkJwt, async (req, res) => {
       return res.status(400).json({ error: "'permissions' debe ser un array con al menos un permiso" });
     }
 
-    const access_token = await getManagementToken();
+    const access_token = await getManagementTokenCached();
+    const targetRole = await fetch(
+      `https://${process.env.AUTH0_DOMAIN}/api/v2/roles/${roleId}`,
+      { headers: { Authorization: `Bearer ${access_token}` } }
+    ).then(r => r.json());
+
+    if (targetRole?.name === "SuperAdmin") {
+      return res.status(403).json({ error: "No se pueden modificar permisos del rol SuperAdmin" });
+    }
 
     const payload = {
       permissions: permissions.map(p => ({
@@ -1418,7 +1709,7 @@ app.post("/api/permissions", checkJwt, async (req, res) => {
       return res.status(400).json({ error: "value y description son obligatorios" })
     }
 
-    const access_token = await getManagementToken()
+    const access_token = await getManagementTokenCached()
 
     // Traer scopes actuales
     const getRes = await fetch(
@@ -1459,6 +1750,26 @@ app.post("/api/permissions", checkJwt, async (req, res) => {
       return res.status(patchRes.status).json({ error: patchData.message })
     }
 
+    const superAdminRole = await getRoleByName(access_token, "SuperAdmin")
+    if (superAdminRole?.id) {
+      await fetch(
+        `https://${process.env.AUTH0_DOMAIN}/api/v2/roles/${superAdminRole.id}/permissions`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${access_token}`
+          },
+          body: JSON.stringify({
+            permissions: [{
+              resource_server_identifier: process.env.AUTH0_AUDIENCE,
+              permission_name: value
+            }]
+          })
+        }
+      )
+    }
+
     auditLog({
       accion: 'CREAR_PERMISO',
       realizadoPor: req.auth.payload.sub,
@@ -1482,7 +1793,7 @@ app.delete("/api/permissions", checkJwt, async (req, res) => {
       return res.status(400).json({ error: "value es obligatorio" })
     }
 
-    const access_token = await getManagementToken()
+    const access_token = await getManagementTokenCached()
 
     const getRes = await fetch(
       `https://${process.env.AUTH0_DOMAIN}/api/v2/resource-servers?identifier=${encodeURIComponent(process.env.AUTH0_AUDIENCE)}`,
@@ -1538,7 +1849,7 @@ app.patch("/api/permissions", checkJwt, async (req, res) => {
       return res.status(400).json({ error: "oldValue es obligatorio" })
     }
 
-    const access_token = await getManagementToken()
+    const access_token = await getManagementTokenCached()
 
     const getRes = await fetch(
       `https://${process.env.AUTH0_DOMAIN}/api/v2/resource-servers?identifier=${encodeURIComponent(process.env.AUTH0_AUDIENCE)}`,
@@ -1614,9 +1925,9 @@ app.get('/api/auditoria', checkJwt, async (req, res) => {
   }
 })
 
-
 //CHECK DE BACKEND CORRIENDO
 
 app.listen(3001, () => {
   console.log("Server running on http://localhost:3001");
 });
+

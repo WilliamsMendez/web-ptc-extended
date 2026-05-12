@@ -21,7 +21,7 @@ export function ShineCardInverse({
             after:absolute after:top-0 after:left-0 after:right-0 after:h-16 after:rounded-t-2xl after:pointer-events-none
             after:bg-[linear-gradient(180deg,rgba(var(--surface-90),0.4),transparent)] flex flex-col gap-4 shadow-md hover:scale-105 transition border-1 border-black/10`}
     >
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-4">
         <h2 className="text-text-primary/50 tracking-widest uppercase font-light text-sm">{subtitle}</h2>
         <h1 className={`bg-linear-to-br from-brand-accent-80 to-brand-accent-110 bg-clip-text text-transparent text-${textSize} font-black`}>
           {title}

@@ -16,6 +16,8 @@ import ProtectedRoute from '@/components/admin/protection/ProtectedRoute'
 import AdminPermissions from './AdminPermissions'
 import AdminLogs from './AdminLogs'
 import Pruebas from './Pruebas'
+import AdminMails from './AdminMails'
+import AdminTickets from './AdminTickets'
 
 const ProtectedAdmin = withAuthenticationRequired(AdminLayout);
 
@@ -30,37 +32,57 @@ export default function Router() {
         <Route path='/historial-cambio' element={<HistorialTipoCambio />} />
         <Route path="/pruebas" element={<Pruebas/>} />
       </Route>
+
       <Route path='/admin' element={<ProtectedAdmin />} >
+
         <Route index element={
           <ProtectedRoute requiredPermission="read:analytics">
             <AdminDashboard />
           </ProtectedRoute>
         } />
+
         <Route path='/admin/users' element={
           <ProtectedRoute requiredPermission="read:users">
             <AdminUsers />
           </ProtectedRoute>
         } />
+
         <Route path='/admin/historial' element={
           <ProtectedRoute requiredPermission="read:analytics">
             <AdminHistorial />
           </ProtectedRoute>
         } />
+
         <Route path='/admin/roles' element={
           <ProtectedRoute requiredPermission="read:roles">
             <AdminRoles />
           </ProtectedRoute>
         } />
+
         <Route path='/admin/permissions' element={
           <ProtectedRoute requiredPermission="read:permissions">
             <AdminPermissions />
           </ProtectedRoute>
         } />
+
         <Route path='/admin/logs' element={
           <ProtectedRoute requiredPermission="read:logs">
             <AdminLogs />
           </ProtectedRoute>
         } />
+
+        <Route path='/admin/mails' element={
+          <ProtectedRoute requiredPermission="read:mails">
+            <AdminMails />
+          </ProtectedRoute>
+        } />
+
+        <Route path='/admin/tickets' element={
+          <ProtectedRoute requiredPermission="read:tickets">
+            <AdminTickets />
+          </ProtectedRoute>
+        } />
+
         <Route path='/admin/protected-error' element={<AdminProtectedError />} />
       </Route>
     </Routes>

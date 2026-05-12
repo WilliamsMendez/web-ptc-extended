@@ -294,7 +294,7 @@ export default function UserEditModal({ open, onOpenChange, user, onUserUpdated,
                 <select
                   value={selectedRole}
                   onChange={(e) => setSelectedRole(e.target.value)}
-                  className="w-full border rounded-sm p-2 text-text-primary bg-transparent cursor-pointer"
+                  className="w-full border rounded-sm p-2 text-text-dark-static bg-surface-light cursor-pointer"
                 >
                   <option value="">Sin rol</option>
                   {availableRoles

@@ -23,7 +23,7 @@ export default function StatCard({ title, value, subtitle, subtitleType, compare
         <div className="flex flex-col shadow-md gap-2 bg-white rounded-lg p-10 md:min-w-50 border-solid border-1 border-bg-110 hover:border-bg-120 hover:scale-102 transition">
             <h1 className="text-brand-primary font-bold md:text-md">{title}</h1>
             <hr className="h-0 w-15 border-solid border-1 border-gray-300" />
-            <h1 className="text-brand-accent font-bold md:text-2xl">{value}</h1>
+            <h1 className="text-brand-accent font-bold md:text-2xl text-3xl">{value}</h1>
             <p className={subtitleColor}>{subtitle}</p>
         </div>
       </TooltipTrigger>

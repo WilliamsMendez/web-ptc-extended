@@ -1,0 +1,42 @@
+[
+  {
+    "id": "ticket-005",
+    "titulo": "prueba 5",
+    "descripcion": "kim prueba",
+    "estado": "hecho",
+    "motivo_rechazo": null,
+    "creado_en": "2026-05-02T03:30:35.045Z"
+  },
+  {
+    "id": "ticket-004",
+    "titulo": "Poner certificacion PCI PIN Security",
+    "descripcion": "Meter seccion de pin security",
+    "estado": "rechazado",
+    "motivo_rechazo": "no puedo hacerlo jeje",
+    "creado_en": "2026-05-02T03:29:54.434Z"
+  },
+  {
+    "id": "ticket-003",
+    "titulo": "Ticket de prueba 3",
+    "descripcion": "prueba prueba prueba prueba prueba prueba prueba prueba prueba prueba prueba prueba prueba prueba prueba prueba prueba prueba prueba prueba prueba prueba prueba prueba prueba prueba prueba prueba",
+    "estado": "rechazado",
+    "motivo_rechazo": "Prueba de rechazo",
+    "creado_en": "2026-05-02T02:12:24.314Z"
+  },
+  {
+    "id": "ticket-002",
+    "titulo": "Ticket prueba 2",
+    "descripcion": "Este es un ticket de prueba con descripcion largaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "estado": "hecho",
+    "motivo_rechazo": null,
+    "creado_en": "2026-05-02T01:51:59.236Z"
+  },
+  {
+    "id": "ticket-001",
+    "titulo": "Ticket de prueba 1",
+    "descripcion": "Este es un ticket de prueba",
+    "estado": "recibido",
+    "motivo_rechazo": null,
+    "creado_en": "2026-05-02T00:56:09.647Z"
+  }
+]
